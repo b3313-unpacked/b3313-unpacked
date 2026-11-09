@@ -15,12 +15,6 @@
       "file": "assets/art/doubledoor.png"
     },
     {
-      "id": "trapdoor",
-      "kind": "trapdoor",
-      "name": "Trapdoor",
-      "file": "assets/art/trapdoor.png"
-    },
-    {
       "id": "pipe",
       "kind": "pipe",
       "name": "Pipe",
@@ -39,18 +33,6 @@
       "file": "assets/art/hole.png"
     },
     {
-      "id": "warp",
-      "kind": "other",
-      "name": "Warp",
-      "file": "assets/art/warp.png"
-    },
-    {
-      "id": "exitcourse",
-      "kind": "other",
-      "name": "Exit course",
-      "file": "assets/art/exitcourse.png"
-    },
-    {
       "id": "deadly",
       "kind": "deadly",
       "name": "Deadly dead end",
@@ -61,17 +43,26 @@
       "kind": "other",
       "name": "Other",
       "file": "assets/art/other.png"
+    },
+    {
+      "id": "blockpipe",
+      "kind": "pipe",
+      "name": "blockpipe",
+      "file": "assets/art/blockpipe.png"
+    },
+    {
+      "id": "locked_door",
+      "kind": "door",
+      "name": "locked door",
+      "file": "assets/art/locked_door.png"
     }
   ],
   "typeArt": {
     "door": "door",
     "doubledoor": "doubledoor",
-    "trapdoor": "trapdoor",
     "pipe": "pipe",
     "painting": "painting",
     "hole": "hole",
-    "warp": "warp",
-    "exitcourse": "exitcourse",
     "deadly": "deadly",
     "other": "other"
   },
@@ -86,30 +77,42 @@
           "type": "door",
           "x": 0.514,
           "y": 0.63,
-          "label": "",
+          "label": "Front double doors",
           "to": "beta_lobby_e",
           "pair": "beta_lobby_e_1",
-          "art": "exitcourse"
+          "art": "doubledoor"
+        },
+        {
+          "id": "castle_grounds_2_2",
+          "type": "other",
+          "x": 0.511,
+          "y": 0.708,
+          "label": "Hole inside wall under bridge",
+          "to": "scary_sewer_maze",
+          "art": "hole"
+        },
+        {
+          "id": "castle_grounds_3",
+          "type": "other",
+          "x": 0.514,
+          "y": 0.787,
+          "label": "Hole in ground under bridge",
+          "to": "genesis_basement",
+          "art": "hole",
+          "pair": "genesis_basement_1"
+        },
+        {
+          "id": "castle_grounds_4",
+          "type": "other",
+          "x": 0.79,
+          "y": 0.917,
+          "label": "Swim out of bounds",
+          "to": "",
+          "art": "other"
         }
       ],
       "shape": "assets/rooms/castle_grounds.png",
       "color": "#20DF20"
-    },
-    {
-      "id": "beta_lobby_a",
-      "name": "Beta Lobby A",
-      "kind": "room",
-      "exits": [
-        {
-          "id": "beta_lobby_a_1",
-          "type": "door",
-          "label": "Back to Castle Grounds",
-          "to": "castle_grounds",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true
-        }
-      ]
     },
     {
       "id": "beta_lobby_e",
@@ -126,6 +129,29 @@
           "needsPos": true,
           "pair": "castle_grounds_2",
           "art": "doubledoor"
+        }
+      ]
+    },
+    {
+      "id": "scary_sewer_maze",
+      "name": "Scary Sewer Maze",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "genesis_basement",
+      "name": "Genesis Basement",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "genesis_basement_1",
+          "type": "other",
+          "label": "Back to Castle Grounds",
+          "to": "castle_grounds",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "castle_grounds_3"
         }
       ]
     }

@@ -205,7 +205,7 @@ function exportStars(){
 const state = {
   tab:"explore", here:"castle_grounds", cameVia:null, history:[], checked:new Set(), route:null,
   rsQ:"", rsMin:0, rsConn:[], rsConnQ:"", rsShow:48, starQ:"", starC:"all", starShow:"all", planFrom:null, planTo:"", showIO:false,
-  artFilter:"all", edit:false, sel:null, placing:null, newKind:null, newName:"",
+  artFilter:"all", edit:false, sel:null, placing:null, newKind:null, newFor:null, newName:"",
   dirty:false, choose:null, confirm:null, picking:false, pickQ:"", delConfirm:null,
   draft:null, loadError:false, savedHandle:null, folderName:"", saveStatus:""
 };
@@ -435,7 +435,7 @@ function takeExit(id, chosen){
   state.choose = null; state.confirm = null;
   state.history.push({ here:state.here, cameVia:state.cameVia });
   state.here = dest; state.cameVia = (dest === e.to && e.pair) ? e.pair : null;
-  state.sel = null; state.placing = null; state.newKind = null; state.picking = false; state.delConfirm = null;
+  state.sel = null; state.placing = null; state.newKind = null; state.newFor = null; state.picking = false; state.delConfirm = null;
   const rt = state.route;
   if (rt){
     const step = rt.steps[rt.i];
@@ -650,6 +650,24 @@ function editorPanel(p){
   ${saveCard()}`;
 }
 
+// A place dropdown that can also create a new room or course on the spot.
+// field is "to", "respawn" or "alt"; i is the row number for "alt".
+const destKey = (field, i) => field + (i == null ? "" : i);
+function destSelect(field, i, current, blank, courses, exclude){
+  const forThis = state.newFor === destKey(field, i);
+  const pick = forThis ? null : current;
+  return `<select data-edit="dest" data-field="${field}"${i == null ? "" : ` data-i="${i}"`}>
+      <option value="" ${!pick && !forThis ? "selected" : ""}>${blank}</option>${placeOptions(pick, exclude)}
+      <option value="__new_room" ${forThis && state.newKind === "room" ? "selected" : ""}>New room…</option>
+      ${courses ? `<option value="__new_course" ${forThis && state.newKind === "course" ? "selected" : ""}>New course…</option>` : ""}</select>`;
+}
+const newPlaceRow = (field, i) => state.newFor === destKey(field, i)
+  ? `<div class="row" style="margin:0 0 10px;flex-wrap:nowrap"><input data-edit="newname" value="${esc(state.newName)}" placeholder="Name of the new ${state.newKind}"><button class="btn sm primary" data-action="create-new">Create</button></div>` : "";
+function setDest(e, key, v){
+  if (key === "to"){ if (e.to !== v){ unlinkPair(e); e.to = v; } }
+  else if (key === "respawn"){ if (v) e.respawn = v; else delete e.respawn; }
+  else if (key.startsWith("alt")) e.alts[+key.slice(3)].to = v;
+}
 function placeOptions(selected, exclude){
   return DATA.places.filter(x => x.id !== exclude).map(x => `<option value="${x.id}" ${selected === x.id ? "selected" : ""}>${esc(x.name)}${x.kind === "course" ? " (course)" : ""}</option>`).join("");
 }
@@ -668,20 +686,18 @@ function exitForm(e){
       : "Using a plain icon. Pick or add a picture for it."}</p>
     ${artPicker(e.art || (DATA.typeArt || {})[e.type], kindForType(e.type))}
     ${e.art && (DATA.typeArt || {})[e.type] !== e.art ? `<button class="btn sm" data-action="set-default-art" style="margin:-4px 0 12px">Use this picture for every ${esc(TYPE[e.type].toLowerCase())}</button>` : ""}
-    <label class="f">${deadly ? "Room where you get killed (optional)" : "Leads to"}<select data-edit="ex-to">
-      <option value="" ${!e.to && !state.newKind ? "selected" : ""}>${deadly ? "Not logged" : "Not set yet"}</option>${placeOptions(state.newKind ? null : e.to, FROM[e.id])}
-      <option value="__new_room" ${state.newKind === "room" ? "selected" : ""}>New room…</option>
-      ${deadly ? "" : `<option value="__new_course" ${state.newKind === "course" ? "selected" : ""}>New course…</option>`}</select></label>
-    ${state.newKind ? `<div class="row" style="margin-bottom:10px;flex-wrap:nowrap"><input data-edit="newname" value="${esc(state.newName)}" placeholder="Name of the new ${state.newKind}"><button class="btn sm primary" data-action="create-new">Create</button></div>` : ""}
-    ${deadly ? `<label class="f">Where you end up after dying (optional)<select data-edit="ex-respawn"><option value="">Not logged</option>${placeOptions(e.respawn, null)}</select></label>` : `
-    <label class="inline"><input type="checkbox" data-edit="ex-twoway" ${e.pair ? "checked" : ""} ${d && !state.newKind ? "" : "disabled"}> Two-way: going back through it brings you right here</label>
+    <label class="f">${deadly ? "Room where you get killed (optional)" : "Leads to"}${destSelect("to", null, e.to, deadly ? "Not logged" : "Not set yet", !deadly, FROM[e.id])}</label>
+    ${newPlaceRow("to", null)}
+    ${deadly ? `<label class="f">Where you end up after dying (optional)${destSelect("respawn", null, e.respawn, "Not logged", true, null)}</label>
+    ${newPlaceRow("respawn", null)}` : `
+    <label class="inline"><input type="checkbox" data-edit="ex-twoway" ${e.pair ? "checked" : ""} ${d && state.newFor !== "to" ? "" : "disabled"}> Two-way: going back through it brings you right here</label>
     ${partner ? `<p class="small muted" style="margin:-4px 0 10px">You come out at <b>${esc(partner.label)}</b> in ${esc(d.name)}${partner.needsPos ? ". It hasn't been placed on that drawing yet." : "."}</p>`
               : `<label class="f">Where you end up (optional)<input data-edit="ex-arrive" value="${esc(e.arrive || "")}" placeholder="e.g. You land on the 2nd floor balcony"></label>`}
     <div class="small" style="font-weight:600;margin-bottom:6px">Sometimes leads somewhere else</div>
     ${(e.alts || []).map((a, i) => `<div class="alt-row">
-        <select data-edit="alt-to" data-i="${i}"><option value="">Choose a place</option>${placeOptions(a.to, FROM[e.id])}</select>
+        ${destSelect("alt", i, a.to, "Choose a place", true, FROM[e.id])}
         <input data-edit="alt-note" data-i="${i}" value="${esc(a.note || "")}" placeholder="When? e.g. rarely, at night">
-        <button class="btn sm danger" data-action="del-alt" data-i="${i}" aria-label="Remove">✕</button></div>`).join("")}
+        <button class="btn sm danger" data-action="del-alt" data-i="${i}" aria-label="Remove">✕</button></div>${newPlaceRow("alt", i)}`).join("")}
     <button class="btn sm" data-action="add-alt" style="margin-bottom:12px" ${d ? "" : "disabled"}>Add another possible destination</button>`}
     <div class="row">
       ${P[FROM[e.id]].kind === "room" ? `<button class="btn sm" data-action="move-exit">Move on drawing</button>` : ""}
@@ -1098,7 +1114,7 @@ document.addEventListener("click", ev => {
     const p = P[state.here];
     if (state.placing === "exit"){
       const e = { id:uniqueId(`${p.id}_${p.exits.length + 1}`, id => !!EX[id]), type:"door", x, y, label:"", to:"" };
-      p.exits.push(e); state.sel = e.id; state.newKind = null;
+      p.exits.push(e); state.sel = e.id; state.newKind = null; state.newFor = null;
     } else if (state.placing === "move"){ const e = EX[state.sel]; e.x = x; e.y = y; delete e.needsPos; }
     else if (state.placing === "label"){ (p.labels = p.labels || []).push({ text:"New label", x, y }); }
     else if (state.placing.startsWith("label:")){ const l = p.labels[+state.placing.slice(6)]; l.x = x; l.y = y; }
@@ -1106,7 +1122,7 @@ document.addEventListener("click", ev => {
   }
   const ex = ev.target.closest("[data-exit]:not([data-action])");
   if (ex){
-    if (state.edit){ state.sel = state.sel === ex.dataset.exit ? null : ex.dataset.exit; state.newKind = null; state.newName = ""; render(); }
+    if (state.edit){ state.sel = state.sel === ex.dataset.exit ? null : ex.dataset.exit; state.newKind = null; state.newFor = null; state.newName = ""; render(); }
     else takeExit(ex.dataset.exit);
     return;
   }
@@ -1143,7 +1159,7 @@ document.addEventListener("click", ev => {
     "discard-draft": () => { clearDraft(); state.draft = null; },
     "dl-map": () => download("map.json", exportMap()),
     "dl-stars": () => download("stars.json", exportStars()),
-    "edit-toggle": () => { state.edit = !state.edit; Object.assign(state, { sel:null, placing:null, newKind:null, picking:false, delConfirm:null, choose:null, confirm:null }); },
+    "edit-toggle": () => { state.edit = !state.edit; Object.assign(state, { sel:null, placing:null, newKind:null, newFor:null, picking:false, delConfirm:null, choose:null, confirm:null }); },
     "cancel-place": () => { state.placing = null; },
     "add-exit": () => {
       if (p.kind === "room"){ state.placing = "exit"; return; }
@@ -1162,14 +1178,15 @@ document.addEventListener("click", ev => {
       toast("Exit deleted.");
     },
     "create-new": () => {
-      const e = EX[state.sel], name = state.newName.trim() || `Untitled ${state.newKind}`;
+      const e = EX[state.sel], key = state.newFor, name = state.newName.trim() || `Untitled ${state.newKind}`;
       const id = uniqueId(slug(name), x => !!P[x]);
       DATA.places.push({ id, name, kind:state.newKind, exits:[] });
-      unlinkPair(e); e.to = id; state.newKind = null; state.newName = ""; reindex(); markDirty();
-      toast(`Created ${name}. Tick two-way if there's a way straight back, then go through to log it.`);
+      reindex(); setDest(e, key, id);
+      state.newKind = null; state.newFor = null; state.newName = ""; reindex(); markDirty();
+      toast(key === "to" && e.type !== "deadly" ? `Created ${name}. Tick two-way if there's a way straight back, then go through to log it.` : `Created ${name}.`);
     },
     "add-alt": () => { const e = EX[state.sel]; (e.alts = e.alts || []).push({ to:"", note:"" }); markDirty(); },
-    "del-alt": () => { const e = EX[state.sel]; e.alts.splice(+el.dataset.i, 1); if (!e.alts.length) delete e.alts; markDirty(); },
+    "del-alt": () => { const e = EX[state.sel]; state.newKind = null; state.newFor = null; e.alts.splice(+el.dataset.i, 1); if (!e.alts.length) delete e.alts; markDirty(); },
     "add-label": () => { state.placing = "label"; },
     "move-label": () => { state.placing = "label:" + el.dataset.i; },
     "del-label": () => { p.labels.splice(+el.dataset.i, 1); markDirty(); },
@@ -1241,12 +1258,13 @@ function applyEdit(el){
       break;
     case "ex-floor": if (v.trim()) e.floor = v; else delete e.floor; break;
     case "ex-arrive": if (v.trim()) e.arrive = v; else delete e.arrive; break;
-    case "ex-to":
-      if (v.startsWith("__new")){ state.newKind = v === "__new_room" ? "room" : "course"; return; }
-      state.newKind = null; if (e.to !== v){ unlinkPair(e); e.to = v; } break;
-    case "ex-respawn": if (v) e.respawn = v; else delete e.respawn; break;
+    case "dest": {
+      const key = destKey(el.dataset.field, el.dataset.i == null ? null : +el.dataset.i);
+      if (v.startsWith("__new")){ state.newKind = v === "__new_room" ? "room" : "course"; state.newFor = key; return; }
+      if (state.newFor === key){ state.newKind = null; state.newFor = null; }
+      setDest(e, key, v); break;
+    }
     case "ex-twoway": el.checked ? linkTwoWay(e) : unlinkPair(e); break;
-    case "alt-to": e.alts[+el.dataset.i].to = v; break;
     case "alt-note": e.alts[+el.dataset.i].note = v; break;
     case "newname": state.newName = v; return;
     case "star-name": s.name = v; break;
