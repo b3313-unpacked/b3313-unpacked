@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "start": "castle_grounds",
+  "art": [
+    {
+      "id": "door",
+      "kind": "door",
+      "name": "Door",
+      "file": "assets/art/door.png"
+    },
+    {
+      "id": "doubledoor",
+      "kind": "door",
+      "name": "Double door",
+      "file": "assets/art/doubledoor.png"
+    },
+    {
+      "id": "trapdoor",
+      "kind": "trapdoor",
+      "name": "Trapdoor",
+      "file": "assets/art/trapdoor.png"
+    },
+    {
+      "id": "pipe",
+      "kind": "pipe",
+      "name": "Pipe",
+      "file": "assets/art/pipe.png"
+    },
+    {
+      "id": "painting",
+      "kind": "painting",
+      "name": "Painting",
+      "file": "assets/art/painting.png"
+    },
+    {
+      "id": "hole",
+      "kind": "other",
+      "name": "Drop",
+      "file": "assets/art/hole.png"
+    },
+    {
+      "id": "warp",
+      "kind": "other",
+      "name": "Warp",
+      "file": "assets/art/warp.png"
+    },
+    {
+      "id": "exitcourse",
+      "kind": "other",
+      "name": "Exit course",
+      "file": "assets/art/exitcourse.png"
+    },
+    {
+      "id": "deadly",
+      "kind": "deadly",
+      "name": "Deadly dead end",
+      "file": "assets/art/deadly.png"
+    },
+    {
+      "id": "other",
+      "kind": "other",
+      "name": "Other",
+      "file": "assets/art/other.png"
+    }
+  ],
+  "typeArt": {
+    "door": "door",
+    "doubledoor": "doubledoor",
+    "trapdoor": "trapdoor",
+    "pipe": "pipe",
+    "painting": "painting",
+    "hole": "hole",
+    "warp": "warp",
+    "exitcourse": "exitcourse",
+    "deadly": "deadly",
+    "other": "other"
+  },
+  "places": [
+    {
+      "id": "castle_grounds",
+      "name": "Castle Grounds",
+      "kind": "room",
+      "exits": []
+    }
+  ]
+}

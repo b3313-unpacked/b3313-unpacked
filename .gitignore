@@ -1,0 +1,8 @@
+# operating system clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editor clutter
+.vscode/
+*.swp
