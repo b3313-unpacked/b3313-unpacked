@@ -69,7 +69,8 @@ label.inline{display:flex;gap:8px;align-items:center;font-size:14px;margin-botto
 .maplabel{position:absolute;transform:translate(-50%,-50%);background:var(--panel);color:var(--ink);font-weight:700;font-size:12px;padding:1px 9px;border-radius:999px;border:1px solid var(--line);white-space:nowrap;pointer-events:none}
 .pin{position:absolute;transform:translate(-50%,-50%);background:none;border:0;padding:0;cursor:pointer;display:grid;place-items:center}
 .pin svg{width:32px;height:32px;display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.7))}
-.pin .art{display:block;height:38px;width:auto;max-width:60px;image-rendering:pixelated;filter:drop-shadow(0 0 1px #000) drop-shadow(0 2px 4px rgba(0,0,0,.6))}
+/* exit pictures always fit the same box, whatever size the file is */
+.pin .art{display:block;width:56px;height:40px;object-fit:contain;filter:drop-shadow(0 0 1px #000) drop-shadow(0 2px 4px rgba(0,0,0,.6))}
 .pin .cap{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:3px;background:var(--panel);color:var(--ink);font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px;border:1px solid var(--line);white-space:nowrap;pointer-events:none}
 .pin .badge{position:absolute;top:-9px;right:-11px;min-width:19px;height:19px;border-radius:999px;background:var(--ink);color:var(--panel);font-size:11px;font-weight:700;display:grid;place-items:center;padding:0 4px}
 .pin:hover{filter:brightness(1.15)}
@@ -101,7 +102,7 @@ label.inline{display:flex;gap:8px;align-items:center;font-size:14px;margin-botto
 .exit-row.dim{opacity:.55}
 .exit-row .ico{flex:none;width:40px;display:grid;place-items:center}
 .exit-row .ico svg{width:26px;height:26px}
-.exit-row .ico img{max-width:40px;max-height:30px;image-rendering:pixelated}
+.exit-row .ico img{width:40px;height:30px;object-fit:contain}
 .num{flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--panel);display:inline-grid;place-items:center;font-size:11px;font-weight:700;vertical-align:1px}
 .ex-label{display:block;font-weight:600}
 .ex-dest{display:block;font-size:13px;color:var(--muted)}
@@ -152,7 +153,7 @@ details summary{cursor:pointer;font-weight:600}
 .dots i.m{width:18px;height:18px}
 .artgrid{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 .artt{background:var(--chip);border:2px solid transparent;border-radius:8px;padding:4px;cursor:pointer;width:58px;height:58px;display:grid;place-items:center}
-.artt img{max-width:46px;max-height:46px;image-rendering:pixelated}
+.artt img{width:46px;height:46px;object-fit:contain}
 .artt.on{border-color:var(--accent);background:var(--panel)}
 .results{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
 .result .mini{background:var(--stage);border-radius:8px;padding:6px 14px;margin-bottom:8px}
@@ -196,3 +197,5 @@ footer{max-width:1250px;margin:0 auto;padding:4px 18px 30px;font-size:12px;color
 .check.on.blue{background:var(--sb);color:#FFF;border-color:var(--sb)}
 .check.sw{border-radius:50%;font-size:12px}
 .cdot.blue{background:var(--sb)}
+/* small pixel-art pictures stay crisp when enlarged; big pictures are smoothed when shrunk */
+img.px{image-rendering:pixelated}

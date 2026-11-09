@@ -425,6 +425,8 @@ function iconSVG(type){
   return `<svg viewBox="-16 -16 32 32" aria-hidden="true">${inner}</svg>`;
 }
 const artUrl = id => ART[id] ? asset(ART[id].file) : null;
+// Tiny drawings get crisp pixel scaling; anything bigger than its box gets smooth scaling.
+function pixelFit(img){ img.classList.toggle("px", img.naturalHeight > 0 && img.naturalHeight <= img.clientHeight); }
 // An exit shows its own picture first, then the default picture for its type, then a plain icon.
 function exitArtUrl(e){
   if (e.art && ART[e.art]) return artUrl(e.art);
@@ -433,7 +435,7 @@ function exitArtUrl(e){
 }
 function exitIcon(e){
   const u = exitArtUrl(e);
-  return u ? `<img class="art" src="${esc(u)}" alt="">` : iconSVG(e.type);
+  return u ? `<img class="art" src="${esc(u)}" alt="" onload="pixelFit(this)">` : iconSVG(e.type);
 }
 
 function mapHTML(p, opt = {}){
@@ -638,7 +640,7 @@ function artPicker(sel, uploadKind){
   const f = state.artFilter;
   const list = (DATA.art || []).filter(a => f === "all" || a.kind === f);
   return `<div style="margin-top:6px">${["all", ...ART_KINDS].map(k => `<button class="swatch ${f === k ? "on" : ""}" data-action="art-filter" data-v="${k}">${k === "all" ? "All" : ART_KIND_NAME[k]}</button>`).join("")}</div>
-    <div class="artgrid">${list.map(a => `<button class="artt ${sel === a.id ? "on" : ""}" data-action="pick-art" data-art="${a.id}" title="${esc(a.name)}" aria-label="${esc(a.name)}"><img src="${esc(asset(a.file))}" alt=""></button>`).join("") || `<span class="small muted">No pictures of this kind yet.</span>`}</div>
+    <div class="artgrid">${list.map(a => `<button class="artt ${sel === a.id ? "on" : ""}" data-action="pick-art" data-art="${a.id}" title="${esc(a.name)}" aria-label="${esc(a.name)}"><img src="${esc(asset(a.file))}" alt="" onload="pixelFit(this)"></button>`).join("") || `<span class="small muted">No pictures of this kind yet.</span>`}</div>
     <label class="btn sm" style="margin-bottom:12px">Add pictures from this computer<input type="file" accept="image/*" multiple data-file="art" data-kind="${uploadKind}" hidden></label>`;
 }
 
