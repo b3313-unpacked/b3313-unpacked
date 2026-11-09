@@ -152,16 +152,22 @@ function fillOutline(im, hex){
 
 /* ============================== data ============================== */
 // The exit types, in the order they appear in the dropdown.
-const TYPE = { door:"Door", doubledoor:"Double door", lockeddoor:"Locked door", pipe:"Pipe", hole:"Hole", course:"Course", deadly:"Deadly dead end" };
+const TYPE = { door:"Door", doubledoor:"Double door", lockeddoor:"Locked door", pipe:"Pipe", hole:"Hole", deadly:"Deadly dead end", other:"Other" };
 // Types from earlier versions. Exits that still use one keep working and show it in their dropdown until you pick a new one.
-const OLD_TYPE = { painting:"Painting", trapdoor:"Trapdoor", warp:"Warp", exitcourse:"Exit course", other:"Other" };
+const OLD_TYPE = { painting:"Painting", trapdoor:"Trapdoor", warp:"Warp", exitcourse:"Exit course", course:"Course" };
 const typeName = t => TYPE[t] || OLD_TYPE[t] || t;
-// Old types that have an exact new equivalent are switched over when the map loads.
-const RENAMED_TYPE = { painting:"course", trapdoor:"hole" };
+// Exits using a type from an earlier version are switched over when the map loads:
+// trapdoors become holes, and anything else that's no longer on the list becomes Other.
+const RENAMED_TYPE = { trapdoor:"hole", painting:"other", warp:"other", exitcourse:"other", course:"other" };
 function upgradeTypes(){
   let changed = false;
-  DATA.places.forEach(p => p.exits.forEach(e => { if (RENAMED_TYPE[e.type]){ e.type = RENAMED_TYPE[e.type]; changed = true; } }));
   const ta = DATA.typeArt;
+  DATA.places.forEach(p => p.exits.forEach(e => {
+    const to = RENAMED_TYPE[e.type]; if (!to) return;
+    // keep the picture it was showing, e.g. a painting stays a painting on the map
+    if (!e.art && ta[e.type] && ta[e.type] !== ta[to] && DATA.art.some(a => a.id === ta[e.type])) e.art = ta[e.type];
+    e.type = to; changed = true;
+  }));
   Object.entries(RENAMED_TYPE).forEach(([from, to]) => { if (ta[from] && !ta[to]){ ta[to] = ta[from]; changed = true; } });
   Object.keys(ta).forEach(t => { if (!TYPE[t]){ delete ta[t]; changed = true; } });
   if (!ta.lockeddoor && DATA.art.some(a => a.id === "lockeddoor")){ ta.lockeddoor = "lockeddoor"; changed = true; }
@@ -469,7 +475,7 @@ function iconSVG(type){
     doubledoor:`<rect x="-14" y="-14" width="13" height="28" rx="2" fill="#C8995A" stroke="#4A3520" stroke-width="2.5"/><rect x="1" y="-14" width="13" height="28" rx="2" fill="#C8995A" stroke="#4A3520" stroke-width="2.5"/>`,
     lockeddoor:`<rect x="-11" y="-14" width="22" height="28" rx="3" fill="#8A7A6A" stroke="#3A3028" stroke-width="2.5"/><rect x="-5" y="-1" width="10" height="8" rx="1" fill="#E3C160" stroke="#3A3028" stroke-width="1.5"/><path d="M-3 -1 V-4 A3 3 0 0 1 3 -4 V-1" fill="none" stroke="#3A3028" stroke-width="1.5"/>`,
     hole:`<ellipse rx="14" ry="10" fill="#0D0B12" stroke="#000" stroke-width="2"/>`,
-    course:`<rect x="-14" y="-10" width="28" height="20" fill="#86AEDB" stroke="#C9A03C" stroke-width="4"/>`
+    other:`<circle r="12" fill="#B9B3C9" stroke="#241F33" stroke-width="2"/><text y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#241F33">?</text>`
   }[type] || `<circle r="12" fill="#B9B3C9" stroke="#241F33" stroke-width="2"/>`;
   return `<svg viewBox="-16 -16 32 32" aria-hidden="true">${inner}</svg>`;
 }
@@ -501,7 +507,9 @@ function exitIcon(e){
 
 function mapHTML(p, opt = {}){
   if (p.kind === "course"){
-    const u = artUrl((DATA.typeArt || {}).painting);
+    // a course's page shows the picture of the way in, like its painting
+    const into = Object.values(EX).find(e => e.to === p.id && FROM[e.id] !== p.id);
+    const u = into ? exitArtUrl(into) : null;
     return `<div class="course-art">${u ? `<img src="${esc(u)}" alt="">` : `<div class="blank"></div>`}</div>`;
   }
   const shape = p.shape && !missingFile(p.shape) ? p.shape : null;
@@ -800,7 +808,7 @@ function linkTwoWay(e){
   let q = d.exits.find(x => x.to === here.id && !x.pair && x.type !== "deadly");
   if (q) toast(`Linked to "${q.label || "an existing exit"}" in ${d.name}.`);
   else {
-    q = { id:uniqueId(`${d.id}_${d.exits.length + 1}`, id => !!EX[id]), type:e.type === "course" ? "door" : e.type, label:`Back to ${here.name}`, to:here.id };
+    q = { id:uniqueId(`${d.id}_${d.exits.length + 1}`, id => !!EX[id]), type:e.type, label:`Back to ${here.name}`, to:here.id };
     if (d.kind === "room"){ q.x = 0.5; q.y = 0.5; q.needsPos = true; }
     d.exits.push(q); EX[q.id] = q; FROM[q.id] = d.id;
     toast(`Added the way back in ${d.name}.${d.kind === "room" ? " Place it when you get there." : ""}`);

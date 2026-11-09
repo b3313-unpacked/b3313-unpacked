@@ -35,7 +35,7 @@ Draw each room as a **black outline** on a white or see-through background, in a
 
 ### Exit types
 
-Every exit is one of these: **Door**, **Double door**, **Locked door**, **Pipe**, **Hole**, **Course** (a way into a course, like a painting) or **Deadly dead end**.
+Every exit is one of these: **Door**, **Double door**, **Locked door**, **Pipe**, **Hole**, **Deadly dead end** or **Other** (anything else, like a painting or a warp).
 
 - **Deadly dead end:** a way in that gets you killed. Routes never use it. You can note the room you die in and where you respawn.
 - **Sometimes leads somewhere else:** any exit can have a usual destination plus other possible ones. Routes rely on the usual one, and only use the others when there's no other way.
