@@ -33,17 +33,18 @@ The next time you open `?log`, Chrome may ask you to reconnect to the folder. Cl
 
 Draw each room as a **black outline** on a white or see-through background, in any paint program. The site fills the inside with the room's fill color. The outline must be fully closed, or the fill leaks out. Multi-floor rooms can be several closed shapes in one drawing; add labels like "1st floor" in the editor.
 
-### Exit pictures
+### Exit types
 
-You can drop pictures straight into `assets/art/` with File Explorer. While logging, the site checks the folder whenever you switch back to the browser, adds any new pictures to its list, and guesses each one's category from its file name: names containing *door*, *pipe*, *paint*, *trap*, or *dead*/*death*/*kill* go under those categories, and anything else goes under Other. If you delete a picture's file, it leaves the list too, and exits that used it switch to a plain icon. The list lives in `data/map.json`, so commit that file along with the pictures.
-
-`assets/art/` has a stand-in picture for each exit type: `door.png`, `doubledoor.png`, `trapdoor.png`, `pipe.png`, `painting.png`, `hole.png`, `warp.png`, `exitcourse.png`, `deadly.png` and `other.png`. Save your own drawing over a stand-in with the same file name and every exit of that type switches over. To give one exit a different picture, pick or add it in that exit's editor.
-
-### Exit types worth knowing
+Every exit is one of these: **Door**, **Double door**, **Locked door**, **Pipe**, **Hole**, **Course** (a way into a course, like a painting) or **Deadly dead end**.
 
 - **Deadly dead end:** a way in that gets you killed. Routes never use it. You can note the room you die in and where you respawn.
-- **Sometimes leads somewhere else:** an exit with a usual destination plus other possible ones. Routes rely on the usual one, and only use the others when there's no other way.
-- **Exit course:** the pause-menu exit from a course.
+- **Sometimes leads somewhere else:** any exit can have a usual destination plus other possible ones. Routes rely on the usual one, and only use the others when there's no other way.
+
+### Exit pictures
+
+Put your exit pictures in `assets/art/`. You can drop them in with File Explorer: while logging, the site checks the folder whenever you switch back to the browser, adds new pictures to its list, and drops pictures whose files you deleted. The list lives in `data/map.json`, so commit that file along with the pictures.
+
+Each exit type has a default picture. To change it, pick a picture on any exit of that type and press **Use this picture for every …**. To give one exit its own picture, just pick it on that exit.
 
 ---
 

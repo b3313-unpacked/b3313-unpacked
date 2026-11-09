@@ -80,7 +80,13 @@
           "label": "Front double doors",
           "to": "beta_lobby_e",
           "pair": "beta_lobby_e_1",
-          "art": "doubledoor"
+          "art": "doubledoor",
+          "alts": [
+            {
+              "to": "lobby_z64_beta",
+              "note": "Rarely"
+            }
+          ]
         },
         {
           "id": "castle_grounds_2_2",
@@ -107,8 +113,64 @@
           "x": 0.79,
           "y": 0.917,
           "label": "Swim out of bounds",
+          "to": "eel_graveyard",
+          "art": "painting"
+        },
+        {
+          "id": "castle_grounds_5",
+          "type": "door",
+          "x": 0.513,
+          "y": 0.504,
+          "label": "Hidden hallway door behind clock above front door",
+          "to": "twisted_red_hallway",
+          "art": "doubledoor",
+          "pair": "twisted_red_hallway_1"
+        },
+        {
+          "id": "castle_grounds_6",
+          "type": "door",
+          "x": 0.301,
+          "y": 0.432,
+          "label": "Door on ledge left side when facing front door",
+          "to": "silent_hall",
+          "pair": "silent_hall_1"
+        },
+        {
+          "id": "castle_grounds_7",
+          "type": "door",
+          "x": 0.223,
+          "y": 0.429,
+          "label": "Hole in ground near waterfall",
+          "to": "sunken_castle",
+          "art": "painting"
+        },
+        {
+          "id": "castle_grounds_8",
+          "type": "door",
+          "x": 0.511,
+          "y": 0.374,
+          "label": "Double door back of the castle",
+          "to": "crescent_castle",
+          "art": "doubledoor"
+        },
+        {
+          "id": "castle_grounds_9",
+          "type": "deadly",
+          "x": 0.659,
+          "y": 0.261,
+          "label": "Cave in wall behind castle",
           "to": "",
-          "art": "other"
+          "art": "deadly",
+          "respawn": "castle_grounds"
+        },
+        {
+          "id": "castle_grounds_10",
+          "type": "door",
+          "x": 0.511,
+          "y": 0.168,
+          "label": "Door behind Toad statue",
+          "to": "toad_s_lobby",
+          "pair": "toad_s_lobby_1"
         }
       ],
       "shape": "assets/rooms/castle_grounds.png",
@@ -152,6 +214,81 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "castle_grounds_3"
+        }
+      ]
+    },
+    {
+      "id": "lobby_z64_beta",
+      "name": "lobby.z64 (beta)",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "eel_graveyard",
+      "name": "Eel Graveyard",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "twisted_red_hallway",
+      "name": "Twisted Red Hallway",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "twisted_red_hallway_1",
+          "type": "door",
+          "label": "Back to Castle Grounds",
+          "to": "castle_grounds",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "castle_grounds_5"
+        }
+      ]
+    },
+    {
+      "id": "silent_hall",
+      "name": "Silent Hall",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "silent_hall_1",
+          "type": "door",
+          "label": "Back to Castle Grounds",
+          "to": "castle_grounds",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "castle_grounds_6"
+        }
+      ]
+    },
+    {
+      "id": "sunken_castle",
+      "name": "Sunken Castle",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "crescent_castle",
+      "name": "Crescent Castle",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "toad_s_lobby",
+      "name": "Toad's Lobby",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "toad_s_lobby_1",
+          "type": "door",
+          "label": "Back to Castle Grounds",
+          "to": "castle_grounds",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "castle_grounds_10"
         }
       ]
     }

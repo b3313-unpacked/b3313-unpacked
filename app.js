@@ -151,11 +151,22 @@ function fillOutline(im, hex){
 }
 
 /* ============================== data ============================== */
-const TYPE = { door:"Door", doubledoor:"Double door", trapdoor:"Trapdoor", pipe:"Pipe", painting:"Painting", hole:"Drop",
-               warp:"Warp", exitcourse:"Exit course", deadly:"Deadly dead end", other:"Other" };
-const ART_KINDS = ["door", "painting", "pipe", "trapdoor", "deadly", "other"];
-const ART_KIND_NAME = { door:"Doors", painting:"Paintings", pipe:"Pipes", trapdoor:"Trapdoors", deadly:"Dead ends", other:"Other" };
-const kindForType = t => ({ door:"door", doubledoor:"door", painting:"painting", pipe:"pipe", trapdoor:"trapdoor", deadly:"deadly" }[t] || "other");
+// The exit types, in the order they appear in the dropdown.
+const TYPE = { door:"Door", doubledoor:"Double door", lockeddoor:"Locked door", pipe:"Pipe", hole:"Hole", course:"Course", deadly:"Deadly dead end" };
+// Types from earlier versions. Exits that still use one keep working and show it in their dropdown until you pick a new one.
+const OLD_TYPE = { painting:"Painting", trapdoor:"Trapdoor", warp:"Warp", exitcourse:"Exit course", other:"Other" };
+const typeName = t => TYPE[t] || OLD_TYPE[t] || t;
+// Old types that have an exact new equivalent are switched over when the map loads.
+const RENAMED_TYPE = { painting:"course", trapdoor:"hole" };
+function upgradeTypes(){
+  let changed = false;
+  DATA.places.forEach(p => p.exits.forEach(e => { if (RENAMED_TYPE[e.type]){ e.type = RENAMED_TYPE[e.type]; changed = true; } }));
+  const ta = DATA.typeArt;
+  Object.entries(RENAMED_TYPE).forEach(([from, to]) => { if (ta[from] && !ta[to]){ ta[to] = ta[from]; changed = true; } });
+  Object.keys(ta).forEach(t => { if (!TYPE[t]){ delete ta[t]; changed = true; } });
+  if (!ta.lockeddoor && DATA.art.some(a => a.id === "lockeddoor")){ ta.lockeddoor = "lockeddoor"; changed = true; }
+  return changed;
+}
 const COLORS = ["yellow", "red", "green"];
 const DEFAULT_SWITCHES = [
   { id:"sw_red", color:"red", name:"Red switch" },
@@ -186,6 +197,7 @@ function applyData(map, stars){
   };
   if (!DATA.places.length) DATA.places = JSON.parse(JSON.stringify(STARTER.places));
   if (!DATA.start || !DATA.places.some(p => p.id === DATA.start)) DATA.start = DATA.places[0].id;
+  upgradeTypes();
   reindex();
   if (!P[state.here]) { state.here = DATA.start; state.history = []; state.cameVia = null; }
   state.route = null; state.sel = null;
@@ -205,7 +217,7 @@ function exportStars(){
 const state = {
   tab:"explore", here:"castle_grounds", cameVia:null, history:[], checked:new Set(), route:null,
   rsQ:"", rsMin:0, rsConn:[], rsConnQ:"", rsShow:48, starQ:"", starC:"all", starShow:"all", planFrom:null, planTo:"", showIO:false,
-  artFilter:"all", edit:false, sel:null, placing:null, newKind:null, newFor:null, newName:"",
+  edit:false, sel:null, placing:null, newKind:null, newFor:null, newName:"",
   dirty:false, choose:null, confirm:null, picking:false, pickQ:"", delConfirm:null,
   draft:null, loadError:false, savedHandle:null, folderName:"", saveStatus:""
 };
@@ -278,15 +290,6 @@ async function useFolder(h){
 // assets/art are added to the picture list, and deleted files are forgotten.
 const FILESIG = {};
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp)$/i;
-function guessArtKind(name){
-  const n = name.toLowerCase();
-  if (/dead|death|kill/.test(n)) return "deadly";
-  if (n.includes("trap")) return "trapdoor";
-  if (n.includes("door")) return "door";
-  if (n.includes("pipe")) return "pipe";
-  if (n.includes("paint")) return "painting";
-  return "other";
-}
 async function indexAssets(){
   let changed = false, artRead = false;
   const found = new Set();
@@ -311,7 +314,7 @@ async function indexAssets(){
   const added = [];
   [...found].sort().filter(path => path.startsWith("assets/art/") && !DATA.art.some(a => a.file === path)).forEach(path => {
     const base = path.split("/").pop().replace(/\.[^.]+$/, "");
-    const a = { id:uniqueId(slug(base), id => !!ART[id]), kind:guessArtKind(base), name:base.replace(/[_-]+/g, " "), file:path };
+    const a = { id:uniqueId(slug(base), id => !!ART[id]), name:base.replace(/[_-]+/g, " "), file:path };
     DATA.art.push(a); ART[a.id] = a; added.push(a.name);
   });
   // pictures whose files were deleted from the folder leave the list too
@@ -462,7 +465,11 @@ function iconSVG(type){
   const inner = {
     door:`<rect x="-11" y="-14" width="22" height="28" rx="3" fill="#C8995A" stroke="#4A3520" stroke-width="2.5"/>`,
     pipe:`<circle r="13" fill="#3D9A4E" stroke="#1F4F28" stroke-width="3"/><circle r="6.5" fill="#183520"/>`,
-    deadly:`<rect x="-11" y="-14" width="22" height="28" rx="3" fill="#7A0F18" stroke="#0E0A0C" stroke-width="2.5"/>`
+    deadly:`<rect x="-11" y="-14" width="22" height="28" rx="3" fill="#7A0F18" stroke="#0E0A0C" stroke-width="2.5"/>`,
+    doubledoor:`<rect x="-14" y="-14" width="13" height="28" rx="2" fill="#C8995A" stroke="#4A3520" stroke-width="2.5"/><rect x="1" y="-14" width="13" height="28" rx="2" fill="#C8995A" stroke="#4A3520" stroke-width="2.5"/>`,
+    lockeddoor:`<rect x="-11" y="-14" width="22" height="28" rx="3" fill="#8A7A6A" stroke="#3A3028" stroke-width="2.5"/><rect x="-5" y="-1" width="10" height="8" rx="1" fill="#E3C160" stroke="#3A3028" stroke-width="1.5"/><path d="M-3 -1 V-4 A3 3 0 0 1 3 -4 V-1" fill="none" stroke="#3A3028" stroke-width="1.5"/>`,
+    hole:`<ellipse rx="14" ry="10" fill="#0D0B12" stroke="#000" stroke-width="2"/>`,
+    course:`<rect x="-14" y="-10" width="28" height="20" fill="#86AEDB" stroke="#C9A03C" stroke-width="4"/>`
   }[type] || `<circle r="12" fill="#B9B3C9" stroke="#241F33" stroke-width="2"/>`;
   return `<svg viewBox="-16 -16 32 32" aria-hidden="true">${inner}</svg>`;
 }
@@ -508,7 +515,7 @@ function mapHTML(p, opt = {}){
       opt.cameVia === e.id && "came", opt.sel === e.id && "sel", e.needsPos && "needspos"].filter(Boolean).join(" ");
     const dest = e.type === "deadly" ? "deadly dead end" : placeName(e.to);
     return `<button class="${cls}" data-exit="${e.id}" style="left:${e.x * 100}%;top:${e.y * 100}%"
-      title="${esc(e.label)}: ${esc(TYPE[e.type])}, ${esc(dest)}" aria-label="${esc(e.label)}, ${esc(TYPE[e.type])}, ${esc(dest)}">
+      title="${esc(e.label)}: ${esc(typeName(e.type))}, ${esc(dest)}" aria-label="${esc(e.label)}, ${esc(typeName(e.type))}, ${esc(dest)}">
       ${exitIcon(e)}<span class="badge">${idx + 1}</span>${P[e.to] && P[e.to].kind === "course" && e.type !== "deadly" ? `<span class="cap">${esc(P[e.to].name)}</span>` : ""}</button>`;
   }).join("");
   return `<div class="map ${state.placing && opt.live ? "placing" : ""}" data-map="${p.id}" style="aspect-ratio:${ar}">
@@ -522,7 +529,7 @@ function mapHTML(p, opt = {}){
 /* ============================== explore ============================== */
 function stepText(step){
   const e = EX[step.e];
-  return `take <span class="num">${exitNum(e.id)}</span> ${esc(e.label || TYPE[e.type])}${e.floor ? ` <span class="muted">(${esc(e.floor)})</span>` : ""}`
+  return `take <span class="num">${exitNum(e.id)}</span> ${esc(e.label || typeName(e.type))}${e.floor ? ` <span class="muted">(${esc(e.floor)})</span>` : ""}`
     + (step.luck ? ` <span class="tag warn">only sometimes</span><div class="small muted">This only sometimes leads to ${esc(P[step.to].name)}. If you end up somewhere else, come back and try again.</div>` : "");
 }
 function banners(){
@@ -572,7 +579,7 @@ function exitRow(e, idx, nextId){
   const d = P[e.to];
   let dest;
   if (e.type === "deadly") dest = `Deadly dead end. You'll be killed.${P[e.respawn] ? ` You end up in ${P[e.respawn].name}.` : ""}`;
-  else dest = `${TYPE[e.type]}${e.floor ? `, ${e.floor}` : ""} to ${placeName(e.to)}`;
+  else dest = `${typeName(e.type)}${e.floor ? `, ${e.floor}` : ""} to ${placeName(e.to)}`;
   const stars = d && e.type !== "deadly" && starsIn(d.id).length ? ` <span class="tag">${gotIn(d.id)}/${starsIn(d.id).length}★</span>` : "";
   const alts = (e.alts || []).filter(a => P[a.to]);
   const tags = (!e.pair && e.type !== "deadly" ? `<span class="tag one">one-way</span>` : "")
@@ -677,15 +684,15 @@ function exitForm(e){
     <h3>Exit ${exitNum(e.id)}</h3>
     <label class="f">What it looks like<input data-edit="ex-label" value="${esc(e.label)}" placeholder="e.g. Blue door left of the stairs"></label>
     <div class="two">
-      <label class="f">Type<select data-edit="ex-type">${Object.entries(TYPE).map(([k, v]) => `<option value="${k}" ${e.type === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
+      <label class="f">Type<select data-edit="ex-type">${Object.entries(TYPE).map(([k, v]) => `<option value="${k}" ${e.type === k ? "selected" : ""}>${v}</option>`).join("")}${TYPE[e.type] ? "" : `<option value="${esc(e.type)}" selected>${esc(typeName(e.type))} (old type, pick a new one)</option>`}</select></label>
       <label class="f">Floor (optional)<input data-edit="ex-floor" value="${esc(e.floor || "")}" placeholder="e.g. 2nd floor"></label>
     </div>
     <div class="small" style="font-weight:600">Picture on the map</div>
     <p class="small muted" style="margin:2px 0 0">${e.art ? "Click the selected picture again to go back to the default."
-      : exitArtUrl(e) ? `Using the default picture for ${esc(TYPE[e.type].toLowerCase())}s. Pick another to use it just for this exit.`
+      : exitArtUrl(e) ? `Using the default picture for ${esc(typeName(e.type).toLowerCase())}s. Pick another to use it just for this exit.`
       : "Using a plain icon. Pick or add a picture for it."}</p>
-    ${artPicker(e.art || (DATA.typeArt || {})[e.type], kindForType(e.type))}
-    ${e.art && (DATA.typeArt || {})[e.type] !== e.art ? `<button class="btn sm" data-action="set-default-art" style="margin:-4px 0 12px">Use this picture for every ${esc(TYPE[e.type].toLowerCase())}</button>` : ""}
+    ${artPicker(e.art || (DATA.typeArt || {})[e.type])}
+    ${e.art && (DATA.typeArt || {})[e.type] !== e.art ? `<button class="btn sm" data-action="set-default-art" style="margin:-4px 0 12px">Use this picture for every ${esc(typeName(e.type).toLowerCase())}</button>` : ""}
     <label class="f">${deadly ? "Room where you get killed (optional)" : "Leads to"}${destSelect("to", null, e.to, deadly ? "Not logged" : "Not set yet", !deadly, FROM[e.id])}</label>
     ${newPlaceRow("to", null)}
     ${deadly ? `<label class="f">Where you end up after dying (optional)${destSelect("respawn", null, e.respawn, "Not logged", true, null)}</label>
@@ -707,12 +714,10 @@ function exitForm(e){
   </div>`;
 }
 
-function artPicker(sel, uploadKind){
-  const f = state.artFilter;
-  const list = (DATA.art || []).filter(a => (f === "all" || a.kind === f) && !missingFile(a.file));
-  return `<div style="margin-top:6px">${["all", ...ART_KINDS].map(k => `<button class="swatch ${f === k ? "on" : ""}" data-action="art-filter" data-v="${k}">${k === "all" ? "All" : ART_KIND_NAME[k]}</button>`).join("")}</div>
-    <div class="artgrid">${list.map(a => `<button class="artt ${sel === a.id ? "on" : ""}" data-action="pick-art" data-art="${a.id}" title="${esc(a.name)}" aria-label="${esc(a.name)}"><img src="${esc(asset(a.file))}" alt="" onload="pixelFit(this)" onerror="artFailed(this)"></button>`).join("") || `<span class="small muted">No pictures of this kind yet.</span>`}</div>
-    <label class="btn sm" style="margin-bottom:12px">Add pictures from this computer<input type="file" accept="image/*" multiple data-file="art" data-kind="${uploadKind}" hidden></label>`;
+function artPicker(sel){
+  const list = (DATA.art || []).filter(a => !missingFile(a.file));
+  return `<div class="artgrid">${list.map(a => `<button class="artt ${sel === a.id ? "on" : ""}" data-action="pick-art" data-art="${a.id}" title="${esc(a.name)}" aria-label="${esc(a.name)}"><img src="${esc(asset(a.file))}" alt="" onload="pixelFit(this)" onerror="artFailed(this)"></button>`).join("") || `<span class="small muted">No pictures yet. Add some, or drop them into assets/art.</span>`}</div>
+    <label class="btn sm" style="margin-bottom:12px">Add pictures from this computer<input type="file" accept="image/*" multiple data-file="art" hidden></label>`;
 }
 
 function roomColorEditor(p){
@@ -795,7 +800,7 @@ function linkTwoWay(e){
   let q = d.exits.find(x => x.to === here.id && !x.pair && x.type !== "deadly");
   if (q) toast(`Linked to "${q.label || "an existing exit"}" in ${d.name}.`);
   else {
-    q = { id:uniqueId(`${d.id}_${d.exits.length + 1}`, id => !!EX[id]), type:e.type === "painting" ? "door" : e.type, label:`Back to ${here.name}`, to:here.id };
+    q = { id:uniqueId(`${d.id}_${d.exits.length + 1}`, id => !!EX[id]), type:e.type === "course" ? "door" : e.type, label:`Back to ${here.name}`, to:here.id };
     if (d.kind === "room"){ q.x = 0.5; q.y = 0.5; q.needsPos = true; }
     d.exits.push(q); EX[q.id] = q; FROM[q.id] = d.id;
     toast(`Added the way back in ${d.name}.${d.kind === "room" ? " Place it when you get there." : ""}`);
@@ -947,8 +952,8 @@ function renderFind(){
 /* ============================== route ============================== */
 function stepHTML(step){
   const e = EX[step.e];
-  return `<li><b>${esc(P[FROM[step.e]].name)}</b>: take <span class="num">${exitNum(step.e)}</span> ${esc(e.label || TYPE[e.type])}${e.floor ? ` on the ${esc(e.floor)}` : ""}
-    <span class="muted">(${esc(TYPE[e.type])})</span>, arriving in <b>${esc(P[step.to].name)}</b>
+  return `<li><b>${esc(P[FROM[step.e]].name)}</b>: take <span class="num">${exitNum(step.e)}</span> ${esc(e.label || typeName(e.type))}${e.floor ? ` on the ${esc(e.floor)}` : ""}
+    <span class="muted">(${esc(typeName(e.type))})</span>, arriving in <b>${esc(P[step.to].name)}</b>
     ${step.luck ? `<span class="tag warn">only sometimes</span>` : ""}</li>`;
 }
 function renderRoute(){
@@ -989,7 +994,7 @@ function fileMissing(path){ return FOLDER ? !LOCAL[path] : BROKEN.has(path); }
 function dataCheck(){
   const issues = [], seenP = new Set(), seenE = new Set();
   const add = (sev, msg) => issues.push([sev, msg]);
-  Object.entries(DATA.typeArt || {}).forEach(([t, id]) => { if (!ART[id]) add("error", `The default picture for ${TYPE[t] || t} is "${id}", which isn't in the picture list.`); });
+  Object.entries(DATA.typeArt || {}).forEach(([t, id]) => { if (!ART[id]) add("error", `The default picture for ${typeName(t)} is "${id}", which isn't in the picture list.`); });
   (DATA.art || []).forEach(a => { if (fileMissing(a.file)) add("warn", `The picture file ${a.file} is missing.`); });
   DATA.places.forEach(p => { if (seenP.has(p.id)) add("error", `Two places share the id "${p.id}".`); seenP.add(p.id); });
   DATA.places.forEach(p => {
@@ -1005,6 +1010,7 @@ function dataCheck(){
       if (seenE.has(e.id)) add("error", `Two exits share the id "${e.id}".`); seenE.add(e.id);
       if (e.art && !ART[e.art]) add("error", `${nm} uses picture "${e.art}", which isn't in the picture list.`);
       if (e.needsPos) add("info", `${nm} hasn't been placed on the drawing yet.`);
+      if (!TYPE[e.type]) add("warn", `${nm} still uses the old exit type "${typeName(e.type)}". Pick one from the new list.`);
       if (e.type === "deadly"){
         if (e.to && !P[e.to]) add("error", `${nm} leads to "${e.to}", which doesn't exist.`);
         if (e.respawn && !P[e.respawn]) add("error", `${nm} respawns you in "${e.respawn}", which doesn't exist.`);
@@ -1163,7 +1169,7 @@ document.addEventListener("click", ev => {
     "cancel-place": () => { state.placing = null; },
     "add-exit": () => {
       if (p.kind === "room"){ state.placing = "exit"; return; }
-      const e = { id:uniqueId(`${p.id}_${p.exits.length + 1}`, id => !!EX[id]), type:"other", label:"", to:"" };
+      const e = { id:uniqueId(`${p.id}_${p.exits.length + 1}`, id => !!EX[id]), type:"door", label:"", to:"" };
       p.exits.push(e); state.sel = e.id; reindex(); markDirty();
     },
     "move-exit": () => { state.placing = "move"; },
@@ -1195,7 +1201,6 @@ document.addEventListener("click", ev => {
       if (state.delConfirm === target.id) deletePlace(target); else state.delConfirm = target.id;
     },
     "hex": () => { const hex = el.dataset.hex; if (p.color === hex) delete p.color; else p.color = hex; markDirty(); },
-    "art-filter": () => { state.artFilter = el.dataset.v; },
     "pick-art": () => {
       const id = el.dataset.art, e = EX[state.sel];
       if (e.art === id || (!e.art && (DATA.typeArt || {})[e.type] === id)) delete e.art; else e.art = id;
@@ -1203,7 +1208,7 @@ document.addEventListener("click", ev => {
     },
     "set-default-art": () => {
       const e = EX[state.sel]; DATA.typeArt[e.type] = e.art; delete e.art; markDirty();
-      toast(`Every ${TYPE[e.type].toLowerCase()} without its own picture now uses this one.`);
+      toast(`Every ${typeName(e.type).toLowerCase()} without its own picture now uses this one.`);
     },
     "toggle-picker": () => { state.picking = !state.picking; state.pickQ = ""; },
     "place-star": () => { STAR[el.dataset.star].place = p.id; markDirty(); },
@@ -1290,7 +1295,7 @@ function handleFile(el){
         let a = DATA.art.find(x => x.file === path);
         if (!a){
           const base = file.name.replace(/\.[^.]+$/, "");
-          a = { id:uniqueId(slug(base), id => !!ART[id]), kind:el.dataset.kind || "other", name:base.replace(/[_-]+/g, " "), file:path };
+          a = { id:uniqueId(slug(base), id => !!ART[id]), name:base.replace(/[_-]+/g, " "), file:path };
           DATA.art.push(a); ART[a.id] = a;
         }
         firstArt = firstArt || a.id;
