@@ -80,7 +80,53 @@
       "id": "castle_grounds",
       "name": "Castle Grounds",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "castle_grounds_2",
+          "type": "door",
+          "x": 0.514,
+          "y": 0.63,
+          "label": "",
+          "to": "beta_lobby_e",
+          "pair": "beta_lobby_e_1",
+          "art": "door"
+        }
+      ],
+      "shape": "assets/rooms/castle_grounds.png",
+      "color": "#20DF20"
+    },
+    {
+      "id": "beta_lobby_a",
+      "name": "Beta Lobby A",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "beta_lobby_a_1",
+          "type": "door",
+          "label": "Back to Castle Grounds",
+          "to": "castle_grounds",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true
+        }
+      ]
+    },
+    {
+      "id": "beta_lobby_e",
+      "name": "Beta Lobby E",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "beta_lobby_e_1",
+          "type": "door",
+          "label": "Back to Castle Grounds",
+          "to": "castle_grounds",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "castle_grounds_2"
+        }
+      ]
     }
   ]
 }
