@@ -23,8 +23,9 @@ Logging happens in Chrome or Edge, which can save straight into your copy of thi
    - Tick **Two-way** when going back through it brings you right back. The return door is created on the other side for you.
    - Use **Add stars from the star list** to place the stars that are in this room, and mark any cap switches that are here.
    - Press **Go through** to move on and keep logging.
-4. Check the **Data check** tab. It lists everything unfinished: exits with no destination, return doors that still need placing, unplaced stars, drawings with gaps, and so on.
-5. Commit and push with GitHub Desktop. The live site updates a minute or two later.
+4. Made a room by mistake? Delete it from the top of its **This room** card, or from its card in **Room select**.
+5. Check the **Data check** tab. It lists everything unfinished: exits with no destination, return doors that still need placing, unplaced stars, drawings with gaps, and so on.
+6. Commit and push. The live site updates a minute or two later.
 
 The next time you open `?log`, Chrome may ask you to reconnect to the folder. Click the button at the top. If something goes wrong before an edit is saved, the site keeps a backup in your browser and offers to restore it.
 
@@ -34,7 +35,7 @@ Draw each room as a **black outline** on a white or see-through background, in a
 
 ### Exit pictures
 
-You can drop pictures straight into `assets/art/` with File Explorer. While logging, the site checks the folder whenever you switch back to the browser, adds any new pictures to its list, and guesses each one's category from its file name: names containing *door*, *pipe*, *paint*, *trap*, or *dead*/*death*/*kill* go under those categories, and anything else goes under Other. If you delete a picture's file, the **Data check** tab offers to remove it from the list. The list lives in `data/map.json`, so commit that file along with the pictures.
+You can drop pictures straight into `assets/art/` with File Explorer. While logging, the site checks the folder whenever you switch back to the browser, adds any new pictures to its list, and guesses each one's category from its file name: names containing *door*, *pipe*, *paint*, *trap*, or *dead*/*death*/*kill* go under those categories, and anything else goes under Other. If you delete a picture's file, it leaves the list too, and exits that used it switch to a plain icon. The list lives in `data/map.json`, so commit that file along with the pictures.
 
 `assets/art/` has a stand-in picture for each exit type: `door.png`, `doubledoor.png`, `trapdoor.png`, `pipe.png`, `painting.png`, `hole.png`, `warp.png`, `exitcourse.png`, `deadly.png` and `other.png`. Save your own drawing over a stand-in with the same file name and every exit of that type switches over. To give one exit a different picture, pick or add it in that exit's editor.
 

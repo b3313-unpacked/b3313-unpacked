@@ -288,11 +288,12 @@ function guessArtKind(name){
   return "other";
 }
 async function indexAssets(){
-  let changed = false;
+  let changed = false, artRead = false;
   const found = new Set();
   for (const sub of ["rooms", "art"]){
     let dir;
     try { dir = await (await FOLDER.getDirectoryHandle("assets")).getDirectoryHandle(sub); } catch { continue; }
+    if (sub === "art") artRead = true;
     for await (const [name, fh] of dir.entries()){
       if (fh.kind !== "file" || name.startsWith(".") || !IMAGE_EXT.test(name)) continue;
       const path = `assets/${sub}/${name}`, file = await fh.getFile(), sig = file.size + ":" + file.lastModified;
@@ -313,8 +314,20 @@ async function indexAssets(){
     const a = { id:uniqueId(slug(base), id => !!ART[id]), kind:guessArtKind(base), name:base.replace(/[_-]+/g, " "), file:path };
     DATA.art.push(a); ART[a.id] = a; added.push(a.name);
   });
-  if (added.length){ markDirty(); toast(`Found ${added.length} new picture${added.length > 1 ? "s" : ""}: ${added.join(", ")}.`); }
-  return changed || added.length > 0;
+  // pictures whose files were deleted from the folder leave the list too
+  const gone = artRead ? DATA.art.filter(a => a.file.startsWith("assets/art/") && !found.has(a.file)) : [];
+  if (gone.length) removeArt(new Set(gone.map(a => a.id)));
+  const msgs = [];
+  if (added.length) msgs.push(`Found ${added.length} new picture${added.length > 1 ? "s" : ""}: ${added.join(", ")}.`);
+  if (gone.length) msgs.push(`Removed ${gone.length} picture${gone.length > 1 ? "s" : ""} whose file${gone.length > 1 ? "s are" : " is"} gone: ${gone.map(a => a.name).join(", ")}.`);
+  if (msgs.length){ markDirty(); toast(msgs.join(" ")); }
+  return changed || added.length > 0 || gone.length > 0;
+}
+function removeArt(ids){
+  DATA.art = DATA.art.filter(a => !ids.has(a.id));
+  Object.keys(DATA.typeArt).forEach(t => { if (ids.has(DATA.typeArt[t])) delete DATA.typeArt[t]; });
+  DATA.places.forEach(x => x.exits.forEach(e => { if (ids.has(e.art)) delete e.art; }));
+  reindex();
 }
 async function writeAsset(sub, file){
   const dir = await (await FOLDER.getDirectoryHandle("assets", { create:true })).getDirectoryHandle(sub, { create:true });
@@ -459,6 +472,14 @@ const missingFile = path => !!(FOLDER && path && path.startsWith("assets/") && !
 const artUrl = id => ART[id] && !missingFile(ART[id].file) ? asset(ART[id].file) : null;
 // Tiny drawings get crisp pixel scaling; anything bigger than its box gets smooth scaling.
 function pixelFit(img){ img.classList.toggle("px", img.naturalHeight > 0 && img.naturalHeight <= img.clientHeight); }
+// A picture that can't be loaded is never shown as an empty box.
+function artFailed(img){
+  const src = img.getAttribute("src");
+  const a = (DATA.art || []).find(x => asset(x.file) === src); if (a) BROKEN.add(a.file);
+  const tile = img.closest(".artt");
+  if (tile){ tile.hidden = true; return; }
+  img.outerHTML = iconSVG(img.dataset.type || "other");
+}
 // An exit shows its own picture first, then the default picture for its type, then a plain icon.
 function exitArtUrl(e){
   const own = e.art && artUrl(e.art);
@@ -468,7 +489,7 @@ function exitArtUrl(e){
 }
 function exitIcon(e){
   const u = exitArtUrl(e);
-  return u ? `<img class="art" src="${esc(u)}" alt="" onload="pixelFit(this)">` : iconSVG(e.type);
+  return u ? `<img class="art" src="${esc(u)}" alt="" data-type="${esc(e.type)}" onload="pixelFit(this)" onerror="artFailed(this)">` : iconSVG(e.type);
 }
 
 function mapHTML(p, opt = {}){
@@ -674,7 +695,7 @@ function artPicker(sel, uploadKind){
   const f = state.artFilter;
   const list = (DATA.art || []).filter(a => (f === "all" || a.kind === f) && !missingFile(a.file));
   return `<div style="margin-top:6px">${["all", ...ART_KINDS].map(k => `<button class="swatch ${f === k ? "on" : ""}" data-action="art-filter" data-v="${k}">${k === "all" ? "All" : ART_KIND_NAME[k]}</button>`).join("")}</div>
-    <div class="artgrid">${list.map(a => `<button class="artt ${sel === a.id ? "on" : ""}" data-action="pick-art" data-art="${a.id}" title="${esc(a.name)}" aria-label="${esc(a.name)}"><img src="${esc(asset(a.file))}" alt="" onload="pixelFit(this)"></button>`).join("") || `<span class="small muted">No pictures of this kind yet.</span>`}</div>
+    <div class="artgrid">${list.map(a => `<button class="artt ${sel === a.id ? "on" : ""}" data-action="pick-art" data-art="${a.id}" title="${esc(a.name)}" aria-label="${esc(a.name)}"><img src="${esc(asset(a.file))}" alt="" onload="pixelFit(this)" onerror="artFailed(this)"></button>`).join("") || `<span class="small muted">No pictures of this kind yet.</span>`}</div>
     <label class="btn sm" style="margin-bottom:12px">Add pictures from this computer<input type="file" accept="image/*" multiple data-file="art" data-kind="${uploadKind}" hidden></label>`;
 }
 
@@ -689,7 +710,9 @@ function roomColorEditor(p){
 
 function placeForm(p){
   const isRoom = p.kind === "room";
-  return `<div class="card"><h3>This ${p.kind}</h3>
+  return `<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:10px"><h3 style="margin:0">This ${p.kind}</h3>
+    ${p.id === DATA.start ? `<span class="small muted">The map starts here</span>`
+      : `<button class="btn sm danger" data-action="del-place" data-place="${p.id}">${state.delConfirm === p.id ? "Click again to delete" : `Delete this ${p.kind}`}</button>`}</div>
     <label class="f">Name<input data-edit="name" value="${esc(p.name)}"></label>
     <label class="f">Kind<select data-edit="kind"><option value="room" ${isRoom ? "selected" : ""}>Room</option><option value="course" ${!isRoom ? "selected" : ""}>Course (or one-painting room)</option></select></label>
     ${isRoom ? `
@@ -700,8 +723,6 @@ function placeForm(p){
       <div class="row" style="justify-content:space-between;margin-bottom:6px"><b class="small">Labels on the drawing</b><button class="btn sm" data-action="add-label">Add label</button></div>
       ${(p.labels || []).map((l, i) => `<div class="row" style="margin-bottom:6px;flex-wrap:nowrap"><input data-edit="label" data-i="${i}" value="${esc(l.text)}"><button class="btn sm" data-action="move-label" data-i="${i}">Move</button><button class="btn sm danger" data-action="del-label" data-i="${i}" aria-label="Delete label">✕</button></div>`).join("") || `<p class="small muted" style="margin:0 0 10px">Use labels for floors, like "1st floor".</p>`}
     ` : ""}
-    ${p.id === DATA.start ? `<p class="small muted" style="margin:0">This is where the map starts.</p>`
-      : `<button class="btn sm danger" data-action="del-place">${state.delConfirm === p.id ? `Click again to delete ${esc(p.name)}` : `Delete this ${p.kind}`}</button>`}
   </div>`;
 }
 
@@ -766,6 +787,7 @@ function linkTwoWay(e){
   q.pair = e.id; e.pair = q.id;
 }
 function deletePlace(p){
+  if (p.id === DATA.start) return;
   p.exits.forEach(unlinkPair);
   DATA.places = DATA.places.filter(x => x.id !== p.id);
   DATA.places.forEach(x => x.exits.forEach(e => {
@@ -776,8 +798,11 @@ function deletePlace(p){
   DATA.stars.forEach(s => { if (s.place === p.id) delete s.place; });
   DATA.switches.forEach(w => { w.places = w.places.filter(x => x !== p.id); });
   state.history = state.history.filter(h => h.here !== p.id);
-  state.here = state.history.length ? state.history.pop().here : DATA.start;
-  Object.assign(state, { cameVia:null, sel:null, delConfirm:null, route:null });
+  if (state.here === p.id){
+    state.here = state.history.length ? state.history.pop().here : DATA.start;
+    Object.assign(state, { cameVia:null, sel:null });
+  }
+  Object.assign(state, { delConfirm:null, route:null });
   reindex(); markDirty();
   toast(`Deleted ${p.name}.`);
 }
@@ -874,7 +899,8 @@ function roomSelectResultsHTML(){
       <div class="mini">${mapHTML(p)}</div>
       <b>${esc(p.name)}</b> <span class="match">${p.exits.length} way${p.exits.length === 1 ? "" : "s"} out</span>
       <div class="row" style="margin-top:8px"><button class="btn sm primary" data-action="here" data-place="${p.id}">I'm here</button>
-      <button class="btn sm" data-action="route-place" data-place="${p.id}">Take me here</button></div></div>`).join("")}</div>
+      <button class="btn sm" data-action="route-place" data-place="${p.id}">Take me here</button>
+      ${LOG_MODE && p.id !== DATA.start ? `<button class="btn sm danger" data-action="del-place" data-place="${p.id}">${state.delConfirm === p.id ? "Click again to delete" : "Delete"}</button>` : ""}</div></div>`).join("")}</div>
     ${list.length > shown.length ? `<div class="row" style="margin-top:14px;justify-content:center"><button class="btn" data-action="rs-more">Show more rooms</button></div>` : ""}`;
 }
 function rsConnListHTML(){
@@ -943,7 +969,7 @@ function reachSet(start, reverse){
   return seen;
 }
 function fileMissing(path){ return FOLDER ? !LOCAL[path] : BROKEN.has(path); }
-const goneArt = () => FOLDER ? (DATA.art || []).filter(a => !LOCAL[a.file]) : [];
+
 function dataCheck(){
   const issues = [], seenP = new Set(), seenE = new Set();
   const add = (sev, msg) => issues.push([sev, msg]);
@@ -1023,8 +1049,6 @@ function renderCheck(){
       <div><b>${(DATA.art || []).length}</b><span class="muted small">exit pictures</span></div>
       <div><b>${placed}/${DATA.stars.length}</b><span class="muted small">stars placed</span></div>
     </div></div>
-    ${goneArt().length ? `<div class="banner ask"><div class="grow"><b>${goneArt().length} picture${goneArt().length > 1 ? "s are" : " is"} listed but the file${goneArt().length > 1 ? "s are" : " is"} gone:</b> ${goneArt().map(a => esc(a.file)).join(", ")}</div>
-      <button class="btn primary" data-action="prune-art">Remove from the list</button></div>` : ""}
     <div class="card"><h3>${issues.length ? `${issues.length} things to look at` : "No problems found"}</h3>
     ${issues.map(([sev, msg]) => `<div class="issue ${sev}">${esc(msg)}</div>`).join("")}</div>`;
 }
@@ -1047,6 +1071,8 @@ function renderChips(){
 function topNotices(){
   const out = [];
   if (state.loadError) out.push(`<div class="banner lost"><div class="grow"><b>The map data couldn't be loaded.</b> If you opened index.html straight from your computer, open the site from GitHub Pages instead${LOG_MODE && FS_OK ? ", or open your repo folder" : ""}.</div></div>`);
+  if (LOG_MODE && !FOLDER && FS_OK) out.push(`<div class="banner ask"><div class="grow"><b>Your repo folder isn't connected.</b> Edits won't be saved there, and pictures you haven't pushed yet won't show.</div>
+      <button class="btn primary" data-action="${state.savedHandle ? "reconnect" : "open-folder"}">${state.savedHandle ? `Reconnect to ${esc(state.savedHandle.name)}` : "Open my repo folder"}</button></div>`);
   if (LOG_MODE && state.draft){
     const when = new Date(state.draft.time).toLocaleString([], { dateStyle:"medium", timeStyle:"short" });
     out.push(`<div class="banner ask"><div class="grow"><b>You have map edits from ${esc(when)} that were never saved.</b></div>
@@ -1147,7 +1173,10 @@ document.addEventListener("click", ev => {
     "add-label": () => { state.placing = "label"; },
     "move-label": () => { state.placing = "label:" + el.dataset.i; },
     "del-label": () => { p.labels.splice(+el.dataset.i, 1); markDirty(); },
-    "del-place": () => { if (state.delConfirm === p.id) deletePlace(p); else state.delConfirm = p.id; },
+    "del-place": () => {
+      const target = P[el.dataset.place || p.id]; if (!target) return;
+      if (state.delConfirm === target.id) deletePlace(target); else state.delConfirm = target.id;
+    },
     "hex": () => { const hex = el.dataset.hex; if (p.color === hex) delete p.color; else p.color = hex; markDirty(); },
     "art-filter": () => { state.artFilter = el.dataset.v; },
     "pick-art": () => {
@@ -1165,14 +1194,6 @@ document.addEventListener("click", ev => {
       const list = unplacedStars().filter(s => s.course === el.dataset.course);
       list.forEach(s => { s.place = p.id; }); markDirty();
       toast(`Placed ${list.length} star${list.length > 1 ? "s" : ""} in ${p.name}.`);
-    },
-    "prune-art": () => {
-      const gone = new Set(goneArt().map(a => a.id));
-      DATA.art = DATA.art.filter(a => !gone.has(a.id));
-      Object.keys(DATA.typeArt).forEach(t => { if (gone.has(DATA.typeArt[t])) delete DATA.typeArt[t]; });
-      DATA.places.forEach(x => x.exits.forEach(e => { if (gone.has(e.art)) delete e.art; }));
-      reindex(); markDirty();
-      toast(`Removed ${gone.size} picture${gone.size > 1 ? "s" : ""}. Exits that used them show a plain icon until you pick a new one.`);
     },
     "unplace-star": () => { delete STAR[el.dataset.star].place; markDirty(); },
     "toggle-switch-place": () => { const w = SWITCH[el.dataset.sw]; w.places = w.places.includes(p.id) ? w.places.filter(x => x !== p.id) : [...w.places, p.id]; markDirty(); },
