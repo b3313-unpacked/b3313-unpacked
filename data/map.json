@@ -89,7 +89,7 @@
           "label": "",
           "to": "beta_lobby_e",
           "pair": "beta_lobby_e_1",
-          "art": "door"
+          "art": "doubledoor"
         }
       ],
       "shape": "assets/rooms/castle_grounds.png",
@@ -124,7 +124,8 @@
           "x": 0.5,
           "y": 0.5,
           "needsPos": true,
-          "pair": "castle_grounds_2"
+          "pair": "castle_grounds_2",
+          "art": "doubledoor"
         }
       ]
     }

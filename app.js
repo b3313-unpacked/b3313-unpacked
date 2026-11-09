@@ -274,18 +274,47 @@ async function useFolder(h){
   state.draft = null;
   render();
 }
+// Reads assets/rooms and assets/art from your repo folder. New pictures dropped into
+// assets/art are added to the picture list, and deleted files are forgotten.
+const FILESIG = {};
+const IMAGE_EXT = /\.(png|jpe?g|gif|webp)$/i;
+function guessArtKind(name){
+  const n = name.toLowerCase();
+  if (/dead|death|kill/.test(n)) return "deadly";
+  if (n.includes("trap")) return "trapdoor";
+  if (n.includes("door")) return "door";
+  if (n.includes("pipe")) return "pipe";
+  if (n.includes("paint")) return "painting";
+  return "other";
+}
 async function indexAssets(){
+  let changed = false;
+  const found = new Set();
   for (const sub of ["rooms", "art"]){
-    try {
-      const dir = await (await FOLDER.getDirectoryHandle("assets")).getDirectoryHandle(sub);
-      for await (const [name, fh] of dir.entries()){
-        if (fh.kind !== "file" || name.startsWith(".")) continue;
-        const path = `assets/${sub}/${name}`;
+    let dir;
+    try { dir = await (await FOLDER.getDirectoryHandle("assets")).getDirectoryHandle(sub); } catch { continue; }
+    for await (const [name, fh] of dir.entries()){
+      if (fh.kind !== "file" || name.startsWith(".") || !IMAGE_EXT.test(name)) continue;
+      const path = `assets/${sub}/${name}`, file = await fh.getFile(), sig = file.size + ":" + file.lastModified;
+      found.add(path);
+      if (FILESIG[path] !== sig){
         if (LOCAL[path]) URL.revokeObjectURL(LOCAL[path]);
-        LOCAL[path] = URL.createObjectURL(await fh.getFile());
+        LOCAL[path] = URL.createObjectURL(file); FILESIG[path] = sig; changed = true;
       }
-    } catch {}
+    }
   }
+  Object.keys(FILESIG).forEach(path => {
+    if (found.has(path)) return;
+    URL.revokeObjectURL(LOCAL[path]); delete LOCAL[path]; delete FILESIG[path]; changed = true;
+  });
+  const added = [];
+  [...found].sort().filter(path => path.startsWith("assets/art/") && !DATA.art.some(a => a.file === path)).forEach(path => {
+    const base = path.split("/").pop().replace(/\.[^.]+$/, "");
+    const a = { id:uniqueId(slug(base), id => !!ART[id]), kind:guessArtKind(base), name:base.replace(/[_-]+/g, " "), file:path };
+    DATA.art.push(a); ART[a.id] = a; added.push(a.name);
+  });
+  if (added.length){ markDirty(); toast(`Found ${added.length} new picture${added.length > 1 ? "s" : ""}: ${added.join(", ")}.`); }
+  return changed || added.length > 0;
 }
 async function writeAsset(sub, file){
   const dir = await (await FOLDER.getDirectoryHandle("assets", { create:true })).getDirectoryHandle(sub, { create:true });
@@ -424,14 +453,18 @@ function iconSVG(type){
   }[type] || `<circle r="12" fill="#B9B3C9" stroke="#241F33" stroke-width="2"/>`;
   return `<svg viewBox="-16 -16 32 32" aria-hidden="true">${inner}</svg>`;
 }
-const artUrl = id => ART[id] ? asset(ART[id].file) : null;
+// With your repo folder open, a file that's gone from the folder counts as gone,
+// even if the live site still has an older copy.
+const missingFile = path => !!(FOLDER && path && path.startsWith("assets/") && !LOCAL[path]);
+const artUrl = id => ART[id] && !missingFile(ART[id].file) ? asset(ART[id].file) : null;
 // Tiny drawings get crisp pixel scaling; anything bigger than its box gets smooth scaling.
 function pixelFit(img){ img.classList.toggle("px", img.naturalHeight > 0 && img.naturalHeight <= img.clientHeight); }
 // An exit shows its own picture first, then the default picture for its type, then a plain icon.
 function exitArtUrl(e){
-  if (e.art && ART[e.art]) return artUrl(e.art);
+  const own = e.art && artUrl(e.art);
+  if (own) return own;
   const def = (DATA.typeArt || {})[e.type];
-  return def && ART[def] ? artUrl(def) : null;
+  return def ? artUrl(def) : null;
 }
 function exitIcon(e){
   const u = exitArtUrl(e);
@@ -443,9 +476,10 @@ function mapHTML(p, opt = {}){
     const u = artUrl((DATA.typeArt || {}).painting);
     return `<div class="course-art">${u ? `<img src="${esc(u)}" alt="">` : `<div class="blank"></div>`}</div>`;
   }
-  const ar = p.shape ? aspectOf(p.shape) : 4/3;
-  const filled = p.shape && isHex(p.color) ? filledDrawing(p.shape, p.color) : null;
-  const src = filled && filled.url ? filled.url : (p.shape ? asset(p.shape) : null);
+  const shape = p.shape && !missingFile(p.shape) ? p.shape : null;
+  const ar = shape ? aspectOf(shape) : 4/3;
+  const filled = shape && isHex(p.color) ? filledDrawing(shape, p.color) : null;
+  const src = filled && filled.url ? filled.url : (shape ? asset(shape) : null);
   const pins = p.exits.filter(e => typeof e.x === "number").map(e => {
     const idx = p.exits.indexOf(e);
     const cls = ["pin",
@@ -638,7 +672,7 @@ function exitForm(e){
 
 function artPicker(sel, uploadKind){
   const f = state.artFilter;
-  const list = (DATA.art || []).filter(a => f === "all" || a.kind === f);
+  const list = (DATA.art || []).filter(a => (f === "all" || a.kind === f) && !missingFile(a.file));
   return `<div style="margin-top:6px">${["all", ...ART_KINDS].map(k => `<button class="swatch ${f === k ? "on" : ""}" data-action="art-filter" data-v="${k}">${k === "all" ? "All" : ART_KIND_NAME[k]}</button>`).join("")}</div>
     <div class="artgrid">${list.map(a => `<button class="artt ${sel === a.id ? "on" : ""}" data-action="pick-art" data-art="${a.id}" title="${esc(a.name)}" aria-label="${esc(a.name)}"><img src="${esc(asset(a.file))}" alt="" onload="pixelFit(this)"></button>`).join("") || `<span class="small muted">No pictures of this kind yet.</span>`}</div>
     <label class="btn sm" style="margin-bottom:12px">Add pictures from this computer<input type="file" accept="image/*" multiple data-file="art" data-kind="${uploadKind}" hidden></label>`;
@@ -909,6 +943,7 @@ function reachSet(start, reverse){
   return seen;
 }
 function fileMissing(path){ return FOLDER ? !LOCAL[path] : BROKEN.has(path); }
+const goneArt = () => FOLDER ? (DATA.art || []).filter(a => !LOCAL[a.file]) : [];
 function dataCheck(){
   const issues = [], seenP = new Set(), seenE = new Set();
   const add = (sev, msg) => issues.push([sev, msg]);
@@ -988,6 +1023,8 @@ function renderCheck(){
       <div><b>${(DATA.art || []).length}</b><span class="muted small">exit pictures</span></div>
       <div><b>${placed}/${DATA.stars.length}</b><span class="muted small">stars placed</span></div>
     </div></div>
+    ${goneArt().length ? `<div class="banner ask"><div class="grow"><b>${goneArt().length} picture${goneArt().length > 1 ? "s are" : " is"} listed but the file${goneArt().length > 1 ? "s are" : " is"} gone:</b> ${goneArt().map(a => esc(a.file)).join(", ")}</div>
+      <button class="btn primary" data-action="prune-art">Remove from the list</button></div>` : ""}
     <div class="card"><h3>${issues.length ? `${issues.length} things to look at` : "No problems found"}</h3>
     ${issues.map(([sev, msg]) => `<div class="issue ${sev}">${esc(msg)}</div>`).join("")}</div>`;
 }
@@ -1129,6 +1166,14 @@ document.addEventListener("click", ev => {
       list.forEach(s => { s.place = p.id; }); markDirty();
       toast(`Placed ${list.length} star${list.length > 1 ? "s" : ""} in ${p.name}.`);
     },
+    "prune-art": () => {
+      const gone = new Set(goneArt().map(a => a.id));
+      DATA.art = DATA.art.filter(a => !gone.has(a.id));
+      Object.keys(DATA.typeArt).forEach(t => { if (gone.has(DATA.typeArt[t])) delete DATA.typeArt[t]; });
+      DATA.places.forEach(x => x.exits.forEach(e => { if (gone.has(e.art)) delete e.art; }));
+      reindex(); markDirty();
+      toast(`Removed ${gone.size} picture${gone.size > 1 ? "s" : ""}. Exits that used them show a plain icon until you pick a new one.`);
+    },
     "unplace-star": () => { delete STAR[el.dataset.star].place; markDirty(); },
     "toggle-switch-place": () => { const w = SWITCH[el.dataset.sw]; w.places = w.places.includes(p.id) ? w.places.filter(x => x !== p.id) : [...w.places, p.id]; markDirty(); },
     "toggle-switch": () => { const id = el.dataset.sw; state.checked.has(id) ? state.checked.delete(id) : state.checked.add(id); saveProgress(); },
@@ -1200,6 +1245,7 @@ function handleFile(el){
       if (FOLDER){ try { await writeAsset(sub, file); } catch { writeFailed = true; } }
       if (LOCAL[path]) URL.revokeObjectURL(LOCAL[path]);
       LOCAL[path] = URL.createObjectURL(file);
+      if (FOLDER && !writeFailed) FILESIG[path] = file.size + ":" + file.lastModified;
       if (kind === "shape") p.shape = path;
       else {
         let a = DATA.art.find(x => x.file === path);
@@ -1245,5 +1291,9 @@ async function init(){
   }
   render();
 }
+window.addEventListener("focus", async () => {
+  if (!LOG_MODE || !FOLDER) return;
+  try { if (await indexAssets()) render(); } catch {}
+});
 window.addEventListener("beforeunload", ev => { if (LOG_MODE && state.dirty && !FOLDER){ ev.preventDefault(); ev.returnValue = ""; } });
 init();

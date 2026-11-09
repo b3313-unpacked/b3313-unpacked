@@ -34,6 +34,8 @@ Draw each room as a **black outline** on a white or see-through background, in a
 
 ### Exit pictures
 
+You can drop pictures straight into `assets/art/` with File Explorer. While logging, the site checks the folder whenever you switch back to the browser, adds any new pictures to its list, and guesses each one's category from its file name: names containing *door*, *pipe*, *paint*, *trap*, or *dead*/*death*/*kill* go under those categories, and anything else goes under Other. If you delete a picture's file, the **Data check** tab offers to remove it from the list. The list lives in `data/map.json`, so commit that file along with the pictures.
+
 `assets/art/` has a stand-in picture for each exit type: `door.png`, `doubledoor.png`, `trapdoor.png`, `pipe.png`, `painting.png`, `hole.png`, `warp.png`, `exitcourse.png`, `deadly.png` and `other.png`. Save your own drawing over a stand-in with the same file name and every exit of that type switches over. To give one exit a different picture, pick or add it in that exit's editor.
 
 ### Exit types worth knowing
