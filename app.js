@@ -683,8 +683,11 @@ function setDest(e, key, v){
   else if (key === "respawn"){ if (v) e.respawn = v; else delete e.respawn; }
   else if (key.startsWith("alt")) e.alts[+key.slice(3)].to = v;
 }
+// Rooms A to Z, then courses A to Z.
+const byName = (a, b) => a.name.localeCompare(b.name, undefined, { numeric:true, sensitivity:"base" });
+const sortedPlaces = kind => DATA.places.filter(p => !kind || p.kind === kind).sort((a, b) => (a.kind === "course") - (b.kind === "course") || byName(a, b));
 function placeOptions(selected, exclude){
-  return DATA.places.filter(x => x.id !== exclude).map(x => `<option value="${x.id}" ${selected === x.id ? "selected" : ""}>${esc(x.name)}${x.kind === "course" ? " (course)" : ""}</option>`).join("");
+  return sortedPlaces().filter(x => x.id !== exclude).map(x => `<option value="${x.id}" ${selected === x.id ? "selected" : ""}>${esc(x.name)}${x.kind === "course" ? " (course)" : ""}</option>`).join("");
 }
 function exitForm(e){
   const d = P[e.to], partner = e.pair ? EX[e.pair] : null, deadly = e.type === "deadly";
@@ -967,7 +970,7 @@ function stepHTML(step){
 function renderRoute(){
   const from = P[state.planFrom] ? state.planFrom : state.here;
   const to = P[state.planTo] ? state.planTo : null;
-  const grp = (kind, label, sel) => `<optgroup label="${label}">${DATA.places.filter(p => p.kind === kind).map(p => `<option value="${p.id}" ${sel === p.id ? "selected" : ""}>${esc(p.name)}</option>`).join("")}</optgroup>`;
+  const grp = (kind, label, sel) => `<optgroup label="${label}">${sortedPlaces(kind).map(p => `<option value="${p.id}" ${sel === p.id ? "selected" : ""}>${esc(p.name)}</option>`).join("")}</optgroup>`;
   let result = "";
   if (to){
     const steps = bestRoute(from, to);
