@@ -61,7 +61,6 @@
     "door": "door",
     "doubledoor": "doubledoor",
     "pipe": "pipe",
-    "painting": "painting",
     "hole": "hole",
     "deadly": "deadly",
     "other": "other"
@@ -74,7 +73,7 @@
       "exits": [
         {
           "id": "castle_grounds_2",
-          "type": "door",
+          "type": "doubledoor",
           "x": 0.514,
           "y": 0.63,
           "label": "Front double doors",
@@ -90,7 +89,7 @@
         },
         {
           "id": "castle_grounds_2_2",
-          "type": "other",
+          "type": "hole",
           "x": 0.511,
           "y": 0.708,
           "label": "Hole inside wall under bridge",
@@ -99,7 +98,7 @@
         },
         {
           "id": "castle_grounds_3",
-          "type": "other",
+          "type": "hole",
           "x": 0.514,
           "y": 0.787,
           "label": "Hole in ground under bridge",
@@ -118,7 +117,7 @@
         },
         {
           "id": "castle_grounds_5",
-          "type": "door",
+          "type": "doubledoor",
           "x": 0.513,
           "y": 0.504,
           "label": "Hidden hallway door behind clock above front door",
@@ -137,7 +136,7 @@
         },
         {
           "id": "castle_grounds_7",
-          "type": "door",
+          "type": "hole",
           "x": 0.223,
           "y": 0.429,
           "label": "Hole in ground near waterfall",
@@ -146,7 +145,7 @@
         },
         {
           "id": "castle_grounds_8",
-          "type": "door",
+          "type": "doubledoor",
           "x": 0.511,
           "y": 0.374,
           "label": "Double door back of the castle",
@@ -183,16 +182,86 @@
       "exits": [
         {
           "id": "beta_lobby_e_1",
-          "type": "door",
+          "type": "doubledoor",
           "label": "Back to Castle Grounds",
           "to": "castle_grounds",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.482,
+          "y": 0.965,
           "pair": "castle_grounds_2",
           "art": "doubledoor"
+        },
+        {
+          "id": "beta_lobby_e_2",
+          "type": "door",
+          "x": 0.11,
+          "y": 0.563,
+          "label": "Door 3 to room with painting",
+          "to": "snow_slider_shoshinkai",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_e_3",
+          "type": "door",
+          "x": 0.28,
+          "y": 0.413,
+          "label": "Door 1 to room with painting",
+          "to": "mountain_shoshinkai",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_e_4",
+          "type": "door",
+          "x": 0.701,
+          "y": 0.411,
+          "label": "Door 2 to room with painting",
+          "to": "fire_bubble_shoshinkai",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_e_5",
+          "type": "door",
+          "x": 0.883,
+          "y": 0.558,
+          "label": "Door 4 to room with painting",
+          "to": "water_land_b_roll",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_e_6",
+          "type": "other",
+          "x": 0.489,
+          "y": 0.715,
+          "label": "Look up at the ceiling",
+          "to": "the_star"
+        },
+        {
+          "id": "beta_lobby_e_7",
+          "type": "hole",
+          "x": 0.489,
+          "y": 0.128,
+          "label": "Top double door into the trapdoor by Bowser painting",
+          "to": "beta_lobby_b",
+          "art": "hole",
+          "alts": [
+            {
+              "to": "bowser_in_the_dark_world_shoshinkai",
+              "note": "Before getting a red star"
+            }
+          ]
+        },
+        {
+          "id": "beta_lobby_e_8",
+          "type": "door",
+          "x": 0.491,
+          "y": 0.436,
+          "label": "Basement door",
+          "to": "uncanny_courtyard",
+          "pair": "uncanny_courtyard_1"
         }
-      ]
+      ],
+      "shape": "assets/rooms/beta_lobby.png",
+      "color": "#DF2020",
+      "view": ""
     },
     {
       "id": "scary_sewer_maze",
@@ -221,7 +290,19 @@
       "id": "lobby_z64_beta",
       "name": "lobby.z64 (beta)",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "lobby_z64_beta_1",
+          "type": "door",
+          "x": 0.508,
+          "y": 0.33,
+          "label": "Door 1",
+          "to": "wf_z64",
+          "art": "painting"
+        }
+      ],
+      "color": "#DF2020",
+      "shape": "assets/rooms/lobbyz64_beta.png"
     },
     {
       "id": "eel_graveyard",
@@ -291,6 +372,292 @@
           "pair": "castle_grounds_10"
         }
       ]
+    },
+    {
+      "id": "wf_z64",
+      "name": "wf.z64",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "snow_slider_shoshinkai",
+      "name": "Snow Slider (Shoshinkai)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "mountain_shoshinkai",
+      "name": "Mountain (Shoshinkai)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "fire_bubble_shoshinkai",
+      "name": "Fire Bubble (Shoshinkai)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "fire_bubble_shoshinkai_1",
+          "type": "door",
+          "label": "Inside the volcano",
+          "to": "melty_magma_mound",
+          "art": "other"
+        }
+      ]
+    },
+    {
+      "id": "melty_magma_mound",
+      "name": "Melting Magma Mound",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "water_land_b_roll",
+      "name": "Water Land (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "water_land_b_roll_1",
+          "type": "hole",
+          "label": "Jump in the hatch on Bowser's sub",
+          "to": "inside_the_submarine",
+          "art": "other"
+        }
+      ]
+    },
+    {
+      "id": "inside_the_submarine",
+      "name": "Inside the Submarine",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "inside_the_submarine_1",
+          "type": "hole",
+          "label": "Open the gate with a switch and walk through it",
+          "to": "bowser_in_the_sub",
+          "art": "other"
+        }
+      ]
+    },
+    {
+      "id": "bowser_in_the_sub",
+      "name": "Bowser in the Sub",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "the_star",
+      "name": "The Star",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "the_star_1",
+          "type": "pipe",
+          "label": "Pipe around the star",
+          "to": "3rd_floor_beta",
+          "art": "blockpipe"
+        }
+      ]
+    },
+    {
+      "id": "3rd_floor_beta",
+      "name": "3rd Floor (beta)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "3rd_floor_beta_1",
+          "type": "hole",
+          "x": 0.06,
+          "y": 0.767,
+          "label": "Hole in left alcove in main room",
+          "to": "geometric_frenzy",
+          "art": "painting"
+        },
+        {
+          "id": "3rd_floor_beta_2",
+          "type": "hole",
+          "x": 0.767,
+          "y": 0.767,
+          "label": "Hole in right alcove in main room",
+          "to": "parkour_playground",
+          "art": "painting"
+        },
+        {
+          "id": "3rd_floor_beta_3",
+          "type": "door",
+          "x": 0.396,
+          "y": 0.456,
+          "label": "Pipe in the middle of 3 doors and the main room",
+          "to": "4th_floor_beta",
+          "art": "blockpipe",
+          "pair": "4th_floor_beta_1"
+        },
+        {
+          "id": "3rd_floor_beta_4",
+          "type": "hole",
+          "x": 0.32,
+          "y": 0.454,
+          "label": "Door 3 left of the pipe into a hole",
+          "to": "minion_base",
+          "art": "painting"
+        },
+        {
+          "id": "3rd_floor_beta_5",
+          "type": "hole",
+          "x": 0.396,
+          "y": 0.384,
+          "label": "Door 3 behind the pipe into a hole",
+          "to": "test_level",
+          "art": "painting"
+        },
+        {
+          "id": "3rd_floor_beta_6",
+          "type": "door",
+          "x": 0.552,
+          "y": 0.549,
+          "label": "Door 3 right of the pipe, painting in back with tower",
+          "to": "tall_floating_fortress",
+          "art": "painting"
+        },
+        {
+          "id": "3rd_floor_beta_7",
+          "type": "door",
+          "x": 0.634,
+          "y": 0.417,
+          "label": "Door 3 right of the pipe, first painting in the door",
+          "to": "wing_cap_by_the_rainbow_highway",
+          "art": "painting"
+        },
+        {
+          "id": "3rd_floor_beta_8",
+          "type": "hole",
+          "x": 0.552,
+          "y": 0.152,
+          "label": "Door 3 right of the pipe, door 3 to the left, hole in front of mirror",
+          "to": "cubic_greens",
+          "art": "painting"
+        },
+        {
+          "id": "3rd_floor_beta_9",
+          "type": "hole",
+          "x": 0.546,
+          "y": 0.062,
+          "label": "Behind the mirror to in the room with Cubic Greens hole",
+          "to": "big_blocky_bananza",
+          "art": "painting"
+        },
+        {
+          "id": "3rd_floor_beta_10",
+          "type": "other",
+          "x": 0.397,
+          "y": 0.765,
+          "label": "Look up at the ceiling",
+          "to": "personalization_chamber",
+          "art": "other"
+        }
+      ],
+      "color": "#DF2020",
+      "shape": "assets/rooms/third_floor_beta.png"
+    },
+    {
+      "id": "beta_lobby_b",
+      "name": "Beta Lobby B",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "bowser_in_the_dark_world_shoshinkai",
+      "name": "Bowser in the Dark World (Shoshinkai)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "uncanny_courtyard",
+      "name": "Uncanny Courtyard",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "uncanny_courtyard_1",
+          "type": "door",
+          "label": "Back to Beta Lobby E",
+          "to": "beta_lobby_e",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "beta_lobby_e_8"
+        }
+      ]
+    },
+    {
+      "id": "geometric_frenzy",
+      "name": "Geometric Frenzy",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "parkour_playground",
+      "name": "Parkour Playground",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "4th_floor_beta",
+      "name": "4th Floor (beta)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "4th_floor_beta_1",
+          "type": "door",
+          "label": "Back to 3rd Floor (beta)",
+          "to": "3rd_floor_beta",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "3rd_floor_beta_3"
+        }
+      ]
+    },
+    {
+      "id": "minion_base",
+      "name": "Minion Base",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "test_level",
+      "name": "Test Level",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "tall_floating_fortress",
+      "name": "Tall Floating Fortress",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "wing_cap_by_the_rainbow_highway",
+      "name": "Wing Cap by the Rainbow Highway",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "cubic_greens",
+      "name": "Cubic Greens",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "big_blocky_bananza",
+      "name": "Big Blocky Bonanza",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "personalization_chamber",
+      "name": "Personalization Chamber",
+      "kind": "room",
+      "exits": []
     }
   ]
 }
