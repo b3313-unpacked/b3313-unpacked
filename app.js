@@ -1009,7 +1009,8 @@ function dataCheck(){
   (DATA.art || []).forEach(a => { if (fileMissing(a.file)) add("warn", `The picture file ${a.file} is missing.`); });
   DATA.places.forEach(p => { if (seenP.has(p.id)) add("error", `Two places share the id "${p.id}".`); seenP.add(p.id); });
   DATA.places.forEach(p => {
-    if (!p.exits.length) add("warn", `${p.name} has no exits logged.`);
+    // courses don't need exits: you can always leave by dying, getting a star or fast travel
+    if (!p.exits.length && p.kind === "room") add("warn", `${p.name} has no exits logged.`);
     if (p.kind === "room" && !p.shape) add("info", `${p.name} has no drawing yet.`);
     if (p.shape && fileMissing(p.shape)) add("warn", `${p.name}'s drawing ${p.shape} is missing.`);
     if (p.kind === "room" && !p.color) add("info", `${p.name} has no fill color yet.`);
@@ -1045,13 +1046,12 @@ function dataCheck(){
     });
   });
   if (P[DATA.start]){
-    const fwd = reachSet(DATA.start, false), back = reachSet(DATA.start, true);
+    const fwd = reachSet(DATA.start, false);
     DATA.places.forEach(p => {
       if (p.id === DATA.start) return;
       if (!fwd.has(p.id)) add("warn", `${p.name} can't be reached from ${P[DATA.start].name} with the current map.`);
       else {
         if (!findRoute(DATA.start, p.id, false) && findRoute(DATA.start, p.id, true)) add("info", `${p.name} can only be reached through an exit that only sometimes leads there.`);
-        if (!back.has(p.id)) add("info", `There's no logged way back to ${P[DATA.start].name} from ${p.name}. Possible trap, or a missing exit.`);
       }
     });
   }

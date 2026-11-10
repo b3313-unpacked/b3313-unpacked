@@ -78,9 +78,13 @@
           "y": 0.63,
           "label": "Front double doors",
           "to": "beta_lobby_e",
-          "pair": "beta_lobby_e_1",
           "art": "doubledoor",
+          "pair": "beta_lobby_e_1",
           "alts": [
+            {
+              "to": "beta_lobby_a",
+              "note": "As likely as Beta Lobby E"
+            },
             {
               "to": "lobby_z64_beta",
               "note": "Rarely"
@@ -176,22 +180,21 @@
       "color": "#20DF20"
     },
     {
-      "id": "beta_lobby_e",
-      "name": "Beta Lobby E",
+      "id": "beta_lobby_a",
+      "name": "Beta Lobby A",
       "kind": "room",
       "exits": [
         {
-          "id": "beta_lobby_e_1",
+          "id": "beta_lobby_a_1",
           "type": "doubledoor",
-          "label": "Back to Castle Grounds",
+          "label": "Double door to outside",
           "to": "castle_grounds",
           "x": 0.482,
           "y": 0.965,
-          "pair": "castle_grounds_2",
           "art": "doubledoor"
         },
         {
-          "id": "beta_lobby_e_2",
+          "id": "beta_lobby_a_2",
           "type": "door",
           "x": 0.11,
           "y": 0.563,
@@ -200,7 +203,7 @@
           "art": "painting"
         },
         {
-          "id": "beta_lobby_e_3",
+          "id": "beta_lobby_a_3",
           "type": "door",
           "x": 0.28,
           "y": 0.413,
@@ -209,7 +212,7 @@
           "art": "painting"
         },
         {
-          "id": "beta_lobby_e_4",
+          "id": "beta_lobby_a_4",
           "type": "door",
           "x": 0.701,
           "y": 0.411,
@@ -218,7 +221,7 @@
           "art": "painting"
         },
         {
-          "id": "beta_lobby_e_5",
+          "id": "beta_lobby_a_5",
           "type": "door",
           "x": 0.883,
           "y": 0.558,
@@ -227,7 +230,7 @@
           "art": "painting"
         },
         {
-          "id": "beta_lobby_e_6",
+          "id": "beta_lobby_a_6",
           "type": "other",
           "x": 0.489,
           "y": 0.715,
@@ -235,7 +238,7 @@
           "to": "the_star"
         },
         {
-          "id": "beta_lobby_e_7",
+          "id": "beta_lobby_a_7",
           "type": "hole",
           "x": 0.489,
           "y": 0.128,
@@ -250,7 +253,7 @@
           ]
         },
         {
-          "id": "beta_lobby_e_8",
+          "id": "beta_lobby_a_8",
           "type": "door",
           "x": 0.491,
           "y": 0.436,
@@ -381,19 +384,19 @@
     },
     {
       "id": "snow_slider_shoshinkai",
-      "name": "Snow Slider (Shoshinkai)",
+      "name": "Snow Slide (B-roll)",
       "kind": "course",
       "exits": []
     },
     {
       "id": "mountain_shoshinkai",
-      "name": "Mountain (Shoshinkai)",
+      "name": "Mountain (B-roll)",
       "kind": "course",
       "exits": []
     },
     {
       "id": "fire_bubble_shoshinkai",
-      "name": "Fire Bubble (Shoshinkai)",
+      "name": "Fire Bubble (B-roll)",
       "kind": "course",
       "exits": [
         {
@@ -563,7 +566,96 @@
       "id": "beta_lobby_b",
       "name": "Beta Lobby B",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "beta_lobby_b_1",
+          "type": "doubledoor",
+          "x": 0.48,
+          "y": 0.972,
+          "label": "Double door to outside",
+          "to": "castle_grounds",
+          "art": "doubledoor"
+        },
+        {
+          "id": "beta_lobby_b_2",
+          "type": "door",
+          "x": 0.104,
+          "y": 0.536,
+          "label": "Door 1 to room with painting",
+          "to": "frosty_highlands",
+          "art": "painting",
+          "alts": [
+            {
+              "to": "snow_tunnels",
+              "note": "Rarely"
+            }
+          ]
+        },
+        {
+          "id": "beta_lobby_b_3",
+          "type": "door",
+          "x": 0.275,
+          "y": 0.408,
+          "label": "Door 2 to room with painting",
+          "to": "whomp_s_kingdom",
+          "art": "painting",
+          "alts": [
+            {
+              "to": "wf_z64",
+              "note": "Rarely"
+            }
+          ]
+        },
+        {
+          "id": "beta_lobby_b_4",
+          "type": "door",
+          "x": 0.697,
+          "y": 0.408,
+          "label": "Door 3 to room with painting",
+          "to": "blazing_bully_base",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_b_5",
+          "type": "door",
+          "x": 0.881,
+          "y": 0.57,
+          "label": "Door 4 to room with painting",
+          "to": "jolly_roger_lagoon",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_b_6",
+          "type": "other",
+          "x": 0.489,
+          "y": 0.692,
+          "label": "Look up at the ceiling",
+          "to": "beta_lobby_c",
+          "art": "other",
+          "pair": "beta_lobby_c_1"
+        },
+        {
+          "id": "beta_lobby_b_7",
+          "type": "doubledoor",
+          "x": 0.491,
+          "y": 0.06,
+          "label": "Top double door",
+          "to": "plexal_upstairs",
+          "art": "doubledoor",
+          "pair": "plexal_upstairs_1"
+        },
+        {
+          "id": "beta_lobby_b_8",
+          "type": "door",
+          "x": 0.491,
+          "y": 0.431,
+          "label": "Basement door",
+          "to": "plexal_lobby",
+          "pair": "plexal_lobby_1"
+        }
+      ],
+      "color": "#DF2020",
+      "shape": "assets/rooms/beta_lobby.png"
     },
     {
       "id": "bowser_in_the_dark_world_shoshinkai",
@@ -579,12 +671,12 @@
         {
           "id": "uncanny_courtyard_1",
           "type": "door",
-          "label": "Back to Beta Lobby E",
-          "to": "beta_lobby_e",
+          "label": "Back to Beta Lobby A",
+          "to": "beta_lobby_a",
           "x": 0.5,
           "y": 0.5,
           "needsPos": true,
-          "pair": "beta_lobby_e_8"
+          "pair": "beta_lobby_a_8"
         }
       ]
     },
@@ -607,15 +699,116 @@
       "exits": [
         {
           "id": "4th_floor_beta_1",
-          "type": "door",
+          "type": "pipe",
           "label": "Back to 3rd Floor (beta)",
           "to": "3rd_floor_beta",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "3rd_floor_beta_3"
+          "x": 0.654,
+          "y": 0.943,
+          "pair": "3rd_floor_beta_3",
+          "art": "blockpipe"
+        },
+        {
+          "id": "4th_floor_beta_2",
+          "type": "pipe",
+          "x": 0.213,
+          "y": 0.793,
+          "label": "Pipe when taking first left",
+          "to": "surface_test",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_3",
+          "type": "pipe",
+          "x": 0.216,
+          "y": 0.521,
+          "label": "Pipe past Surface Test pipe",
+          "to": "collision_test",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_4",
+          "type": "pipe",
+          "x": 0.402,
+          "y": 0.657,
+          "label": "Pipe when taking second left and down the ramp",
+          "to": "athletic_fortress",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_5",
+          "type": "pipe",
+          "x": 0.935,
+          "y": 0.645,
+          "label": "Pipe when taking first or second right",
+          "to": "snow_tunnels",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_6",
+          "type": "door",
+          "x": 0.936,
+          "y": 0.545,
+          "label": "Pipe when taking third right",
+          "to": "test_course",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_7",
+          "type": "pipe",
+          "x": 0.063,
+          "y": 0.391,
+          "label": "Leftmost pipe after main hallway",
+          "to": "dreamy_heights",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_8",
+          "type": "pipe",
+          "x": 0.697,
+          "y": 0.359,
+          "label": "Pipe in divot outside 4-door room",
+          "to": "stone_island_pathway",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_9",
+          "type": "door",
+          "x": 0.974,
+          "y": 0.446,
+          "label": "Painting inside double doors",
+          "to": "bom_omb_test_field",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_10",
+          "type": "pipe",
+          "x": 0.418,
+          "y": 0.207,
+          "label": "Pipe to the left of the pipe in the divot",
+          "to": "sombrero_land",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_11",
+          "type": "pipe",
+          "x": 0.521,
+          "y": 0.051,
+          "label": "Pipe all the way to the back left",
+          "to": "athletic_fortress",
+          "art": "painting"
+        },
+        {
+          "id": "4th_floor_beta_12",
+          "type": "pipe",
+          "x": 0.812,
+          "y": 0.1,
+          "label": "Pipe all the way to the back right",
+          "to": "brown_stony_steps",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/fourth_floor_beta.png",
+      "color": "#989898"
     },
     {
       "id": "minion_base",
@@ -657,6 +850,747 @@
       "id": "personalization_chamber",
       "name": "Personalization Chamber",
       "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "surface_test",
+      "name": "Surface Test",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "collision_test",
+      "name": "Collision Test",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "athletic_fortress",
+      "name": "Athletic Fortress",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "snow_tunnels",
+      "name": "Snow Tunnels",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "test_course",
+      "name": "Test Course",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "dreamy_heights",
+      "name": "Dreamy Heights",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "dreamy_heights_1",
+          "type": "door",
+          "label": "Door on the side of the mountain",
+          "to": "melancholy_mausoleum",
+          "art": "door",
+          "pair": "melancholy_mausoleum_1"
+        }
+      ]
+    },
+    {
+      "id": "melancholy_mausoleum",
+      "name": "Melancholy Mausoleum",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "melancholy_mausoleum_1",
+          "type": "door",
+          "label": "Back to Dreamy Heights",
+          "to": "dreamy_heights",
+          "pair": "dreamy_heights_1"
+        }
+      ]
+    },
+    {
+      "id": "stone_island_pathway",
+      "name": "Stone Island Pathway",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "bom_omb_test_field",
+      "name": "Bob-omb Test Field",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "sombrero_land",
+      "name": "Sombrero Land",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "brown_stony_steps",
+      "name": "Brown Stony Steps",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "frosty_highlands",
+      "name": "Frosty Highlands",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "frosty_highlands_1",
+          "type": "hole",
+          "label": "Giant hole in side of mountain partway up",
+          "to": "cold_cold_crevasse",
+          "art": "hole"
+        },
+        {
+          "id": "frosty_highlands_2",
+          "type": "pipe",
+          "label": "Pipe at the bottom near checkboard platforms",
+          "to": "snowman_s_land_beta",
+          "art": "painting",
+          "pair": "snowman_s_land_beta_1"
+        }
+      ]
+    },
+    {
+      "id": "cold_cold_crevasse",
+      "name": "Cold, Cold Crevasse",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "cold_cold_crevasse_1",
+          "type": "hole",
+          "label": "Back to Frosty Highlands",
+          "to": "frosty_highlands"
+        }
+      ]
+    },
+    {
+      "id": "snowman_s_land_beta",
+      "name": "Snowman's Land (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "snowman_s_land_beta_1",
+          "type": "pipe",
+          "label": "Pipe in corner of course",
+          "to": "frosty_highlands",
+          "pair": "frosty_highlands_2",
+          "art": "painting"
+        }
+      ]
+    },
+    {
+      "id": "whomp_s_kingdom",
+      "name": "Whomp's Kingdom",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "whomp_s_kingdom_1",
+          "type": "hole",
+          "label": "Hole in the wall at the bottom of the mountain",
+          "to": "whomp_s_prison",
+          "art": "hole",
+          "pair": "whomp_s_prison_1"
+        }
+      ]
+    },
+    {
+      "id": "whomp_s_prison",
+      "name": "Whomp's Prison",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "whomp_s_prison_1",
+          "type": "hole",
+          "label": "Back to Whomp's Kingdom",
+          "to": "whomp_s_kingdom",
+          "pair": "whomp_s_kingdom_1"
+        },
+        {
+          "id": "whomp_s_prison_2",
+          "type": "pipe",
+          "label": "Pipe opposite from the prison entrance",
+          "to": "king_whomp_s_battle_arena",
+          "art": "blockpipe",
+          "pair": "king_whomp_s_battle_arena_1"
+        }
+      ]
+    },
+    {
+      "id": "king_whomp_s_battle_arena",
+      "name": "King Whomp's Battle Arena",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "king_whomp_s_battle_arena_1",
+          "type": "pipe",
+          "label": "Back to Whomp's Prison",
+          "to": "whomp_s_prison",
+          "pair": "whomp_s_prison_2"
+        }
+      ]
+    },
+    {
+      "id": "blazing_bully_base",
+      "name": "Blazing Bully Base",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "blazing_bully_base_1",
+          "type": "hole",
+          "label": "Jump into the volcano",
+          "to": "bowser_inside_the_volcano",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "bowser_inside_the_volcano",
+      "name": "Bowser in the Bully Battlefield",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "jolly_roger_lagoon",
+      "name": "Jolly Roger Lagoon",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "beta_lobby_c",
+      "name": "Beta Lobby C",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "beta_lobby_c_1",
+          "type": "other",
+          "label": "Back to Beta Lobby B",
+          "to": "beta_lobby_b",
+          "x": 0.496,
+          "y": 0.668,
+          "pair": "beta_lobby_b_6"
+        },
+        {
+          "id": "beta_lobby_c_2",
+          "type": "doubledoor",
+          "x": 0.486,
+          "y": 0.972,
+          "label": "Double door to outside",
+          "to": "castle_grounds",
+          "arrive": "Nighttime"
+        },
+        {
+          "id": "beta_lobby_c_3",
+          "type": "door",
+          "x": 0.105,
+          "y": 0.538,
+          "label": "Leftmost door 3",
+          "to": "beta_lobby_d",
+          "pair": "beta_lobby_d_1",
+          "art": "door"
+        },
+        {
+          "id": "beta_lobby_c_4",
+          "type": "door",
+          "x": 0.699,
+          "y": 0.402,
+          "label": "Door 1 to room with painting",
+          "to": "blargg_s_lava_realm",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_c_5",
+          "type": "door",
+          "x": 0.882,
+          "y": 0.543,
+          "label": "Rightmost door 3 to room with painting",
+          "to": "jolly_roger_bay_beta",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_c_6",
+          "type": "hole",
+          "x": 0.491,
+          "y": 0.216,
+          "label": "Top double door into the trapdoor before Peach",
+          "to": "bowser_in_the_dark_world_shoshinkai",
+          "alts": [
+            {
+              "to": "beta_lobby_a",
+              "note": "Sometimes"
+            }
+          ]
+        },
+        {
+          "id": "beta_lobby_c_7",
+          "type": "doubledoor",
+          "x": 0.488,
+          "y": 0.057,
+          "label": "Top double door down the hall",
+          "to": "4th_floor",
+          "art": "doubledoor",
+          "pair": "4th_floor_1"
+        },
+        {
+          "id": "beta_lobby_c_8",
+          "type": "door",
+          "x": 0.495,
+          "y": 0.423,
+          "label": "Basement door",
+          "to": "crimson_hallway",
+          "pair": "crimson_hallway_1"
+        }
+      ],
+      "color": "#DF2020",
+      "shape": "assets/rooms/beta_lobby.png"
+    },
+    {
+      "id": "plexal_upstairs",
+      "name": "Plexal Upstairs",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "plexal_upstairs_1",
+          "type": "doubledoor",
+          "label": "Back to Beta Lobby B",
+          "to": "beta_lobby_b",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "beta_lobby_b_7"
+        }
+      ]
+    },
+    {
+      "id": "plexal_lobby",
+      "name": "Plexal Lobby",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "plexal_lobby_1",
+          "type": "door",
+          "label": "Back to Beta Lobby B",
+          "to": "beta_lobby_b",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "beta_lobby_b_8"
+        }
+      ]
+    },
+    {
+      "id": "beta_lobby_d",
+      "name": "Beta Lobby D",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "beta_lobby_d_1",
+          "type": "door",
+          "label": "Rightmost door",
+          "to": "beta_lobby_c",
+          "x": 0.885,
+          "y": 0.528,
+          "pair": "beta_lobby_c_3"
+        },
+        {
+          "id": "beta_lobby_d_2",
+          "type": "door",
+          "x": 0.107,
+          "y": 0.539,
+          "label": "Door 2 to room with painting",
+          "to": "snowman_s_land_beta",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_d_3",
+          "type": "door",
+          "x": 0.266,
+          "y": 0.411,
+          "label": "Door 1 to room with painting",
+          "to": "river_mountain",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_d_4",
+          "type": "door",
+          "x": 0.482,
+          "y": 0.97,
+          "label": "Double door to outside",
+          "to": "castle_grounds",
+          "art": "doubledoor"
+        },
+        {
+          "id": "beta_lobby_d_5",
+          "type": "door",
+          "x": 0.492,
+          "y": 0.06,
+          "label": "Top double door",
+          "to": "plexal_lobby_large_rooms",
+          "art": "doubledoor",
+          "pair": "plexal_lobby_large_rooms_1"
+        },
+        {
+          "id": "beta_lobby_d_6",
+          "type": "lockeddoor",
+          "x": 0.491,
+          "y": 0.413,
+          "label": "Basement door",
+          "to": "plexal_basement_wet_floor_maze",
+          "art": "locked_door",
+          "pair": "plexal_basement_wet_floor_maze_1"
+        },
+        {
+          "id": "beta_lobby_d_7",
+          "type": "other",
+          "x": 0.491,
+          "y": 0.686,
+          "label": "Look up at the ceiling",
+          "to": "beta_lobby_b"
+        }
+      ],
+      "shape": "assets/rooms/beta_lobby.png",
+      "color": "#DF2020"
+    },
+    {
+      "id": "blargg_s_lava_realm",
+      "name": "Blargg's Lava Realm",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "blargg_s_lava_realm_1",
+          "type": "hole",
+          "label": "Hole in the wall at the start",
+          "to": "blargg_s_fiery_fortress",
+          "art": "hole",
+          "pair": "blargg_s_fiery_fortress_1"
+        }
+      ]
+    },
+    {
+      "id": "blargg_s_fiery_fortress",
+      "name": "Blargg's Fiery Fortress",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "blargg_s_fiery_fortress_1",
+          "type": "hole",
+          "label": "Back to Blargg's Lava Realm",
+          "to": "blargg_s_lava_realm",
+          "pair": "blargg_s_lava_realm_1"
+        }
+      ]
+    },
+    {
+      "id": "jolly_roger_bay_beta",
+      "name": "Jolly Roger Bay (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "jolly_roger_bay_beta_1",
+          "type": "hole",
+          "label": "Hole in the raised sunken ship",
+          "to": "sunken_ghost_ship",
+          "art": "hole"
+        },
+        {
+          "id": "jolly_roger_bay_beta_2",
+          "type": "hole",
+          "label": "Enter hole above sunken ship",
+          "to": "unagi_s_tunnel",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "sunken_ghost_ship",
+      "name": "Sunken Ghost Ship",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "unagi_s_tunnel",
+      "name": "Unagi's Tunnel",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "4th_floor",
+      "name": "4th Floor",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "4th_floor_1",
+          "type": "doubledoor",
+          "label": "Back to Beta Lobby C",
+          "to": "beta_lobby_c",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "beta_lobby_c_7"
+        }
+      ]
+    },
+    {
+      "id": "crimson_hallway",
+      "name": "Crimson Hallway",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "crimson_hallway_1",
+          "type": "door",
+          "label": "Back to Beta Lobby C",
+          "to": "beta_lobby_c",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "beta_lobby_c_8"
+        }
+      ]
+    },
+    {
+      "id": "river_mountain",
+      "name": "Bob-omb River",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "river_mountain_1",
+          "type": "door",
+          "label": "Pipe on top of the mountain",
+          "to": "inside_the_summit",
+          "art": "blockpipe"
+        },
+        {
+          "id": "river_mountain_2",
+          "type": "hole",
+          "label": "Hole the top corner of course",
+          "to": "dark_downtown",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "inside_the_summit",
+      "name": "Inside the Summit",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "dark_downtown",
+      "name": "Dark Downtown",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "dark_downtown_1",
+          "type": "door",
+          "label": "Pipe at the top of the course",
+          "to": "ice_cold_warzone",
+          "art": "blockpipe"
+        }
+      ]
+    },
+    {
+      "id": "ice_cold_warzone",
+      "name": "Ice-Cold Warzone",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "ice_cold_warzone_1",
+          "type": "door",
+          "label": "Pipe at the top of the mountain",
+          "to": "limitless_lighthouse",
+          "art": "pipe"
+        }
+      ]
+    },
+    {
+      "id": "limitless_lighthouse",
+      "name": "Limitless Lighthouse",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "limitless_lighthouse_1",
+          "type": "pipe",
+          "label": "Pipe at the top of the lighthouse",
+          "to": "bob_omb_battlefield_beta",
+          "art": "painting"
+        }
+      ]
+    },
+    {
+      "id": "bob_omb_battlefield_beta",
+      "name": "Bob-omb Battlefield (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "bob_omb_battlefield_beta_1",
+          "type": "pipe",
+          "label": "Pipe at the top of the mountain",
+          "to": "river_mountain",
+          "art": "painting"
+        },
+        {
+          "id": "bob_omb_battlefield_beta_2",
+          "type": "hole",
+          "label": "Hole in the chain chomp gate",
+          "to": "chomp_caverns",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "chomp_caverns",
+      "name": "Chomp Caverns",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "plexal_lobby_large_rooms",
+      "name": "Plexal Lobby (Large Rooms)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "plexal_lobby_large_rooms_1",
+          "type": "door",
+          "label": "Back to Beta Lobby D",
+          "to": "beta_lobby_d",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "beta_lobby_d_5"
+        }
+      ]
+    },
+    {
+      "id": "plexal_basement_wet_floor_maze",
+      "name": "Plexal Basement (Wet Floor Maze)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "plexal_basement_wet_floor_maze_1",
+          "type": "lockeddoor",
+          "label": "Back to Beta Lobby D",
+          "to": "beta_lobby_d",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "beta_lobby_d_6"
+        }
+      ]
+    },
+    {
+      "id": "beta_lobby_e",
+      "name": "Beta Lobby E",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "beta_lobby_e_1",
+          "type": "doubledoor",
+          "label": "Double door to outside",
+          "to": "castle_grounds",
+          "x": 0.48,
+          "y": 0.973,
+          "pair": "castle_grounds_2"
+        },
+        {
+          "id": "beta_lobby_e_2",
+          "type": "door",
+          "x": 0.107,
+          "y": 0.536,
+          "label": "Door 3 to room with painting",
+          "to": "snow_slide_shoshinkai",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_e_3",
+          "type": "door",
+          "x": 0.267,
+          "y": 0.406,
+          "label": "Door 1 to room with painting",
+          "to": "mountain_shoshinkai_2",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_e_4",
+          "type": "door",
+          "x": 0.683,
+          "y": 0.406,
+          "label": "Door 2 to room with painting",
+          "to": "fire_bubble_shoshinkai_2",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_e_5",
+          "type": "door",
+          "x": 0.883,
+          "y": 0.545,
+          "label": "Door 4 to room with painting",
+          "to": "water_land",
+          "art": "painting"
+        },
+        {
+          "id": "beta_lobby_e_6",
+          "type": "other",
+          "x": 0.494,
+          "y": 0.7,
+          "label": "Look up at the ceiling",
+          "to": "the_star",
+          "art": "other"
+        },
+        {
+          "id": "beta_lobby_e_7",
+          "type": "hole",
+          "x": 0.491,
+          "y": 0.126,
+          "label": "Top double door into the trapdoor by Bowser painting",
+          "to": "beta_lobby_b",
+          "art": "hole",
+          "alts": [
+            {
+              "to": "bowser_in_the_dark_world_shoshinkai",
+              "note": "Before getting a red star"
+            }
+          ]
+        },
+        {
+          "id": "beta_lobby_e_8",
+          "type": "door",
+          "x": 0.492,
+          "y": 0.427,
+          "label": "Basement door",
+          "to": "uncanny_courtyard"
+        }
+      ],
+      "color": "#DF2020",
+      "shape": "assets/rooms/beta_lobby.png"
+    },
+    {
+      "id": "snow_slide_shoshinkai",
+      "name": "Snow Slide (shoshinkai)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "mountain_shoshinkai_2",
+      "name": "Mountain (Shoshinkai)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "fire_bubble_shoshinkai_2",
+      "name": "Fire Bubble (Shoshinkai)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "water_land",
+      "name": "Water Land",
+      "kind": "course",
       "exits": []
     }
   ]
