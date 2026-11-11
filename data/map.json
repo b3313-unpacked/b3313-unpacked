@@ -286,6 +286,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "castle_grounds_3"
+        },
+        {
+          "id": "genesis_basement_2",
+          "type": "doubledoor",
+          "label": "Back to Plexal Lobby",
+          "to": "plexal_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_lobby_8"
         }
       ]
     },
@@ -357,7 +367,18 @@
       "id": "crescent_castle",
       "name": "Crescent Castle",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "crescent_castle_1",
+          "type": "lockeddoor",
+          "label": "Back to Plexal Lobby (4-way)",
+          "to": "plexal_lobby_4_way",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_lobby_4_way_7"
+        }
+      ]
     },
     {
       "id": "toad_s_lobby",
@@ -677,6 +698,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "beta_lobby_a_8"
+        },
+        {
+          "id": "uncanny_courtyard_2",
+          "type": "doubledoor",
+          "label": "Back to Plexal Lobby (4-way)",
+          "to": "plexal_lobby_4_way",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_lobby_4_way_2"
         }
       ]
     },
@@ -1175,12 +1206,85 @@
         {
           "id": "plexal_lobby_1",
           "type": "door",
-          "label": "Back to Beta Lobby B",
+          "label": "Door above hallway to locked door",
           "to": "beta_lobby_b",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.526,
+          "y": 0.691,
           "pair": "beta_lobby_b_8"
+        },
+        {
+          "id": "plexal_lobby_2",
+          "type": "door",
+          "x": 0.533,
+          "y": 0.866,
+          "label": "Locked door down a short hallway",
+          "to": "plexal_lobby_4_way",
+          "art": "locked_door",
+          "pair": "plexal_lobby_4_way_1"
+        },
+        {
+          "id": "plexal_lobby_3",
+          "type": "door",
+          "x": 0.348,
+          "y": 0.398,
+          "label": "Door 1 on the bottom level, leads to a pipe",
+          "to": "vanilla_lobby"
+        },
+        {
+          "id": "plexal_lobby_4",
+          "type": "door",
+          "x": 0.803,
+          "y": 0.391,
+          "label": "Door 1 on the second level to room with painting",
+          "to": "grassy_highlands",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_lobby_5",
+          "type": "pipe",
+          "x": 0.307,
+          "y": 0.143,
+          "label": "Door 1 on second level, into pipe next to a hole",
+          "to": "crimson_hallway",
+          "art": "blockpipe"
+        },
+        {
+          "id": "plexal_lobby_6",
+          "type": "hole",
+          "x": 0.217,
+          "y": 0.083,
+          "label": "Door 1 on second level, into the hole in the back, down into a big room with double doors, into the resulting pipe near piano",
+          "to": "funhouse",
+          "art": "hole"
+        },
+        {
+          "id": "plexal_lobby_7",
+          "type": "lockeddoor",
+          "x": 0.531,
+          "y": 0.098,
+          "label": "Locked door and through a small hallway",
+          "to": "plexal_lobby_large_rooms",
+          "art": "locked_door",
+          "pair": "plexal_lobby_large_rooms_2"
+        },
+        {
+          "id": "plexal_lobby_8",
+          "type": "doubledoor",
+          "x": 0.714,
+          "y": 0.148,
+          "label": "Double door at top level after some stairs",
+          "to": "genesis_basement",
+          "art": "doubledoor",
+          "pair": "genesis_basement_2"
+        },
+        {
+          "id": "plexal_lobby_9",
+          "type": "door",
+          "x": 0.529,
+          "y": 0.165,
+          "label": "Door under stairs, through double door",
+          "to": "plexal_basement",
+          "pair": "plexal_basement_1"
         }
       ],
       "color": "#DF2020",
@@ -1459,14 +1563,101 @@
         {
           "id": "plexal_lobby_large_rooms_1",
           "type": "door",
-          "label": "Back to Beta Lobby D",
+          "label": "Door 3 to small hallway to double door",
           "to": "beta_lobby_d",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.012,
+          "y": 0.868,
           "pair": "beta_lobby_d_5"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_2",
+          "type": "lockeddoor",
+          "label": "Locked door and through a small hallway",
+          "to": "plexal_lobby",
+          "x": 0.765,
+          "y": 0.976,
+          "pair": "plexal_lobby_7",
+          "art": "locked_door"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_3",
+          "type": "door",
+          "x": 0.541,
+          "y": 0.892,
+          "label": "Door 3 to room with painting",
+          "to": "zany_castle",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_4",
+          "type": "doubledoor",
+          "x": 0.982,
+          "y": 0.736,
+          "label": "Double door on platform across from hallway between rooms",
+          "to": "bowser_s_maze",
+          "art": "doubledoor",
+          "pair": "bowser_s_maze_1"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_5",
+          "type": "doubledoor",
+          "x": 0.545,
+          "y": 0.251,
+          "label": "Double door on thick stairs",
+          "to": "balcony",
+          "art": "doubledoor",
+          "pair": "balcony_1"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_6",
+          "type": "door",
+          "x": 0.769,
+          "y": 0.015,
+          "label": "",
+          "to": "castle_garden",
+          "art": "doubledoor",
+          "pair": "castle_garden_1"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_7",
+          "type": "doubledoor",
+          "x": 0.01,
+          "y": 0.687,
+          "label": "Double door with star above it",
+          "to": "clock_hall",
+          "art": "doubledoor",
+          "pair": "clock_hall_1"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_8",
+          "type": "door",
+          "x": 0.443,
+          "y": 0.626,
+          "label": "Door 2 to room with painting",
+          "to": "goomba_hills",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_9",
+          "type": "pipe",
+          "x": 0.186,
+          "y": 0.55,
+          "label": "Pipe near Big Boo",
+          "to": "vanilla_lobby",
+          "art": "blockpipe"
+        },
+        {
+          "id": "plexal_lobby_large_rooms_10",
+          "type": "other",
+          "x": 0.274,
+          "y": 0.545,
+          "label": "Jump in Big Boo's cage",
+          "to": "crimson_hallway",
+          "art": "other"
         }
-      ]
+      ],
+      "color": "#DF2020",
+      "shape": "assets/rooms/plexal_large.png"
     },
     {
       "id": "plexal_basement_wet_floor_maze",
@@ -1594,6 +1785,247 @@
       "name": "Water Land",
       "kind": "course",
       "exits": []
+    },
+    {
+      "id": "plexal_lobby_4_way",
+      "name": "Plexal Lobby (Junction)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "plexal_lobby_4_way_1",
+          "type": "lockeddoor",
+          "label": "Locked door across from locked door with clock above it",
+          "to": "plexal_lobby",
+          "x": 0.315,
+          "y": 0.009,
+          "pair": "plexal_lobby_2",
+          "art": "locked_door"
+        },
+        {
+          "id": "plexal_lobby_4_way_2",
+          "type": "door",
+          "x": 0.008,
+          "y": 0.161,
+          "label": "Double door down long hallway through single door",
+          "to": "uncanny_courtyard",
+          "art": "door",
+          "pair": "uncanny_courtyard_2"
+        },
+        {
+          "id": "plexal_lobby_4_way_3",
+          "type": "door",
+          "x": 0.766,
+          "y": 0.292,
+          "label": "Door 1 to room with painting",
+          "to": "big_boo_s_haunted_forest",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_lobby_4_way_4",
+          "type": "doubledoor",
+          "x": 0.982,
+          "y": 0.172,
+          "label": "Double door under Bowser painting up the ramp",
+          "to": "floating_hotel",
+          "art": "painting",
+          "pair": "floating_hotel_1"
+        },
+        {
+          "id": "plexal_lobby_4_way_5",
+          "type": "doubledoor",
+          "x": 0.313,
+          "y": 0.483,
+          "label": "Don't take the middle locked door",
+          "to": "plexal_lobby",
+          "art": "deadly"
+        },
+        {
+          "id": "plexal_lobby_4_way_6",
+          "type": "other",
+          "x": 0.31,
+          "y": 0.81,
+          "label": "Jump in Big Boo's Cage",
+          "to": "crimson_hallway",
+          "art": "other"
+        },
+        {
+          "id": "plexal_lobby_4_way_7",
+          "type": "lockeddoor",
+          "x": 0.306,
+          "y": 0.975,
+          "label": "Locked door behind the mirror",
+          "to": "crescent_castle",
+          "art": "locked_door",
+          "pair": "crescent_castle_1"
+        },
+        {
+          "id": "plexal_lobby_4_way_8",
+          "type": "other",
+          "x": 0.459,
+          "y": 0.222,
+          "label": "Stand on pillar with no fire",
+          "to": "plexal_hallway",
+          "art": "other"
+        }
+      ],
+      "color": "#AEAEAE",
+      "shape": "assets/rooms/plexal_4.png"
+    },
+    {
+      "id": "vanilla_lobby",
+      "name": "Vanilla Lobby",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "grassy_highlands",
+      "name": "Grassy Highlands",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "funhouse",
+      "name": "Funhouse",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "zany_castle",
+      "name": "Zany Castle",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "bowser_s_maze",
+      "name": "Bowser's Maze",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "bowser_s_maze_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Lobby (Large Rooms)",
+          "to": "plexal_lobby_large_rooms",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_lobby_large_rooms_4"
+        }
+      ]
+    },
+    {
+      "id": "balcony",
+      "name": "Balcony",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "balcony_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Lobby (Large Rooms)",
+          "to": "plexal_lobby_large_rooms",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_lobby_large_rooms_5"
+        }
+      ]
+    },
+    {
+      "id": "castle_garden",
+      "name": "Castle Garden",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "castle_garden_1",
+          "type": "door",
+          "label": "Back to Plexal Lobby (Large Rooms)",
+          "to": "plexal_lobby_large_rooms",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_lobby_large_rooms_6"
+        }
+      ]
+    },
+    {
+      "id": "clock_hall",
+      "name": "Clock Hall",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "clock_hall_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Lobby (Large Rooms)",
+          "to": "plexal_lobby_large_rooms",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_lobby_large_rooms_7"
+        }
+      ]
+    },
+    {
+      "id": "goomba_hills",
+      "name": "Goomba Hills",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "big_boo_s_haunted_forest",
+      "name": "Big Boo's Haunted Forest",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "floating_hotel",
+      "name": "Floating Hotel",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "floating_hotel_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Lobby (4-way)",
+          "to": "plexal_lobby_4_way",
+          "pair": "plexal_lobby_4_way_4"
+        },
+        {
+          "id": "floating_hotel_2",
+          "type": "other",
+          "label": "Fall off or collect a star",
+          "to": "castle_grounds",
+          "art": "other",
+          "arrive": "Rooftop"
+        },
+        {
+          "id": "floating_hotel_3",
+          "type": "lockeddoor",
+          "label": "Any locked door in the hotel hallway",
+          "to": "plexal_lobby",
+          "art": "locked_door"
+        }
+      ]
+    },
+    {
+      "id": "plexal_hallway",
+      "name": "Plexal Hallway",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "plexal_basement",
+      "name": "Plexal Basement",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "plexal_basement_1",
+          "type": "door",
+          "label": "Back to Plexal Lobby",
+          "to": "plexal_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_lobby_9"
+        }
+      ]
     }
   ]
 }
