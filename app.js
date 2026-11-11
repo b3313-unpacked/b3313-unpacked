@@ -109,8 +109,9 @@ function aspectOf(path){
 
 /* Outline drawings: the inside of your black outline is filled with the room's main color. */
 const FILLED = {};
+// hex can be null: the drawing is still cleaned up and trimmed, just not filled.
 function filledDrawing(path, hex){
-  const u = asset(path), key = u + "|" + hex, v = FILLED[key];
+  const u = asset(path), key = u + "|" + (hex || "none"), v = FILLED[key];
   if (v && v !== "pending") return v;
   if (!v){
     FILLED[key] = "pending";
@@ -140,14 +141,22 @@ function fillOutline(im, hex){
     if (i >= w) push(i - w);
     if (i < n - w) push(i + w);
   }
-  const c = parseInt(hex.slice(1), 16), R = c >> 16 & 255, G = c >> 8 & 255, B = c & 255;
-  let inside = 0;
+  const c = hex ? parseInt(hex.slice(1), 16) : 0, R = c >> 16 & 255, G = c >> 8 & 255, B = c & 255;
+  let inside = 0, x0 = w, y0 = h, x1 = -1, y1 = -1;
   for (let i = 0; i < n; i++){
-    if (ink[i]) continue; const o = i * 4;
-    if (out[i]) px[o + 3] = 0; else { px[o] = R; px[o + 1] = G; px[o + 2] = B; px[o + 3] = 255; inside++; }
+    const o = i * 4;
+    if (!ink[i]){
+      if (out[i]){ px[o + 3] = 0; continue; }
+      if (hex){ px[o] = R; px[o + 1] = G; px[o + 2] = B; px[o + 3] = 255; }
+      inside++;
+    }
+    // everything that isn't outside belongs to the drawing; track its bounding box
+    const x = i % w, y = (i - x) / w;
+    if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
   }
   g.putImageData(img, 0, 0);
-  return { url:cv.toDataURL("image/png"), leak:inside < n * 0.01 };
+  const box = x1 < 0 ? { x:0, y:0, w:1, h:1 } : { x:x0 / w, y:y0 / h, w:(x1 - x0 + 1) / w, h:(y1 - y0 + 1) / h };
+  return { url:cv.toDataURL("image/png"), leak:!!hex && inside < n * 0.01, box, ar:im.naturalWidth / im.naturalHeight };
 }
 
 /* ============================== data ============================== */
@@ -505,6 +514,19 @@ function exitIcon(e){
   return u ? `<img class="art" src="${esc(u)}" alt="" data-type="${esc(e.type)}" onload="pixelFit(this)" onerror="artFailed(this)">` : iconSVG(e.type);
 }
 
+// The part of a drawing to show: its outline's bounding box, widened to include every
+// exit pin and label, plus a little breathing room. Positions are still stored relative
+// to the whole image, so nothing you've logged moves.
+function viewBox(p, filled){
+  if (!filled || !filled.box) return { x:0, y:0, w:1, h:1 };
+  let { x:x0, y:y0 } = filled.box, x1 = x0 + filled.box.w, y1 = y0 + filled.box.h;
+  [...p.exits.filter(e => typeof e.x === "number"), ...(p.labels || [])].forEach(o => {
+    x0 = Math.min(x0, o.x); x1 = Math.max(x1, o.x); y0 = Math.min(y0, o.y); y1 = Math.max(y1, o.y);
+  });
+  const padX = (x1 - x0) * 0.04, padY = (y1 - y0) * 0.04;
+  x0 = Math.max(0, x0 - padX); y0 = Math.max(0, y0 - padY); x1 = Math.min(1, x1 + padX); y1 = Math.min(1, y1 + padY);
+  return { x:x0, y:y0, w:Math.max(0.01, x1 - x0), h:Math.max(0.01, y1 - y0) };
+}
 function mapHTML(p, opt = {}){
   if (p.kind === "course"){
     // a course's page shows the picture of the way in, like its painting
@@ -513,23 +535,26 @@ function mapHTML(p, opt = {}){
     return `<div class="course-art">${u ? `<img src="${esc(u)}" alt="">` : `<div class="blank"></div>`}</div>`;
   }
   const shape = p.shape && !missingFile(p.shape) ? p.shape : null;
-  const ar = shape ? aspectOf(shape) : 4/3;
-  const filled = shape && isHex(p.color) ? filledDrawing(shape, p.color) : null;
+  const filled = shape ? filledDrawing(shape, isHex(p.color) ? p.color : null) : null;
   const src = filled && filled.url ? filled.url : (shape ? asset(shape) : null);
+  const v = viewBox(p, filled);
+  const natural = filled && filled.ar ? filled.ar : (shape ? aspectOf(shape) : 4/3);
+  const ar = shape ? natural * v.w / v.h : 4/3;
+  const at = (x, y) => `left:${((x - v.x) / v.w * 100).toFixed(2)}%;top:${((y - v.y) / v.h * 100).toFixed(2)}%`;
   const pins = p.exits.filter(e => typeof e.x === "number").map(e => {
     const idx = p.exits.indexOf(e);
     const cls = ["pin",
       opt.next === e.id && "next", opt.next && opt.next !== e.id && "dim",
       opt.cameVia === e.id && "came", opt.sel === e.id && "sel", e.needsPos && "needspos"].filter(Boolean).join(" ");
     const dest = e.type === "deadly" ? "deadly dead end" : placeName(e.to);
-    return `<button class="${cls}" data-exit="${e.id}" style="left:${e.x * 100}%;top:${e.y * 100}%"
+    return `<button class="${cls}" data-exit="${e.id}" style="${at(e.x, e.y)}"
       title="${esc(e.label)}: ${esc(typeName(e.type))}, ${esc(dest)}" aria-label="${esc(e.label)}, ${esc(typeName(e.type))}, ${esc(dest)}">
       ${exitIcon(e)}<span class="badge">${idx + 1}</span>${P[e.to] && P[e.to].kind === "course" && e.type !== "deadly" ? `<span class="cap">${esc(P[e.to].name)}</span>` : ""}</button>`;
   }).join("");
-  return `<div class="map ${state.placing && opt.live ? "placing" : ""}" data-map="${p.id}" style="aspect-ratio:${ar}">
-    ${src ? `<img class="drawing" src="${esc(src)}" alt="">`
+  return `<div class="map ${state.placing && opt.live ? "placing" : ""}" data-map="${p.id}" data-view="${v.x},${v.y},${v.w},${v.h}" style="--ar:${ar.toFixed(4)}">
+    ${src ? `<div class="drawwrap"><img class="drawing" src="${esc(src)}" alt="" style="width:${(100 / v.w).toFixed(2)}%;height:${(100 / v.h).toFixed(2)}%;left:${(-v.x / v.w * 100).toFixed(2)}%;top:${(-v.y / v.h * 100).toFixed(2)}%"></div>`
           : `<div class="colorbox" style="background:${isHex(p.color) ? p.color : "#8A8D92"}">${opt.live ? `No drawing yet${state.edit ? ". Add one under This room." : ""}` : ""}</div>`}
-    ${(p.labels || []).map(l => `<span class="maplabel" style="left:${l.x * 100}%;top:${l.y * 100}%">${esc(l.text)}</span>`).join("")}
+    ${(p.labels || []).map(l => `<span class="maplabel" style="${at(l.x, l.y)}">${esc(l.text)}</span>`).join("")}
     ${pins}
   </div>`;
 }
@@ -732,7 +757,7 @@ function artPicker(sel){
 }
 
 function roomColorEditor(p){
-  const fill = p.shape && isHex(p.color) ? FILLED[asset(p.shape) + "|" + p.color] : null;
+  const fill = p.shape && isHex(p.color) ? FILLED[asset(p.shape) + "|" + (p.color || "none")] : null;
   return `<div class="small" style="font-weight:600;margin-bottom:2px">Fill color</div>
     <p class="small muted" style="margin:0 0 4px">Fills the inside of the drawing. Click it again to clear it.</p>
     ${honeycomb([], isHex(p.color) ? p.color : null, "edit")}
@@ -1016,7 +1041,7 @@ function dataCheck(){
     if (p.kind === "room" && !p.color) add("info", `${p.name} has no fill color yet.`);
     if (p.color && !isHex(p.color)) add("error", `${p.name} has a fill color "${p.color}" that isn't a #RRGGBB color.`);
     (p.colors || []).forEach(c => { if (!isHex(c)) add("error", `${p.name} has a color "${c}" that isn't a #RRGGBB color.`); });
-    if (p.shape && isHex(p.color)){ const fl = FILLED[asset(p.shape) + "|" + p.color]; if (fl && fl.leak) add("warn", `${p.name}'s drawing seems to have a gap in its outline, so it can't be filled.`); }
+    if (p.shape && isHex(p.color)){ const fl = FILLED[asset(p.shape) + "|" + (p.color || "none")]; if (fl && fl.leak) add("warn", `${p.name}'s drawing seems to have a gap in its outline, so it can't be filled.`); }
     p.exits.forEach(e => {
       const nm = `${p.name}: "${e.label || e.id}"`;
       if (seenE.has(e.id)) add("error", `Two exits share the id "${e.id}".`); seenE.add(e.id);
@@ -1126,8 +1151,8 @@ function render(){
 document.addEventListener("click", ev => {
   const m = ev.target.closest(".map[data-map]");
   if (state.placing && m){
-    const rc = m.getBoundingClientRect();
-    const x = round3((ev.clientX - rc.left) / rc.width), y = round3((ev.clientY - rc.top) / rc.height);
+    const rc = m.getBoundingClientRect(), [vx, vy, vw, vh] = m.dataset.view.split(",").map(Number);
+    const x = round3(vx + (ev.clientX - rc.left) / rc.width * vw), y = round3(vy + (ev.clientY - rc.top) / rc.height * vh);
     const p = P[state.here];
     if (state.placing === "exit"){
       const e = { id:uniqueId(`${p.id}_${p.exits.length + 1}`, id => !!EX[id]), type:"door", x, y, label:"", to:"" };

@@ -1182,7 +1182,9 @@
           "needsPos": true,
           "pair": "beta_lobby_b_8"
         }
-      ]
+      ],
+      "color": "#DF2020",
+      "shape": "assets/rooms/plexal_main.png"
     },
     {
       "id": "beta_lobby_d",

@@ -61,9 +61,11 @@ label.inline{display:flex;gap:8px;align-items:center;font-size:14px;margin-botto
 .hint{background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:8px 12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:600}
 
 /* the room map */
-.map{position:relative;width:100%;margin:10px 0 4px}
+/* every drawing fits the same box: as wide as the panel, but never taller than --maxh */
+.map{--maxh:min(60vh, 560px);position:relative;aspect-ratio:var(--ar);width:min(100%, calc(var(--maxh) * var(--ar)));margin:10px auto 4px}
+.drawwrap{position:absolute;inset:0;overflow:hidden;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
 .map.placing{cursor:crosshair}
-.drawing{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+.drawing{position:absolute;display:block;max-width:none}
 .colorbox{position:absolute;inset:6%;border-radius:14px;border:4px solid rgba(0,0,0,.45);display:grid;place-items:center;color:#fff;text-shadow:0 1px 3px #000;font-size:14px;text-align:center;padding:20px}
 .noshape{position:absolute;inset:0;border:3px dashed var(--line);border-radius:12px;display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:20px}
 .maplabel{position:absolute;transform:translate(-50%,-50%);background:var(--panel);color:var(--ink);font-weight:700;font-size:12px;padding:1px 9px;border-radius:999px;border:1px solid var(--line);white-space:nowrap;pointer-events:none}
@@ -83,6 +85,7 @@ label.inline{display:flex;gap:8px;align-items:center;font-size:14px;margin-botto
 .spin{animation:spin 5s linear infinite;transform-box:fill-box;transform-origin:center}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.pin.next::before,.spin{animation:none}}
+.mini .map{--maxh:190px}
 .mini .pin{transform:translate(-50%,-50%) scale(.6);pointer-events:none}
 .mini .pin .badge,.mini .pin .cap,.mini .maplabel{display:none}
 .course-art{display:grid;place-items:center;padding:24px 10px}
