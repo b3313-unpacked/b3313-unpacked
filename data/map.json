@@ -377,6 +377,26 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "plexal_lobby_4_way_7"
+        },
+        {
+          "id": "crescent_castle_2",
+          "type": "doubledoor",
+          "label": "Back to Plexal Hallway",
+          "to": "plexal_hallway",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_hallway_4"
+        },
+        {
+          "id": "crescent_castle_3",
+          "type": "doubledoor",
+          "label": "Back to Plexal Basement",
+          "to": "plexal_basement",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_basement_7"
         }
       ]
     },
@@ -660,7 +680,7 @@
           "type": "doubledoor",
           "x": 0.491,
           "y": 0.06,
-          "label": "Top double door",
+          "label": "Top double door and up ramp",
           "to": "plexal_upstairs",
           "art": "doubledoor",
           "pair": "plexal_upstairs_1"
@@ -694,22 +714,59 @@
           "type": "door",
           "label": "Back to Beta Lobby A",
           "to": "beta_lobby_a",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.232,
+          "y": 0.978,
           "pair": "beta_lobby_a_8"
         },
         {
           "id": "uncanny_courtyard_2",
-          "type": "doubledoor",
-          "label": "Back to Plexal Lobby (4-way)",
+          "type": "door",
+          "label": "Back to Plexal Lobby (Junction)",
           "to": "plexal_lobby_4_way",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "plexal_lobby_4_way_2"
+          "x": 0.734,
+          "y": 0.873,
+          "pair": "plexal_lobby_4_way_2",
+          "art": "door"
+        },
+        {
+          "id": "uncanny_courtyard_3",
+          "type": "hole",
+          "x": 0.412,
+          "y": 0.822,
+          "label": "Hole in the corner in normal courtyard",
+          "to": "battle_fort",
+          "art": "painting"
+        },
+        {
+          "id": "uncanny_courtyard_4",
+          "type": "other",
+          "x": 0.231,
+          "y": 0.499,
+          "label": "Collect 8 Red Coins star",
+          "to": "sunny_courtyard",
+          "art": "other"
+        },
+        {
+          "id": "uncanny_courtyard_5",
+          "type": "door",
+          "x": 0.24,
+          "y": 0.023,
+          "label": "Door at other end of the courtyard",
+          "to": "funhouse",
+          "pair": "funhouse_1"
+        },
+        {
+          "id": "uncanny_courtyard_6",
+          "type": "other",
+          "x": 0.596,
+          "y": 0.255,
+          "label": "Stand on pedestal in the maze",
+          "to": "checkerboard",
+          "art": "painting"
         }
-      ]
+      ],
+      "color": "#989898",
+      "shape": "assets/rooms/uncanny_courtyard.png"
     },
     {
       "id": "geometric_frenzy",
@@ -1189,14 +1246,99 @@
         {
           "id": "plexal_upstairs_1",
           "type": "doubledoor",
-          "label": "Back to Beta Lobby B",
+          "label": "Through central double door and down ramp",
           "to": "beta_lobby_b",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.552,
+          "y": 0.571,
           "pair": "beta_lobby_b_7"
+        },
+        {
+          "id": "plexal_upstairs_2",
+          "type": "door",
+          "label": "Door 1 and through the mirror blocked by boxes",
+          "to": "plexal_hallway",
+          "x": 0.015,
+          "y": 0.812,
+          "pair": "plexal_hallway_1",
+          "art": "door"
+        },
+        {
+          "id": "plexal_upstairs_3",
+          "type": "doubledoor",
+          "x": 0.201,
+          "y": 0.969,
+          "label": "Double door near Wet-Dry World painting",
+          "to": "royal_lobby",
+          "art": "doubledoor",
+          "pair": "royal_lobby_1"
+        },
+        {
+          "id": "plexal_upstairs_4",
+          "type": "other",
+          "x": 0.383,
+          "y": 0.811,
+          "label": "Wet-Dry World painting",
+          "to": "dry_town",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_upstairs_5",
+          "type": "other",
+          "x": 0.227,
+          "y": 0.417,
+          "label": "Painting close to Beta Lobby B door",
+          "to": "pleasant_pleasant_falls",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_upstairs_6",
+          "type": "other",
+          "x": 0.554,
+          "y": 0.022,
+          "label": "Jolly Roger Bay painting in front Beta Lobby B door",
+          "to": "creepy_cove",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_upstairs_7",
+          "type": "hole",
+          "x": 0.727,
+          "y": 0.193,
+          "label": "Giant hole in the wall with (/) above it",
+          "to": "uncanny_courtyard",
+          "arrive": "In the Crimson form. Step on the fountain pedestal to warp to Windy form"
+        },
+        {
+          "id": "plexal_upstairs_8",
+          "type": "door",
+          "x": 0.973,
+          "y": 0.639,
+          "label": "Door next to stairs leading to 3 Lethal Lava Land paintings. Jump in one of the side ones",
+          "to": "lavish_lava_mountain",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_upstairs_9",
+          "type": "door",
+          "x": 0.854,
+          "y": 0.97,
+          "label": "Door behind the stairs, jump into the hole",
+          "to": "sky_high_pathway",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_upstairs_10",
+          "type": "doubledoor",
+          "x": 0.764,
+          "y": 0.832,
+          "label": "Double door up the ramp",
+          "to": "plexal_upstairs_upper",
+          "art": "doubledoor",
+          "pair": "plexal_upstairs_upper_1"
         }
-      ]
+      ],
+      "shape": "assets/rooms/plexal_upstairs.png",
+      "color": "#AEAEAE"
     },
     {
       "id": "plexal_lobby",
@@ -1673,6 +1815,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "beta_lobby_d_6"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_2",
+          "type": "door",
+          "label": "Back to Plexal Basement",
+          "to": "plexal_basement",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_basement_8"
         }
       ]
     },
@@ -1887,7 +2039,18 @@
       "id": "funhouse",
       "name": "Funhouse",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "funhouse_1",
+          "type": "door",
+          "label": "Back to Uncanny Courtyard",
+          "to": "uncanny_courtyard",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "uncanny_courtyard_5"
+        }
+      ]
     },
     {
       "id": "zany_castle",
@@ -1926,6 +2089,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "plexal_lobby_large_rooms_5"
+        },
+        {
+          "id": "balcony_2",
+          "type": "door",
+          "label": "Back to Plexal Hallway",
+          "to": "plexal_hallway",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_hallway_7"
         }
       ]
     },
@@ -2008,7 +2181,105 @@
       "id": "plexal_hallway",
       "name": "Plexal Hallway",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "plexal_hallway_1",
+          "type": "doubledoor",
+          "x": 0.987,
+          "y": 0.603,
+          "label": "Double door all the way at the end of the hall",
+          "to": "plexal_upstairs",
+          "art": "doubledoor",
+          "pair": "plexal_upstairs_2"
+        },
+        {
+          "id": "plexal_hallway_2",
+          "type": "door",
+          "x": 0.867,
+          "y": 0.851,
+          "label": "Door 3 to room with painting with tree trunks",
+          "to": "grim_green_forest",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_hallway_3",
+          "type": "door",
+          "x": 0.864,
+          "y": 0.362,
+          "label": "Door 2 to room with painting with a hill",
+          "to": "thwomp_s_fortress",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_hallway_4",
+          "type": "doubledoor",
+          "x": 0.667,
+          "y": 0.945,
+          "label": "Double door down the skinny hallway across from library",
+          "to": "crescent_castle",
+          "art": "doubledoor",
+          "pair": "crescent_castle_2"
+        },
+        {
+          "id": "plexal_hallway_5",
+          "type": "doubledoor",
+          "x": 0.666,
+          "y": 0.023,
+          "label": "Double door behind bookshelves in library",
+          "to": "internal_sewer_system",
+          "art": "doubledoor",
+          "pair": "internal_sewer_system_1"
+        },
+        {
+          "id": "plexal_hallway_6",
+          "type": "deadly",
+          "x": 0.584,
+          "y": 0.305,
+          "label": "Jump into the Bowser painting",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
+        },
+        {
+          "id": "plexal_hallway_7",
+          "type": "door",
+          "x": 0.47,
+          "y": 0.27,
+          "label": "Unmarked door in alcove closest to library",
+          "to": "balcony",
+          "pair": "balcony_2"
+        },
+        {
+          "id": "plexal_hallway_8",
+          "type": "door",
+          "x": 0.391,
+          "y": 0.931,
+          "label": "Door 3 in alcove near outdoor section",
+          "to": "rocky_trek",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_hallway_9",
+          "type": "door",
+          "x": 0.32,
+          "y": 0.264,
+          "label": "Door 2 in alcove near outdoor section, and down into the hole",
+          "to": "cave_city",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_hallway_10",
+          "type": "hole",
+          "x": 0.061,
+          "y": 0.337,
+          "label": "Giant hole in wall in outdoor section",
+          "to": "uncanny_courtyard",
+          "art": "hole",
+          "arrive": "In the Crimson form. Step on the fountain pedestal to warp to Windy form"
+        }
+      ],
+      "color": "#C4C4C4",
+      "shape": "assets/rooms/plexal_hallway.png"
     },
     {
       "id": "plexal_basement",
@@ -2018,12 +2289,473 @@
         {
           "id": "plexal_basement_1",
           "type": "door",
-          "label": "Back to Plexal Lobby",
+          "label": "Double door under Bowser painting, through door",
           "to": "plexal_lobby",
+          "x": 0.199,
+          "y": 0.972,
+          "pair": "plexal_lobby_9",
+          "art": "doubledoor"
+        },
+        {
+          "id": "plexal_basement_2",
+          "type": "other",
+          "x": 0.431,
+          "y": 0.578,
+          "label": "Painting of desert sky around where Shifting Sand Land would be",
+          "to": "sandy_skyloft",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_basement_3",
+          "type": "other",
+          "x": 0.003,
+          "y": 0.447,
+          "label": "Lethal Lava painting",
+          "to": "caldera_temple",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_basement_4",
+          "type": "pipe",
+          "x": 0.193,
+          "y": 0.137,
+          "label": "Door 1 to room with giant pipe",
+          "to": "hazy_maze_cave_beta",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_basement_5",
+          "type": "doubledoor",
+          "x": 0.421,
+          "y": 0.714,
+          "label": "Double door in between traditional basement sets",
+          "to": "internal_sewer_system",
+          "art": "doubledoor",
+          "pair": "internal_sewer_system_2"
+        },
+        {
+          "id": "plexal_basement_6",
+          "type": "doubledoor",
+          "x": 0.53,
+          "y": 0.15,
+          "label": "Double door into room with black hole",
+          "to": "lethal_cavern",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_basement_7",
+          "type": "doubledoor",
+          "x": 0.685,
+          "y": 0.019,
+          "label": "Double door with crescent moon above it",
+          "to": "crescent_castle",
+          "art": "doubledoor",
+          "pair": "crescent_castle_3"
+        },
+        {
+          "id": "plexal_basement_8",
+          "type": "door",
+          "x": 0.841,
+          "y": 0.035,
+          "label": "Grate to be passed with Vanish Cap",
+          "to": "plexal_basement_wet_floor_maze",
+          "art": "other",
+          "pair": "plexal_basement_wet_floor_maze_2"
+        },
+        {
+          "id": "plexal_basement_9",
+          "type": "hole",
+          "x": 0.898,
+          "y": 0.091,
+          "label": "Hole next to grate in the wall",
+          "to": "bowser_in_the_dark_world_shoshinkai",
+          "art": "hole"
+        },
+        {
+          "id": "plexal_basement_10",
+          "type": "door",
+          "x": 0.772,
+          "y": 0.507,
+          "label": "Big pipe inside grated wall",
+          "to": "4th_floor_final",
+          "art": "blockpipe",
+          "pair": "4th_floor_final_1"
+        }
+      ],
+      "color": "#6C6C6C",
+      "shape": "assets/rooms/plexal_basement.png"
+    },
+    {
+      "id": "battle_fort",
+      "name": "Battle Fort",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "sunny_courtyard",
+      "name": "Sunny Courtyard",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "sunny_courtyard_1",
+          "type": "pipe",
+          "x": 0.484,
+          "y": 0.977,
+          "label": "Climb up bricks to a pipe where Peach's castle normally is",
+          "to": "floor_3b",
+          "art": "blockpipe",
+          "pair": "floor_3b_1"
+        },
+        {
+          "id": "sunny_courtyard_2",
+          "type": "deadly",
+          "x": 0.484,
+          "y": 0.024,
+          "label": "Stand in front of the brick wall to warp",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
+        }
+      ],
+      "color": "#0E621D",
+      "shape": "assets/rooms/sunny_courtyard.png"
+    },
+    {
+      "id": "checkerboard",
+      "name": "Checkerboard",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "floor_3b",
+      "name": "Floor 3B",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "floor_3b_1",
+          "type": "pipe",
+          "label": "Back to Sunny Courtyard",
+          "to": "sunny_courtyard",
           "x": 0.5,
           "y": 0.5,
           "needsPos": true,
-          "pair": "plexal_lobby_9"
+          "pair": "sunny_courtyard_1"
+        }
+      ]
+    },
+    {
+      "id": "grim_green_forest",
+      "name": "Grim Green Forest",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "thwomp_s_fortress",
+      "name": "Bob-omb Tower",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "internal_sewer_system",
+      "name": "Internal Sewer System",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "internal_sewer_system_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Hallway",
+          "to": "plexal_hallway",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_hallway_5"
+        },
+        {
+          "id": "internal_sewer_system_2",
+          "type": "doubledoor",
+          "label": "Back to Plexal Basement",
+          "to": "plexal_basement",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_basement_5"
+        }
+      ]
+    },
+    {
+      "id": "rocky_trek",
+      "name": "Rocky Trek",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "cave_city",
+      "name": "Cave City",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "royal_lobby",
+      "name": "Royal Lobby",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "royal_lobby_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Upstairs",
+          "to": "plexal_upstairs",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_upstairs_3"
+        }
+      ]
+    },
+    {
+      "id": "dry_town",
+      "name": "Dry Town",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "pleasant_pleasant_falls",
+      "name": "Pleasant, Pleasant Falls",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "creepy_cove",
+      "name": "Creepy Cove",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "creepy_cove_1",
+          "type": "hole",
+          "label": "Hole in the sunken ship",
+          "to": "inside_the_sunken_ship",
+          "art": "hole"
+        },
+        {
+          "id": "creepy_cove_2",
+          "type": "hole",
+          "label": "Underwater tunnel near sunken ship with busted gate",
+          "to": "jolly_roger_coastline",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "inside_the_sunken_ship",
+      "name": "Inside the Sunken Ship",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "jolly_roger_coastline",
+      "name": "Jolly Roger Coastline",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "lavish_lava_mountain",
+      "name": "Lavish Lava Mountain",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "sky_high_pathway",
+      "name": "Sky-High Pathway",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "sky_high_pathway_1",
+          "type": "pipe",
+          "label": "Pipe at the end of the course",
+          "to": "tower_of_the_wing_cap_beta",
+          "art": "blockpipe",
+          "pair": "tower_of_the_wing_cap_beta_1"
+        }
+      ]
+    },
+    {
+      "id": "tower_of_the_wing_cap_beta",
+      "name": "Tower of the Wing Cap (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "tower_of_the_wing_cap_beta_1",
+          "type": "pipe",
+          "label": "Back to Sky-High Pathway",
+          "to": "sky_high_pathway",
+          "pair": "sky_high_pathway_1",
+          "art": "blockpipe"
+        }
+      ]
+    },
+    {
+      "id": "plexal_upstairs_upper",
+      "name": "Plexal Upstairs (Upper)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "plexal_upstairs_upper_1",
+          "type": "doubledoor",
+          "label": "Double door near stars on the wall",
+          "to": "plexal_upstairs",
+          "x": 0.286,
+          "y": 0.974,
+          "pair": "plexal_upstairs_10",
+          "art": "doubledoor"
+        },
+        {
+          "id": "plexal_upstairs_upper_2",
+          "type": "hole",
+          "x": 0.479,
+          "y": 0.513,
+          "label": "Jump in the hole with sky painting on it",
+          "to": "rainbow_ride_beta",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_upstairs_upper_3",
+          "type": "hole",
+          "x": 0.549,
+          "y": 0.514,
+          "label": "Door 3, down the hole, and down the next hole in front of the boo painting",
+          "to": "forest_maze",
+          "art": "hole"
+        },
+        {
+          "id": "plexal_upstairs_upper_4",
+          "type": "hole",
+          "x": 0.647,
+          "y": 0.512,
+          "label": "Door 3, down the hole and into the Boo painting",
+          "to": "big_boo_s_fortress",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_upstairs_upper_5",
+          "type": "doubledoor",
+          "x": 0.979,
+          "y": 0.303,
+          "label": "Double door up the steep slope",
+          "to": "underground_passageway",
+          "art": "doubledoor",
+          "pair": "underground_passageway_1"
+        },
+        {
+          "id": "plexal_upstairs_upper_6",
+          "type": "doubledoor",
+          "x": 0.269,
+          "y": 0.161,
+          "label": "Double door up the crescent moon",
+          "to": "cryptic_hideout",
+          "pair": "cryptic_hideout_1"
+        }
+      ],
+      "shape": "assets/rooms/plexal_upstairs_upper.png",
+      "color": "#AEAEAE"
+    },
+    {
+      "id": "rainbow_ride_beta",
+      "name": "Rainbow Ride (beta)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "forest_maze",
+      "name": "Forest Maze",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "big_boo_s_fortress",
+      "name": "Big Boo's Fortress",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "underground_passageway",
+      "name": "Underground Passageway",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "underground_passageway_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Upstairs (Upper)",
+          "to": "plexal_upstairs_upper",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_upstairs_upper_5"
+        }
+      ]
+    },
+    {
+      "id": "cryptic_hideout",
+      "name": "Cryptic Hideout",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "cryptic_hideout_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Upstairs (Upper)",
+          "to": "plexal_upstairs_upper",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_upstairs_upper_6"
+        }
+      ]
+    },
+    {
+      "id": "sandy_skyloft",
+      "name": "Sandy Skyloft",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "caldera_temple",
+      "name": "Caldera Temple",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "hazy_maze_cave_beta",
+      "name": "Hazy Maze Cave (beta)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "lethal_cavern",
+      "name": "Lethal Cavern",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "lethal_cavern_1",
+          "type": "deadly",
+          "label": "Giant cavern at the end of the course",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
+        }
+      ]
+    },
+    {
+      "id": "4th_floor_final",
+      "name": "4th Floor (final)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "4th_floor_final_1",
+          "type": "door",
+          "label": "Back to Plexal Basement",
+          "to": "plexal_basement",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_basement_10"
         }
       ]
     }
