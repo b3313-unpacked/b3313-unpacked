@@ -681,6 +681,7 @@ function editorPanel(p){
     ${p.exits.map((x, i) => exitRow(x, i, null)).join("") || `<p class="muted small" style="margin:0">Nothing logged yet. Add the first door, pipe or painting you see.</p>`}
     ${e ? exitForm(e) : ""}
   </div>
+  ${waysInCard(p)}
   ${placeForm(p)}
   ${starEditor(p)}
   <div class="card"><h3>Switches here</h3>
@@ -711,6 +712,30 @@ function setDest(e, key, v){
 // Rooms A to Z, then courses A to Z.
 const byName = (a, b) => a.name.localeCompare(b.name, undefined, { numeric:true, sensitivity:"base" });
 const sortedPlaces = kind => DATA.places.filter(p => !kind || p.kind === kind).sort((a, b) => (a.kind === "course") - (b.kind === "course") || byName(a, b));
+// Every exit elsewhere that brings you here: its usual destination, a "sometimes"
+// destination, or where you respawn after a deadly dead end.
+function waysIn(pid){
+  const list = [];
+  DATA.places.forEach(src => src.exits.forEach(e => {
+    if (src.id === pid) return;
+    if (e.to === pid) list.push({ e, src, key:"to", how:e.type === "deadly" ? "room you die in" : "" });
+    (e.alts || []).forEach((a, i) => { if (a.to === pid) list.push({ e, src, key:"alt" + i, how:"sometimes" }); });
+    if (e.type === "deadly" && e.respawn === pid) list.push({ e, src, key:"respawn", how:"respawn" });
+  }));
+  return list.sort((a, b) => byName(a.src, b.src));
+}
+function waysInCard(p){
+  const list = waysIn(p.id);
+  return `<div class="card"><h3>Ways in (${list.length})</h3>
+    <p class="small muted" style="margin:-4px 0 8px">Every exit elsewhere that leads here. Change one's destination right here, or open it to edit it.</p>
+    ${list.map(w => `<div style="border-top:1px solid var(--line);padding:8px 0">
+      <div class="row" style="justify-content:space-between;flex-wrap:nowrap"><span class="small"><b>${esc(w.src.name)}</b>: ${esc(w.e.label || typeName(w.e.type))}
+        ${w.how ? `<span class="tag">${esc(w.how)}</span>` : ""}${w.e.pair && w.key === "to" ? `<span class="tag">two-way</span>` : `<span class="tag one">one-way</span>`}</span>
+        <button class="btn sm" data-action="open-in" data-exit="${w.e.id}">Open</button></div>
+      <select data-edit="in-dest" data-exit="${w.e.id}" data-key="${w.key}" style="margin-top:6px" aria-label="Where this exit leads">${placeOptions(p.id, w.src.id)}</select>
+    </div>`).join("") || `<p class="small muted" style="margin:0">Nothing leads here yet.</p>`}
+  </div>`;
+}
 function placeOptions(selected, exclude){
   return sortedPlaces().filter(x => x.id !== exclude).map(x => `<option value="${x.id}" ${selected === x.id ? "selected" : ""}>${esc(x.name)}${x.kind === "course" ? " (course)" : ""}</option>`).join("");
 }
@@ -1253,6 +1278,12 @@ document.addEventListener("click", ev => {
       list.forEach(s => { s.place = p.id; }); markDirty();
       toast(`Placed ${list.length} star${list.length > 1 ? "s" : ""} in ${p.name}.`);
     },
+    "open-in": () => {
+      const id = el.dataset.exit;
+      state.history.push({ here:state.here, cameVia:state.cameVia });
+      Object.assign(state, { here:FROM[id], cameVia:null, sel:id, placing:null, newKind:null, newFor:null, picking:false, delConfirm:null });
+      window.scrollTo(0, 0);
+    },
     "unplace-star": () => { delete STAR[el.dataset.star].place; markDirty(); },
     "toggle-switch-place": () => { const w = SWITCH[el.dataset.sw]; w.places = w.places.includes(p.id) ? w.places.filter(x => x !== p.id) : [...w.places, p.id]; markDirty(); },
     "toggle-switch": () => { const id = el.dataset.sw; state.checked.has(id) ? state.checked.delete(id) : state.checked.add(id); saveProgress(); },
@@ -1308,6 +1339,12 @@ function applyEdit(el){
     case "ex-twoway": el.checked ? linkTwoWay(e) : unlinkPair(e); break;
     case "alt-note": e.alts[+el.dataset.i].note = v; break;
     case "newname": state.newName = v; return;
+    case "in-dest": {
+      const x = EX[el.dataset.exit]; if (!x || !v) return;
+      setDest(x, el.dataset.key, v);
+      toast(`"${x.label || typeName(x.type)}" in ${P[FROM[x.id]].name} now ${el.dataset.key === "respawn" ? "respawns you in" : "leads to"} ${P[v].name}.`);
+      break;
+    }
     case "star-name": s.name = v; break;
     case "star-notes": if (v.trim()) s.notes = v; else delete s.notes; break;
   }

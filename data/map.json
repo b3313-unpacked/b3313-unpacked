@@ -714,25 +714,15 @@
           "type": "door",
           "label": "Back to Beta Lobby A",
           "to": "beta_lobby_a",
-          "x": 0.232,
+          "x": 0.506,
           "y": 0.978,
           "pair": "beta_lobby_a_8"
         },
         {
-          "id": "uncanny_courtyard_2",
-          "type": "door",
-          "label": "Back to Plexal Lobby (Junction)",
-          "to": "plexal_lobby_4_way",
-          "x": 0.734,
-          "y": 0.873,
-          "pair": "plexal_lobby_4_way_2",
-          "art": "door"
-        },
-        {
           "id": "uncanny_courtyard_3",
           "type": "hole",
-          "x": 0.412,
-          "y": 0.822,
+          "x": 0.846,
+          "y": 0.746,
           "label": "Hole in the corner in normal courtyard",
           "to": "battle_fort",
           "art": "painting"
@@ -740,8 +730,8 @@
         {
           "id": "uncanny_courtyard_4",
           "type": "other",
-          "x": 0.231,
-          "y": 0.499,
+          "x": 0.491,
+          "y": 0.495,
           "label": "Collect 8 Red Coins star",
           "to": "sunny_courtyard",
           "art": "other"
@@ -749,20 +739,11 @@
         {
           "id": "uncanny_courtyard_5",
           "type": "door",
-          "x": 0.24,
-          "y": 0.023,
+          "x": 0.495,
+          "y": 0.009,
           "label": "Door at other end of the courtyard",
           "to": "funhouse",
           "pair": "funhouse_1"
-        },
-        {
-          "id": "uncanny_courtyard_6",
-          "type": "other",
-          "x": 0.596,
-          "y": 0.255,
-          "label": "Stand on pedestal in the maze",
-          "to": "checkerboard",
-          "art": "painting"
         }
       ],
       "color": "#989898",
@@ -1959,9 +1940,9 @@
           "x": 0.008,
           "y": 0.161,
           "label": "Double door down long hallway through single door",
-          "to": "uncanny_courtyard",
+          "to": "uncanny_courtyard_windy",
           "art": "door",
-          "pair": "uncanny_courtyard_2"
+          "pair": "uncanny_courtyard_windy_1"
         },
         {
           "id": "plexal_lobby_4_way_3",
@@ -2758,6 +2739,33 @@
           "pair": "plexal_basement_10"
         }
       ]
+    },
+    {
+      "id": "uncanny_courtyard_windy",
+      "name": "Uncanny Courtyard (Windy)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "uncanny_courtyard_windy_1",
+          "type": "door",
+          "label": "Back to Plexal Lobby (Junction)",
+          "to": "plexal_lobby_4_way",
+          "x": 0.486,
+          "y": 0.978,
+          "pair": "plexal_lobby_4_way_2"
+        },
+        {
+          "id": "uncanny_courtyard_windy_2",
+          "type": "other",
+          "x": 0.197,
+          "y": 0.166,
+          "label": "Stand on the pedestal in the maze",
+          "to": "checkerboard",
+          "art": "painting"
+        }
+      ],
+      "color": "#989898",
+      "shape": "assets/rooms/uncanny_courtyard_windy.png"
     }
   ]
 }

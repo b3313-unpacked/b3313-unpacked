@@ -396,7 +396,7 @@
     {"id":"s_60_5","course":"Unagi's Tunnel","color":"yellow","name":"Touch 5 clams","save":{"offset":60,"bit":5},"place":"unagi_s_tunnel"},
     {"id":"s_60_6","course":"Unagi's Tunnel","color":"yellow","name":"Break box on floor","save":{"offset":60,"bit":6},"place":"unagi_s_tunnel"},
     {"id":"s_8_3","course":"Uncanny Courtyard","color":"yellow","name":"8 Red Coins","save":{"offset":8,"bit":3},"place":"uncanny_courtyard"},
-    {"id":"s_8_4","course":"Uncanny Courtyard","color":"yellow","name":"Hidden in windy maze","save":{"offset":8,"bit":4},"place":"uncanny_courtyard"},
+    {"id":"s_8_4","course":"Uncanny Courtyard","color":"yellow","name":"Hidden in alcove in maze","save":{"offset":8,"bit":4},"place":"uncanny_courtyard_windy"},
     {"id":"s_57_5","course":"Uncanny Courtyard","color":"yellow","name":"MIPS 1 (15 Stars)","save":{"offset":57,"bit":5},"place":"uncanny_courtyard","notes":"You must get Wing Cap by the Rainbow Highway MIPS 1 and Crimson Hallway MIPS 1 before this star"},
     {"id":"s_57_6","course":"Uncanny Courtyard","color":"yellow","name":"MIPS 2 (50 Stars)","save":{"offset":57,"bit":6},"place":"uncanny_courtyard","notes":"You must get Wing Cap by the Rainbow Highway MIPS 2 and Crimson Hallway MIPS 2 before this star"},
     {"id":"s_34_6","course":"Uncanny Moat","color":"yellow","name":"Star 1","save":{"offset":34,"bit":6}},
