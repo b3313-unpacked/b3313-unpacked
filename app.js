@@ -482,7 +482,8 @@ function takeExit(id, chosen){
   if (!P[dest]){ toast("That place isn't logged yet."); return; }
   state.choose = null; state.confirm = null;
   state.history.push({ here:state.here, cameVia:state.cameVia });
-  state.here = dest; state.cameVia = (dest === e.to && e.pair) ? e.pair : null;
+  const viaAlt = (e.alts || []).find(a => a.to === dest && a.pair);
+  state.here = dest; state.cameVia = (dest === e.to && e.pair) ? e.pair : (viaAlt ? viaAlt.pair : null);
   state.sel = null; state.placing = null; state.newKind = null; state.newFor = null; state.picking = false; state.delConfirm = null;
   const rt = state.route;
   if (rt){
@@ -742,7 +743,7 @@ const newPlaceRow = (field, i) => state.newFor === destKey(field, i)
 function setDest(e, key, v){
   if (key === "to"){ if (e.to !== v){ unlinkPair(e); e.to = v; } }
   else if (key === "respawn"){ if (v) e.respawn = v; else delete e.respawn; }
-  else if (key.startsWith("alt")) e.alts[+key.slice(3)].to = v;
+  else if (key.startsWith("alt")){ const i = +key.slice(3); if (e.alts[i].to !== v){ unlinkAlt(e, i); e.alts[i].to = v; } }
 }
 // Rooms A to Z, then courses A to Z.
 const byName = (a, b) => a.name.localeCompare(b.name, undefined, { numeric:true, sensitivity:"base" });
@@ -765,7 +766,7 @@ function waysInCard(p){
     <p class="small muted" style="margin:-4px 0 8px">Every exit elsewhere that leads here. Change one's destination right here, or open it to edit it.</p>
     ${list.map(w => `<div style="border-top:1px solid var(--line);padding:8px 0">
       <div class="row" style="justify-content:space-between;flex-wrap:nowrap"><span class="small"><b>${esc(w.src.name)}</b>: ${esc(w.e.label || typeName(w.e.type))}
-        ${w.how ? `<span class="tag">${esc(w.how)}</span>` : ""}${w.e.pair && w.key === "to" ? `<span class="tag">two-way</span>` : `<span class="tag one">one-way</span>`}</span>
+        ${w.how ? `<span class="tag">${esc(w.how)}</span>` : ""}${(w.key === "to" && w.e.pair) || (w.key.startsWith("alt") && w.e.alts[+w.key.slice(3)].pair) ? `<span class="tag">two-way</span>` : `<span class="tag one">one-way</span>`}</span>
         <button class="btn sm" data-action="open-in" data-exit="${w.e.id}">Open</button></div>
       <select data-edit="in-dest" data-exit="${w.e.id}" data-key="${w.key}" style="margin-top:6px" aria-label="Where this exit leads">${placeOptions(p.id, w.src.id)}</select>
     </div>`).join("") || `<p class="small muted" style="margin:0">Nothing leads here yet.</p>`}
@@ -800,6 +801,7 @@ function exitForm(e){
     ${(e.alts || []).map((a, i) => `<div class="alt-row">
         ${destSelect("alt", i, a.to, "Choose a place", true, FROM[e.id])}
         <input data-edit="alt-note" data-i="${i}" value="${esc(a.note || "")}" placeholder="When? e.g. rarely, at night">
+        <label class="inline small" style="margin:0" title="Going back through it brings you right here"><input type="checkbox" data-edit="alt-twoway" data-i="${i}" ${a.pair ? "checked" : ""} ${P[a.to] && state.newFor !== "alt" + i ? "" : "disabled"}> Two-way</label>
         <button class="btn sm danger" data-action="del-alt" data-i="${i}" aria-label="Remove">✕</button></div>${newPlaceRow("alt", i)}`).join("")}
     <button class="btn sm" data-action="add-alt" style="margin-bottom:12px" ${d ? "" : "disabled"}>Add another possible destination</button>`}
     <div class="row">
@@ -887,32 +889,67 @@ function saveCard(){
   </div>`;
 }
 
+// Two-way links. An exit's usual destination links with "pair"; each "sometimes"
+// destination can link with its own "pair" too. The exit on the far side always
+// points back with its plain "pair".
+function partnerPoints(q, e){ return q && (q.pair === e.id || (q.alts || []).some(a => a.pair === e.id)); }
 function unlinkPair(e){
   if (!e.pair) return;
-  const q = EX[e.pair]; if (q && q.pair === e.id) delete q.pair;
+  const q = EX[e.pair];
+  if (q){
+    if (q.pair === e.id) delete q.pair;
+    (q.alts || []).forEach(a => { if (a.pair === e.id) delete a.pair; });
+  }
   delete e.pair;
+}
+function unlinkAlt(e, i){
+  const a = (e.alts || [])[i]; if (!a || !a.pair) return;
+  const q = EX[a.pair]; if (q && q.pair === e.id) delete q.pair;
+  delete a.pair;
+}
+function unlinkAll(e){ unlinkPair(e); (e.alts || []).forEach((_, i) => unlinkAlt(e, i)); }
+// Finds or makes the exit in place d that leads back to the exit e.
+function returnExit(e, d){
+  const here = P[FROM[e.id]];
+  let q = d.exits.find(x => x.to === here.id && !x.pair && x.type !== "deadly");
+  if (q){ toast(`Linked to "${q.label || "an existing exit"}" in ${d.name}.`); return q; }
+  q = { id:uniqueId(`${d.id}_${d.exits.length + 1}`, id => !!EX[id]), type:e.type, label:`Back to ${here.name}`, to:here.id };
+  if (d.kind === "room"){ q.x = 0.5; q.y = 0.5; q.needsPos = true; }
+  d.exits.push(q); EX[q.id] = q; FROM[q.id] = d.id;
+  toast(`Added the way back in ${d.name}.${d.kind === "room" ? " Place it when you get there." : ""}`);
+  return q;
+}
+function linkAlt(e, i){
+  const a = e.alts[i]; if (!a || a.pair || !P[a.to]) return;
+  const q = returnExit(e, P[a.to]);
+  q.pair = e.id; a.pair = q.id;
 }
 function linkTwoWay(e){
   if (e.pair) return;
   const here = P[FROM[e.id]], d = P[e.to]; if (!d) return;
-  let q = d.exits.find(x => x.to === here.id && !x.pair && x.type !== "deadly");
-  if (q) toast(`Linked to "${q.label || "an existing exit"}" in ${d.name}.`);
-  else {
-    q = { id:uniqueId(`${d.id}_${d.exits.length + 1}`, id => !!EX[id]), type:e.type, label:`Back to ${here.name}`, to:here.id };
-    if (d.kind === "room"){ q.x = 0.5; q.y = 0.5; q.needsPos = true; }
-    d.exits.push(q); EX[q.id] = q; FROM[q.id] = d.id;
-    toast(`Added the way back in ${d.name}.${d.kind === "room" ? " Place it when you get there." : ""}`);
+  // 1. an exit over there that usually leads here
+  if (!d.exits.some(x => x.to === here.id && !x.pair && x.type !== "deadly")){
+    // 2. an exit over there that only sometimes leads here, like a day/night pipe
+    for (const x of d.exits){
+      const i = (x.alts || []).findIndex(a => a.to === here.id && !a.pair);
+      if (i < 0) continue;
+      x.alts[i].pair = e.id; e.pair = x.id;
+      toast(`Linked to "${x.label || "an existing exit"}" in ${d.name}, which sometimes leads here.`);
+      return;
+    }
   }
+  // 3. otherwise find or make the way back
+  const q = returnExit(e, d);
   q.pair = e.id; e.pair = q.id;
 }
 function deletePlace(p){
   if (p.id === DATA.start) return;
-  p.exits.forEach(unlinkPair);
+  p.exits.forEach(unlinkAll);
   DATA.places = DATA.places.filter(x => x.id !== p.id);
   DATA.places.forEach(x => x.exits.forEach(e => {
     if (e.to === p.id){ unlinkPair(e); e.to = ""; }
     if (e.respawn === p.id) delete e.respawn;
-    if (e.alts) e.alts = e.alts.filter(a => a.to !== p.id);
+    if (e.alts){ e.alts.forEach((a, i) => { if (a.to === p.id) unlinkAlt(e, i); }); e.alts = e.alts.filter(a => a.to !== p.id); }
   }));
   DATA.stars.forEach(s => groupsOf(s).forEach(g => { if (placeFor(s, g) === p.id) setPlaceFor(s, g, null); }));
   DATA.switches.forEach(w => { w.places = w.places.filter(x => x !== p.id); });
@@ -1117,6 +1154,12 @@ function dataCheck(){
         return;
       }
       (e.alts || []).forEach(a => {
+        if (a.pair){
+          const q = EX[a.pair];
+          if (!q) add("error", `${nm} says its "sometimes" destination comes out at "${a.pair}", which doesn't exist.`);
+          else if (FROM[q.id] !== a.to) add("error", `${nm} sometimes goes to ${placeName(a.to)}, but that way back is in ${P[FROM[q.id]].name}.`);
+          else if (q.pair !== e.id) add("warn", `${nm} and "${q.label}" in ${placeName(a.to)} should name each other as partners.`);
+        }
         if (!a.to) add("warn", `${nm} has a "sometimes" destination that isn't set.`);
         else if (!P[a.to]) add("error", `${nm} sometimes leads to "${a.to}", which doesn't exist.`);
         else if (a.to === e.to) add("warn", `${nm} lists ${P[a.to].name} as both its usual and its "sometimes" destination.`);
@@ -1127,8 +1170,8 @@ function dataCheck(){
         const q = EX[e.pair];
         if (!q) add("error", `${nm} says you come out at "${e.pair}", which doesn't exist.`);
         else if (FROM[q.id] !== e.to) add("error", `${nm} goes to ${P[e.to].name}, but its partner is in ${P[FROM[q.id]].name}.`);
-        else if (q.to !== p.id) add("warn", `${nm} is marked two-way, but going back through "${q.label}" leads to ${placeName(q.to)}.`);
-        else if (q.pair !== e.id) add("warn", `"${e.id}" and "${e.pair}" should name each other as partners.`);
+        else if (q.to !== p.id && !(q.alts || []).some(a => a.to === p.id)) add("warn", `${nm} is marked two-way, but going back through "${q.label}" leads to ${placeName(q.to)}.`);
+        else if (!partnerPoints(q, e)) add("warn", `"${e.id}" and "${e.pair}" should name each other as partners.`);
       }
     });
   });
@@ -1278,7 +1321,7 @@ document.addEventListener("click", ev => {
       else { const outs = outcomesOf(e); outs.length > 1 ? takeExit(e.id) : takeExit(e.id, outs[0]); }
     },
     "del-exit": () => {
-      const e = EX[state.sel]; unlinkPair(e);
+      const e = EX[state.sel]; unlinkAll(e);
       p.exits = p.exits.filter(x => x.id !== e.id); state.sel = null; state.route = null; reindex(); markDirty();
       toast("Exit deleted.");
     },
@@ -1291,7 +1334,7 @@ document.addEventListener("click", ev => {
       toast(key === "to" && e.type !== "deadly" ? `Created ${name}. Tick two-way if there's a way straight back, then go through to log it.` : `Created ${name}.`);
     },
     "add-alt": () => { const e = EX[state.sel]; (e.alts = e.alts || []).push({ to:"", note:"" }); markDirty(); },
-    "del-alt": () => { const e = EX[state.sel]; state.newKind = null; state.newFor = null; e.alts.splice(+el.dataset.i, 1); if (!e.alts.length) delete e.alts; markDirty(); },
+    "del-alt": () => { const e = EX[state.sel]; state.newKind = null; state.newFor = null; unlinkAlt(e, +el.dataset.i); e.alts.splice(+el.dataset.i, 1); if (!e.alts.length) delete e.alts; markDirty(); },
     "add-label": () => { state.placing = "label"; },
     "move-label": () => { state.placing = "label:" + el.dataset.i; },
     "del-label": () => { p.labels.splice(+el.dataset.i, 1); markDirty(); },
@@ -1366,7 +1409,7 @@ function applyEdit(el){
     case "ex-label": e.label = v; break;
     case "ex-type":
       e.type = v;
-      if (v === "deadly"){ unlinkPair(e); delete e.alts; delete e.arrive; } else delete e.respawn;
+      if (v === "deadly"){ unlinkAll(e); delete e.alts; delete e.arrive; } else delete e.respawn;
       break;
     case "ex-floor": if (v.trim()) e.floor = v; else delete e.floor; break;
     case "ex-arrive": if (v.trim()) e.arrive = v; else delete e.arrive; break;
@@ -1377,6 +1420,7 @@ function applyEdit(el){
       setDest(e, key, v); break;
     }
     case "ex-twoway": el.checked ? linkTwoWay(e) : unlinkPair(e); break;
+    case "alt-twoway": el.checked ? linkAlt(e, +el.dataset.i) : unlinkAlt(e, +el.dataset.i); break;
     case "alt-note": e.alts[+el.dataset.i].note = v; break;
     case "newname": state.newName = v; return;
     case "in-dest": {

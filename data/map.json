@@ -105,7 +105,7 @@
           "type": "hole",
           "x": 0.514,
           "y": 0.787,
-          "label": "Hole in ground under bridge",
+          "label": "Hole in ground under bridge, through long hallway into double door",
           "to": "genesis_basement",
           "art": "hole",
           "pair": "genesis_basement_1"
@@ -281,24 +281,86 @@
         {
           "id": "genesis_basement_1",
           "type": "other",
-          "label": "Back to Castle Grounds",
+          "label": "Double door to long hallway and into water hole",
           "to": "castle_grounds",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "castle_grounds_3"
+          "x": 0.943,
+          "y": 0.826,
+          "pair": "castle_grounds_3",
+          "art": "doubledoor",
+          "alts": [
+            {
+              "to": "bowser_in_the_dark_world_shoshinkai",
+              "note": "Before collecting any red stars"
+            }
+          ]
         },
         {
           "id": "genesis_basement_2",
           "type": "doubledoor",
-          "label": "Back to Plexal Lobby",
+          "label": "Double door in small room across from hallway",
           "to": "plexal_lobby",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.87,
+          "y": 0.981,
           "pair": "plexal_lobby_8"
+        },
+        {
+          "id": "genesis_basement_3",
+          "type": "door",
+          "label": "Second door on the right when facing courtyard and down long hallway",
+          "to": "balcony",
+          "x": 0.596,
+          "y": 0.153,
+          "pair": "balcony_5"
+        },
+        {
+          "id": "genesis_basement_4",
+          "type": "door",
+          "x": 0.794,
+          "y": 0.871,
+          "label": "Door into room with painting",
+          "to": "chroma_tundra",
+          "art": "painting"
+        },
+        {
+          "id": "genesis_basement_5",
+          "type": "doubledoor",
+          "x": 0.79,
+          "y": 0.12,
+          "label": "Double door in thin hallway followed by winding hallway",
+          "to": "toad_s_lobby",
+          "art": "doubledoor",
+          "pair": "toad_s_lobby_3"
+        },
+        {
+          "id": "genesis_basement_6",
+          "type": "hole",
+          "x": 0.777,
+          "y": 0.22,
+          "label": "Jump in hole in front of double door below Bowser painting with no red stars",
+          "to": "bowser_in_the_dark_world_shoshinkai",
+          "art": "hole"
+        },
+        {
+          "id": "genesis_basement_7",
+          "type": "pipe",
+          "x": 0.68,
+          "y": 0.15,
+          "label": "First door on the left when facing courtyard and into the pipe",
+          "to": "flower_fields",
+          "art": "painting"
+        },
+        {
+          "id": "genesis_basement_8",
+          "type": "pipe",
+          "x": 0.25,
+          "y": 0.441,
+          "label": "Pipe hidden in hedge maze outside",
+          "to": "holy_yellow_switch_palace",
+          "art": "painting"
         }
-      ]
+      ],
+      "color": "#2020DF",
+      "shape": "assets/rooms/genesis_basement.png"
     },
     {
       "id": "lobby_z64_beta",
@@ -349,24 +411,49 @@
         {
           "id": "silent_hall_1",
           "type": "door",
-          "label": "Back to Castle Grounds",
+          "label": "Single door up stairs",
           "to": "castle_grounds",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.483,
+          "y": 0.972,
           "pair": "castle_grounds_6"
         },
         {
           "id": "silent_hall_2",
           "type": "doubledoor",
-          "label": "Back to Plexal Basement (Wet Floor Maze)",
+          "label": "Right double door when coming from Castle Grounds",
           "to": "plexal_basement_wet_floor_maze",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.901,
+          "y": 0.144,
           "pair": "plexal_basement_wet_floor_maze_4"
+        },
+        {
+          "id": "silent_hall_3",
+          "type": "door",
+          "x": 0.055,
+          "y": 0.144,
+          "label": "Left double door when coming from Castle Grounds",
+          "to": "bowser_s_maze",
+          "art": "doubledoor",
+          "pair": "bowser_s_maze_2"
+        },
+        {
+          "id": "silent_hall_4",
+          "type": "doubledoor",
+          "x": 0.476,
+          "y": 0.017,
+          "label": "Middle double door and into the painting",
+          "to": "uncanny_moat",
+          "art": "painting",
+          "alts": [
+            {
+              "to": "vanish_cap_within_the_plexus",
+              "note": "Sometimes"
+            }
+          ]
         }
-      ]
+      ],
+      "color": "#AEAEAE",
+      "shape": "assets/rooms/silent_hall.png"
     },
     {
       "id": "sunken_castle",
@@ -519,24 +606,89 @@
         {
           "id": "toad_s_lobby_1",
           "type": "door",
-          "label": "Back to Castle Grounds",
+          "label": "Door in front of Toad statue",
           "to": "castle_grounds",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.483,
+          "y": 0.841,
           "pair": "castle_grounds_10"
         },
         {
           "id": "toad_s_lobby_2",
           "type": "doubledoor",
-          "label": "Back to Plexal Basement (Wet Floor Maze)",
+          "label": "Door to long hallway and then a double door",
           "to": "plexal_basement_wet_floor_maze",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "plexal_basement_wet_floor_maze_13"
+          "x": 0.647,
+          "y": 0.472,
+          "pair": "plexal_basement_wet_floor_maze_13",
+          "art": "door"
+        },
+        {
+          "id": "toad_s_lobby_3",
+          "type": "doubledoor",
+          "label": "Door to long hallway and then a double door",
+          "to": "genesis_basement",
+          "x": 0.319,
+          "y": 0.474,
+          "pair": "genesis_basement_5",
+          "art": "door"
+        },
+        {
+          "id": "toad_s_lobby_4",
+          "type": "pipe",
+          "x": 0.274,
+          "y": 0.962,
+          "label": "Pipe behind and to the left of Castle Grounds door",
+          "to": "solar_tower",
+          "art": "blockpipe",
+          "pair": "solar_tower_1",
+          "alts": [
+            {
+              "to": "lunar_tower",
+              "note": "At night"
+            }
+          ]
+        },
+        {
+          "id": "toad_s_lobby_5",
+          "type": "pipe",
+          "x": 0.697,
+          "y": 0.968,
+          "label": "Pipe behind and to the right of Castle Grounds door",
+          "to": "stellar_tower",
+          "art": "blockpipe",
+          "pair": "stellar_tower_1"
+        },
+        {
+          "id": "toad_s_lobby_6",
+          "type": "door",
+          "x": 0.021,
+          "y": 0.2,
+          "label": "Door left of the Toad statue",
+          "to": "4th_floor",
+          "pair": "4th_floor_2"
+        },
+        {
+          "id": "toad_s_lobby_7",
+          "type": "door",
+          "x": 0.951,
+          "y": 0.202,
+          "label": "Door right of the Toad statue",
+          "to": "silent_sewers",
+          "pair": "silent_sewers_1"
+        },
+        {
+          "id": "toad_s_lobby_8",
+          "type": "doubledoor",
+          "x": 0.493,
+          "y": 0.008,
+          "label": "Double door behind Toad statue",
+          "to": "hybrid_lobby",
+          "art": "doubledoor",
+          "pair": "hybrid_lobby_3"
         }
-      ]
+      ],
+      "shape": "assets/rooms/toad_lobby.png",
+      "color": "#F0F0F0"
     },
     {
       "id": "wf_z64",
@@ -1683,6 +1835,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "beta_lobby_c_7"
+        },
+        {
+          "id": "4th_floor_2",
+          "type": "door",
+          "label": "Back to Toad's Lobby",
+          "to": "toad_s_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "toad_s_lobby_6"
         }
       ]
     },
@@ -2293,6 +2455,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "plexal_lobby_large_rooms_4"
+        },
+        {
+          "id": "bowser_s_maze_2",
+          "type": "door",
+          "label": "Back to Silent Hall",
+          "to": "silent_hall",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "silent_hall_3"
         }
       ]
     },
@@ -2304,24 +2476,60 @@
         {
           "id": "balcony_1",
           "type": "doubledoor",
-          "label": "Back to Plexal Lobby (Large Rooms)",
+          "label": "Double door below Bowser painting",
           "to": "plexal_lobby_large_rooms",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.499,
+          "y": 0.011,
           "pair": "plexal_lobby_large_rooms_5"
         },
         {
           "id": "balcony_2",
           "type": "door",
-          "label": "Back to Plexal Hallway",
+          "label": "Second door to the right from Plexal Lobby",
           "to": "plexal_hallway",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.016,
+          "y": 0.638,
           "pair": "plexal_hallway_7"
+        },
+        {
+          "id": "balcony_3",
+          "type": "door",
+          "x": 0.969,
+          "y": 0.252,
+          "label": "First door to the left from Plexal Lobby",
+          "to": "sunny_balcony",
+          "pair": "sunny_balcony_1"
+        },
+        {
+          "id": "balcony_4",
+          "type": "door",
+          "x": 0.009,
+          "y": 0.256,
+          "label": "First door to the right from Plexal Lobby",
+          "to": "hybrid_lobby",
+          "pair": "hybrid_lobby_2"
+        },
+        {
+          "id": "balcony_5",
+          "type": "door",
+          "x": 0.969,
+          "y": 0.636,
+          "label": "Second door to the left from Plexal Lobby, and down a long hallway",
+          "to": "genesis_basement",
+          "pair": "genesis_basement_3"
+        },
+        {
+          "id": "balcony_6",
+          "type": "other",
+          "x": 0.492,
+          "y": 0.964,
+          "label": "Jump off the balcony",
+          "to": "uncanny_courtyard_windy",
+          "art": "other"
         }
-      ]
+      ],
+      "color": "#F0F0F0",
+      "shape": "assets/rooms/balcony.png"
     },
     {
       "id": "castle_garden",
@@ -2684,34 +2892,69 @@
         {
           "id": "internal_sewer_system_1",
           "type": "doubledoor",
-          "label": "Back to Plexal Hallway",
+          "label": "Double door across from painting",
           "to": "plexal_hallway",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.499,
+          "y": 0.001,
           "pair": "plexal_hallway_5"
         },
         {
           "id": "internal_sewer_system_2",
           "type": "doubledoor",
-          "label": "Back to Plexal Basement",
+          "label": "Double door at end of hallway near painting",
           "to": "plexal_basement",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.065,
+          "y": 0.59,
           "pair": "plexal_basement_5"
         },
         {
           "id": "internal_sewer_system_3",
           "type": "door",
-          "label": "Back to Plexal Basement (Wet Floor Maze)",
+          "label": "Door across from stairs in lower level",
           "to": "plexal_basement_wet_floor_maze",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.353,
+          "y": 0.984,
           "pair": "plexal_basement_wet_floor_maze_10"
+        },
+        {
+          "id": "internal_sewer_system_4",
+          "type": "other",
+          "x": 0.492,
+          "y": 0.463,
+          "label": "Only painting in this room",
+          "to": "melty_magma_mound",
+          "art": "painting"
+        },
+        {
+          "id": "internal_sewer_system_5",
+          "type": "doubledoor",
+          "x": 0.714,
+          "y": 0.724,
+          "label": "Double door up the ramp",
+          "to": "basement_annex",
+          "pair": "basement_annex_2"
+        },
+        {
+          "id": "internal_sewer_system_6",
+          "type": "door",
+          "x": 0.71,
+          "y": 0.666,
+          "label": "Door directly under ramp, across from door leading to lower level",
+          "to": "hybrid_lobby",
+          "pair": "hybrid_lobby_1"
+        },
+        {
+          "id": "internal_sewer_system_7",
+          "type": "door",
+          "x": 0.214,
+          "y": 0.91,
+          "label": "Door near stair in lower level",
+          "to": "floor_2b",
+          "pair": "floor_2b_1"
         }
-      ]
+      ],
+      "color": "#A14317",
+      "shape": "assets/rooms/internal_sewer_system.png"
     },
     {
       "id": "rocky_trek",
@@ -3225,6 +3468,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "crescent_castle_12"
+        },
+        {
+          "id": "basement_annex_2",
+          "type": "doubledoor",
+          "label": "Back to Internal Sewer System",
+          "to": "internal_sewer_system",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "internal_sewer_system_5"
         }
       ]
     },
@@ -3242,6 +3495,164 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "crescent_castle_13"
+        }
+      ]
+    },
+    {
+      "id": "hybrid_lobby",
+      "name": "Hybrid Lobby",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "hybrid_lobby_1",
+          "type": "door",
+          "label": "Back to Internal Sewer System",
+          "to": "internal_sewer_system",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "internal_sewer_system_6"
+        },
+        {
+          "id": "hybrid_lobby_2",
+          "type": "door",
+          "label": "Back to Balcony",
+          "to": "balcony",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "balcony_4"
+        },
+        {
+          "id": "hybrid_lobby_3",
+          "type": "doubledoor",
+          "label": "Back to Toad's Lobby",
+          "to": "toad_s_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "toad_s_lobby_8"
+        }
+      ]
+    },
+    {
+      "id": "floor_2b",
+      "name": "Floor 2B",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "floor_2b_1",
+          "type": "door",
+          "label": "Back to Internal Sewer System",
+          "to": "internal_sewer_system",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "internal_sewer_system_7"
+        }
+      ]
+    },
+    {
+      "id": "uncanny_moat",
+      "name": "Uncanny Moat",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "vanish_cap_within_the_plexus",
+      "name": "Vanish Cap within the Plexus",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "sunny_balcony",
+      "name": "Sunny Balcony",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "sunny_balcony_1",
+          "type": "door",
+          "label": "Back to Balcony",
+          "to": "balcony",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "balcony_3"
+        }
+      ]
+    },
+    {
+      "id": "chroma_tundra",
+      "name": "Chroma Tundra",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "flower_fields",
+      "name": "Flower Fields",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "holy_yellow_switch_palace",
+      "name": "Holy Yellow Switch Palace",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "solar_tower",
+      "name": "Solar Tower",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "solar_tower_1",
+          "type": "door",
+          "label": "Back to Toad's Lobby",
+          "to": "toad_s_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "toad_s_lobby_4"
+        }
+      ]
+    },
+    {
+      "id": "lunar_tower",
+      "name": "Lunar Tower",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "stellar_tower",
+      "name": "Stellar Tower",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "stellar_tower_1",
+          "type": "pipe",
+          "label": "Back to Toad's Lobby",
+          "to": "toad_s_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "toad_s_lobby_5"
+        }
+      ]
+    },
+    {
+      "id": "silent_sewers",
+      "name": "Silent Sewers",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "silent_sewers_1",
+          "type": "door",
+          "label": "Back to Toad's Lobby",
+          "to": "toad_s_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "toad_s_lobby_7"
         }
       ]
     }
