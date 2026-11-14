@@ -168,6 +168,16 @@ const typeName = t => TYPE[t] || OLD_TYPE[t] || t;
 // Exits using a type from an earlier version are switched over when the map loads:
 // trapdoors become holes, and anything else that's no longer on the list becomes Other.
 const RENAMED_TYPE = { trapdoor:"hole", painting:"other", warp:"other", exitcourse:"other", course:"other" };
+// A shared star placed in a room named after one of its other groups belongs to that group.
+function upgradeSharedStars(){
+  DATA.stars.forEach(s => {
+    if (!(s.alsoIn || []).length || !s.place) return;
+    const room = DATA.places.find(x => x.id === s.place); if (!room) return;
+    const n = room.name.toLowerCase();
+    const other = s.alsoIn.find(g => n.includes(g.toLowerCase()));
+    if (other && !n.includes(s.course.toLowerCase()) && !(s.alsoPlace || {})[other]){ setPlaceFor(s, other, s.place); delete s.place; }
+  });
+}
 function upgradeTypes(){
   let changed = false;
   const ta = DATA.typeArt;
@@ -213,6 +223,7 @@ function applyData(map, stars){
   if (!DATA.places.length) DATA.places = JSON.parse(JSON.stringify(STARTER.places));
   if (!DATA.start || !DATA.places.some(p => p.id === DATA.start)) DATA.start = DATA.places[0].id;
   upgradeTypes();
+  upgradeSharedStars();
   reindex();
   if (!P[state.here]) { state.here = DATA.start; state.history = []; state.cameVia = null; }
   state.route = null; state.sel = null;
@@ -237,11 +248,25 @@ const state = {
   draft:null, loadError:false, savedHandle:null, folderName:"", saveStatus:""
 };
 
-const starsIn = pid => DATA.stars.filter(s => s.place === pid);
+// A star that appears in two star-list groups (like the Desert Maze / Sunken Castle one)
+// can be placed once for each group: "place" for its own group, "alsoPlace" for the others.
+const groupsOf = s => [s.course, ...(s.alsoIn || [])];
+const placeFor = (s, group) => group === s.course ? s.place : (s.alsoPlace || {})[group];
+function setPlaceFor(s, group, pid){
+  if (group === s.course){ if (pid) s.place = pid; else delete s.place; return; }
+  s.alsoPlace = s.alsoPlace || {};
+  if (pid) s.alsoPlace[group] = pid; else delete s.alsoPlace[group];
+  if (!Object.keys(s.alsoPlace).length) delete s.alsoPlace;
+}
+const starPlaces = s => groupsOf(s).map(g => placeFor(s, g)).filter(x => P[x]);
+// every group a star could still be placed for
+const openSlots = () => DATA.stars.flatMap(s => groupsOf(s).filter(g => !P[placeFor(s, g)]).map(group => ({ s, group })));
+const starsIn = pid => DATA.stars.filter(s => starPlaces(s).includes(pid));
+const groupHere = (s, pid) => groupsOf(s).find(g => placeFor(s, g) === pid) || s.course;
 const gotIn = pid => starsIn(pid).filter(s => state.checked.has(s.id)).length;
 const exitNum = id => P[FROM[id]].exits.findIndex(x => x.id === id) + 1;
 const placeName = id => P[id] ? P[id].name : (id ? `${id} (not logged)` : "nowhere yet");
-const unplacedStars = () => DATA.stars.filter(s => !P[s.place]);
+const unplacedStars = () => DATA.stars.filter(s => !starPlaces(s).length);
 const switchesIn = pid => DATA.switches.filter(w => w.places.includes(pid));
 
 /* ---------- star progress, saved in this browser ---------- */
@@ -810,28 +835,30 @@ function placeForm(p){
 
 function pickListHTML(){
   const q = state.pickQ.trim().toLowerCase();
-  const list = unplacedStars().filter(s => !q || s.course.toLowerCase().includes(q) || s.name.toLowerCase().includes(q));
-  if (!list.length) return `<p class="small muted" style="margin:6px 0 0">${unplacedStars().length ? "No unplaced stars match." : "Every star has been placed."}</p>`;
+  const slots = openSlots();
+  const list = slots.filter(({ s, group }) => !q || group.toLowerCase().includes(q) || s.name.toLowerCase().includes(q));
+  if (!list.length) return `<p class="small muted" style="margin:6px 0 0">${slots.length ? "No unplaced stars match." : "Every star has been placed."}</p>`;
   const groups = [];
-  list.forEach(s => { let g = groups.find(x => x.course === s.course); if (!g) groups.push(g = { course:s.course, stars:[] }); g.stars.push(s); });
+  list.forEach(({ s, group }) => { let g = groups.find(x => x.course === group); if (!g) groups.push(g = { course:group, stars:[] }); g.stars.push(s); });
   const shown = groups.slice(0, 40);
   return shown.map(g => `<div class="pickgroup">
       <div class="row"><b class="small">${esc(g.course)}</b>${g.stars.length > 1 ? `<button class="btn sm" data-action="place-group" data-course="${esc(g.course)}">Place all ${g.stars.length} here</button>` : ""}</div>
-      ${g.stars.map(s => `<div class="pickstar"><span class="cdot ${s.color}"></span><span class="grow">${esc(s.name)}</span><button class="btn sm" data-action="place-star" data-star="${s.id}">Place here</button></div>`).join("")}
+      ${g.stars.map(s => `<div class="pickstar"><span class="cdot ${s.color}"></span><span class="grow">${esc(s.name)}${(s.alsoIn || []).length ? ` <span class="small muted">(shared with ${esc(groupsOf(s).filter(x => x !== g.course).join(", "))})</span>` : ""}</span><button class="btn sm" data-action="place-star" data-star="${s.id}" data-group="${esc(g.course)}">Place here</button></div>`).join("")}
     </div>`).join("") + (groups.length > shown.length ? `<p class="small muted">${groups.length - shown.length} more groups. Search to narrow it down.</p>` : "");
 }
 function starEditor(p){
   const list = starsIn(p.id);
   const n = p.name.trim().toLowerCase();
-  const match = unplacedStars().filter(s => s.course.toLowerCase() === n);
+  const match = openSlots().filter(x => x.group.toLowerCase() === n).map(x => x.s);
+  const matchGroup = match.length ? openSlots().find(x => x.group.toLowerCase() === n).group : "";
   return `<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:8px"><h3 style="margin:0">Stars here (${list.length})</h3>
     <button class="btn sm ${state.picking ? "primary" : ""}" data-action="toggle-picker">${state.picking ? "Done adding" : "Add stars from the star list"}</button></div>
-    ${match.length ? `<div class="banner ask" style="margin:0 0 10px"><div class="grow small">${match.length} unplaced star${match.length > 1 ? "s" : ""} in the star list ${match.length > 1 ? "are" : "is"} called "${esc(match[0].course)}".</div>
-      <button class="btn sm primary" data-action="place-group" data-course="${esc(match[0].course)}">Place ${match.length > 1 ? "them" : "it"} here</button></div>` : ""}
+    ${match.length ? `<div class="banner ask" style="margin:0 0 10px"><div class="grow small">${match.length} unplaced star${match.length > 1 ? "s" : ""} in the star list ${match.length > 1 ? "are" : "is"} called "${esc(matchGroup)}".</div>
+      <button class="btn sm primary" data-action="place-group" data-course="${esc(matchGroup)}">Place ${match.length > 1 ? "them" : "it"} here</button></div>` : ""}
     ${state.picking ? `<input data-filter="pickq" value="${esc(state.pickQ)}" placeholder="Search unplaced stars" aria-label="Search unplaced stars"><div id="picklist" style="max-height:340px;overflow:auto;margin:6px 0 10px">${pickListHTML()}</div>` : ""}
     ${list.map(s => `<div style="border-top:1px solid var(--line);padding-top:8px;margin-top:8px">
       <div class="row" style="flex-wrap:nowrap"><span class="cdot ${s.color}" title="${COLOR_NAME[s.color]}"></span>
-      <span class="small muted" style="white-space:nowrap">${esc(s.course)}</span>
+      <span class="small muted" style="white-space:nowrap">${esc(groupHere(s, p.id))}</span>
       <input data-edit="star-name" data-star="${s.id}" value="${esc(s.name)}" placeholder="Star name, add (ACT1) if needed">
       <button class="btn sm" data-action="unplace-star" data-star="${s.id}" title="Take it off this room">Remove</button></div>
       <input data-edit="star-notes" data-star="${s.id}" value="${esc(s.notes || "")}" placeholder="Notes (optional)" style="margin-top:6px">
@@ -877,7 +904,7 @@ function deletePlace(p){
     if (e.respawn === p.id) delete e.respawn;
     if (e.alts) e.alts = e.alts.filter(a => a.to !== p.id);
   }));
-  DATA.stars.forEach(s => { if (s.place === p.id) delete s.place; });
+  DATA.stars.forEach(s => groupsOf(s).forEach(g => { if (placeFor(s, g) === p.id) setPlaceFor(s, g, null); }));
   DATA.switches.forEach(w => { w.places = w.places.filter(x => x !== p.id); });
   state.history = state.history.filter(h => h.here !== p.id);
   if (state.here === p.id){
@@ -894,11 +921,12 @@ function checkBtn(s){
   const on = state.checked.has(s.id);
   return `<button class="check ${s.color || "yellow"} ${on ? "on" : ""}" data-action="toggle-star" data-star="${s.id}" aria-pressed="${on}" aria-label="Collected: ${esc(s.course)}, ${esc(s.name)}">★</button>`;
 }
-function starRow(s, goButton){
+function starRow(s, goButton, group){
+  const pl = group ? placeFor(s, group) : (P[s.place] ? s.place : starPlaces(s)[0]);
   return `<div class="star-row">${checkBtn(s)}
     <div class="grow">${esc(s.name)}${s.notes ? `<div class="small muted">${esc(s.notes)}</div>` : ""}
-      ${!P[s.place] ? `<div class="small muted">Location not logged yet</div>` : ""}</div>
-    ${goButton && P[s.place] ? `<button class="btn sm" data-action="route-place" data-place="${s.place}">Go to ${esc(P[s.place].name)}</button>` : ""}
+      ${!P[pl] ? `<div class="small muted">Location not logged yet</div>` : ""}</div>
+    ${goButton && P[pl] ? `<button class="btn sm" data-action="route-place" data-place="${pl}">Go to ${esc(P[pl].name)}</button>` : ""}
   </div>`;
 }
 function switchRow(w, goButton){
@@ -915,7 +943,7 @@ function filteredStars(){
   return DATA.stars.filter(s =>
     (state.starC === "all" || s.color === state.starC) &&
     (state.starShow === "all" || (state.starShow === "todo") !== state.checked.has(s.id)) &&
-    (!q || [s.name, s.notes, s.course, ...(s.alsoIn || []), P[s.place] && P[s.place].name].some(t => (t || "").toLowerCase().includes(q))));
+    (!q || [s.name, s.notes, ...groupsOf(s), ...starPlaces(s).map(x => P[x].name)].some(t => (t || "").toLowerCase().includes(q))));
 }
 function starListHTML(){
   const list = filteredStars();
@@ -926,13 +954,13 @@ function starListHTML(){
   return `<div class="grid2">${groups.map(g => {
     const all = DATA.stars.filter(s => s.course === g.course || (s.alsoIn || []).includes(g.course));
     const got = all.filter(s => state.checked.has(s.id)).length;
-    const places = [...new Set(all.map(s => s.place))];
+    const places = [...new Set(all.map(s => placeFor(s, g.course)))];
     const one = places.length === 1 && P[places[0]] ? places[0] : null;
     return `<div class="card">
       <div class="row" style="justify-content:space-between;margin-bottom:6px">
         <h3 style="margin:0">${esc(g.course)} <span class="muted small">${got}/${all.length}</span></h3>
         ${one ? `<button class="btn sm" data-action="route-place" data-place="${one}">Take me here</button>` : ""}</div>
-      ${g.stars.map(s => starRow(s, !one)).join("")}</div>`;
+      ${g.stars.map(s => starRow(s, !one, g.course)).join("")}</div>`;
   }).join("")}</div>`;
 }
 function renderStars(){
@@ -1110,7 +1138,8 @@ function dataCheck(){
     w.places.forEach(x => { if (!P[x]) add("error", `${w.name} is placed in "${x}", which doesn't exist.`); });
   });
   DATA.stars.forEach(s => {
-    if (s.place && !P[s.place]) add("error", `${s.course}, ${s.name} is placed in "${s.place}", which doesn't exist.`);
+    groupsOf(s).forEach(g => { const pl = placeFor(s, g); if (pl && !P[pl]) add("error", `${g}, ${s.name} is placed in "${pl}", which doesn't exist.`); });
+    (s.alsoIn || []).forEach(g => { if (P[s.place] && !P[placeFor(s, g)]) add("info", `${s.course}, ${s.name} is also a star in ${g}, but hasn't been placed there yet.`); });
     if (!COLORS.includes(s.color)) add("warn", `${s.course}, ${s.name} needs a color (yellow, red or green).`);
     if ((s.alsoIn || []).length) add("info", `${s.course}, ${s.name} shares a save spot with a star in ${s.alsoIn.join(", ")}. Collecting one marks both, and they count as one star.`);
   });
@@ -1272,10 +1301,10 @@ document.addEventListener("click", ev => {
       toast(`Every ${typeName(e.type).toLowerCase()} without its own picture now uses this one.`);
     },
     "toggle-picker": () => { state.picking = !state.picking; state.pickQ = ""; },
-    "place-star": () => { STAR[el.dataset.star].place = p.id; markDirty(); },
+    "place-star": () => { const st = STAR[el.dataset.star]; setPlaceFor(st, el.dataset.group || st.course, p.id); markDirty(); },
     "place-group": () => {
-      const list = unplacedStars().filter(s => s.course === el.dataset.course);
-      list.forEach(s => { s.place = p.id; }); markDirty();
+      const list = openSlots().filter(x => x.group === el.dataset.course);
+      list.forEach(x => setPlaceFor(x.s, x.group, p.id)); markDirty();
       toast(`Placed ${list.length} star${list.length > 1 ? "s" : ""} in ${p.name}.`);
     },
     "open-in": () => {
@@ -1284,7 +1313,7 @@ document.addEventListener("click", ev => {
       Object.assign(state, { here:FROM[id], cameVia:null, sel:id, placing:null, newKind:null, newFor:null, picking:false, delConfirm:null });
       window.scrollTo(0, 0);
     },
-    "unplace-star": () => { delete STAR[el.dataset.star].place; markDirty(); },
+    "unplace-star": () => { const st = STAR[el.dataset.star]; groupsOf(st).forEach(g => { if (placeFor(st, g) === p.id) setPlaceFor(st, g, null); }); markDirty(); },
     "toggle-switch-place": () => { const w = SWITCH[el.dataset.sw]; w.places = w.places.includes(p.id) ? w.places.filter(x => x !== p.id) : [...w.places, p.id]; markDirty(); },
     "toggle-switch": () => { const id = el.dataset.sw; state.checked.has(id) ? state.checked.delete(id) : state.checked.add(id); saveProgress(); },
     "route-switch": () => { if (startRoute(SWITCH[el.dataset.sw].places)){ state.tab = "explore"; state.edit = false; window.scrollTo(0, 0); } },

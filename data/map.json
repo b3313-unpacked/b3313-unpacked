@@ -354,6 +354,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "castle_grounds_6"
+        },
+        {
+          "id": "silent_hall_2",
+          "type": "doubledoor",
+          "label": "Back to Plexal Basement (Wet Floor Maze)",
+          "to": "plexal_basement_wet_floor_maze",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_basement_wet_floor_maze_4"
         }
       ]
     },
@@ -1286,7 +1296,7 @@
           "x": 0.727,
           "y": 0.193,
           "label": "Giant hole in the wall with (/) above it",
-          "to": "uncanny_courtyard",
+          "to": "uncanny_courtyard_windy",
           "arrive": "In the Crimson form. Step on the fountain pedestal to warp to Windy form"
         },
         {
@@ -1799,15 +1809,53 @@
         },
         {
           "id": "plexal_basement_wet_floor_maze_2",
-          "type": "door",
-          "label": "Back to Plexal Basement",
+          "type": "other",
+          "label": "Grate to be passed with Vanish Cap",
           "to": "plexal_basement",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.952,
+          "y": 0.986,
           "pair": "plexal_basement_8"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_3",
+          "type": "door",
+          "x": 0.792,
+          "y": 0.781,
+          "label": "Door 2 to room with painting",
+          "to": "tiny_huge_island_beta",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_4",
+          "type": "doubledoor",
+          "x": 0.551,
+          "y": 0.836,
+          "label": "Double door through the door near tiny Lethal Lava Land painting",
+          "to": "silent_hall",
+          "art": "doubledoor",
+          "pair": "silent_hall_2"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_5",
+          "type": "hole",
+          "x": 0.457,
+          "y": 0.813,
+          "label": "Locked door and into the hole through the door near tiny Lethal Lava Land painting",
+          "to": "bowser_in_the_dark_world_shoshinkai",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_6",
+          "type": "hole",
+          "x": 0.597,
+          "y": 0.62,
+          "label": "Door 2 across from tiny Lethal Lava Land painting and into water hole",
+          "to": "desert_maze",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/plexal_basement_wet.png",
+      "color": "#20ACDF"
     },
     {
       "id": "beta_lobby_e",
@@ -2254,7 +2302,7 @@
           "x": 0.061,
           "y": 0.337,
           "label": "Giant hole in wall in outdoor section",
-          "to": "uncanny_courtyard",
+          "to": "uncanny_courtyard_windy",
           "art": "hole",
           "arrive": "In the Crimson form. Step on the fountain pedestal to warp to Windy form"
         }
@@ -2766,6 +2814,41 @@
       ],
       "color": "#989898",
       "shape": "assets/rooms/uncanny_courtyard_windy.png"
+    },
+    {
+      "id": "tiny_huge_island_beta",
+      "name": "Tiny-Huge Island (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "tiny_huge_island_beta_1",
+          "type": "hole",
+          "label": "Cannonball spawner or hole at the top of the mountain",
+          "to": "wiggler_s_cave",
+          "art": "other",
+          "pair": "wiggler_s_cave_1"
+        }
+      ]
+    },
+    {
+      "id": "wiggler_s_cave",
+      "name": "Wiggler's Cave",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "wiggler_s_cave_1",
+          "type": "hole",
+          "label": "Back to Tiny-Huge Island (beta)",
+          "to": "tiny_huge_island_beta",
+          "pair": "tiny_huge_island_beta_1"
+        }
+      ]
+    },
+    {
+      "id": "desert_maze",
+      "name": "Desert Maze",
+      "kind": "course",
+      "exits": []
     }
   ]
 }
