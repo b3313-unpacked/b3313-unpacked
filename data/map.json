@@ -154,7 +154,8 @@
           "y": 0.374,
           "label": "Double door back of the castle",
           "to": "crescent_castle",
-          "art": "doubledoor"
+          "art": "doubledoor",
+          "pair": "crescent_castle_4"
         },
         {
           "id": "castle_grounds_9",
@@ -407,6 +408,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "plexal_basement_7"
+        },
+        {
+          "id": "crescent_castle_4",
+          "type": "doubledoor",
+          "label": "Back to Castle Grounds",
+          "to": "castle_grounds",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "castle_grounds_8"
         }
       ]
     },
@@ -424,6 +435,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "castle_grounds_10"
+        },
+        {
+          "id": "toad_s_lobby_2",
+          "type": "doubledoor",
+          "label": "Back to Plexal Basement (Wet Floor Maze)",
+          "to": "plexal_basement_wet_floor_maze",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_basement_wet_floor_maze_13"
         }
       ]
     },
@@ -1800,12 +1821,12 @@
         {
           "id": "plexal_basement_wet_floor_maze_1",
           "type": "lockeddoor",
-          "label": "Back to Beta Lobby D",
+          "label": "Locked doors down tiny hallway",
           "to": "beta_lobby_d",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "beta_lobby_d_6"
+          "x": 0.608,
+          "y": 0.565,
+          "pair": "beta_lobby_d_6",
+          "art": "locked_door"
         },
         {
           "id": "plexal_basement_wet_floor_maze_2",
@@ -1852,6 +1873,87 @@
           "label": "Door 2 across from tiny Lethal Lava Land painting and into water hole",
           "to": "desert_maze",
           "art": "painting"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_7",
+          "type": "other",
+          "x": 0.468,
+          "y": 0.537,
+          "label": "Tiny Wet Dry World painting",
+          "to": "flooded_downtown",
+          "art": "painting",
+          "alts": [
+            {
+              "to": "dry_town",
+              "note": "After activating flooding trap"
+            }
+          ]
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_8",
+          "type": "other",
+          "x": 0.431,
+          "y": 0.628,
+          "label": "Tiny step stair pyramid painting",
+          "to": "shifted_sand_land",
+          "art": "painting"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_9",
+          "type": "other",
+          "x": 0.132,
+          "y": 0.793,
+          "label": "Activate flooding trap and swim through the wall",
+          "to": "toad_catacombs",
+          "art": "painting",
+          "pair": "toad_catacombs_1"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_10",
+          "type": "door",
+          "x": 0.007,
+          "y": 0.684,
+          "label": "Door near flooding trap",
+          "to": "internal_sewer_system",
+          "pair": "internal_sewer_system_3"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_11",
+          "type": "hole",
+          "x": 0.306,
+          "y": 0.35,
+          "label": "Swim through the hole way down",
+          "to": "castle_grounds",
+          "art": "hole"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_12",
+          "type": "other",
+          "x": 0.514,
+          "y": 0.206,
+          "label": "Stand on blue pillar near blue flames",
+          "to": "tubular_lobby",
+          "art": "other"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_13",
+          "type": "doubledoor",
+          "x": 0.485,
+          "y": 0.091,
+          "label": "Double door, up the ramp, through door and winding hallway",
+          "to": "toad_s_lobby",
+          "art": "doubledoor",
+          "pair": "toad_s_lobby_2"
+        },
+        {
+          "id": "plexal_basement_wet_floor_maze_14",
+          "type": "doubledoor",
+          "x": 0.825,
+          "y": 0.089,
+          "label": "Double door in red and black checkered floor",
+          "to": "orange_hall",
+          "art": "doubledoor",
+          "pair": "orange_hall_1"
         }
       ],
       "shape": "assets/rooms/plexal_basement_wet.png",
@@ -2376,7 +2478,7 @@
           "type": "doubledoor",
           "x": 0.685,
           "y": 0.019,
-          "label": "Double door with crescent moon above it",
+          "label": "Double door with crescent moon above it, through another double door, and into the pipe",
           "to": "crescent_castle",
           "art": "doubledoor",
           "pair": "crescent_castle_3"
@@ -2398,7 +2500,7 @@
           "y": 0.091,
           "label": "Hole next to grate in the wall",
           "to": "bowser_in_the_dark_world_shoshinkai",
-          "art": "hole"
+          "art": "painting"
         },
         {
           "id": "plexal_basement_10",
@@ -2508,6 +2610,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "plexal_basement_5"
+        },
+        {
+          "id": "internal_sewer_system_3",
+          "type": "door",
+          "label": "Back to Plexal Basement (Wet Floor Maze)",
+          "to": "plexal_basement_wet_floor_maze",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_basement_wet_floor_maze_10"
         }
       ]
     },
@@ -2773,7 +2885,7 @@
     },
     {
       "id": "4th_floor_final",
-      "name": "4th Floor (final)",
+      "name": "4th Floor (Final)",
       "kind": "room",
       "exits": [
         {
@@ -2781,12 +2893,23 @@
           "type": "door",
           "label": "Back to Plexal Basement",
           "to": "plexal_basement",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "plexal_basement_10"
+          "x": 0.837,
+          "y": 0.696,
+          "pair": "plexal_basement_10",
+          "art": "blockpipe"
+        },
+        {
+          "id": "4th_floor_final_2",
+          "type": "door",
+          "x": 0.657,
+          "y": 0.946,
+          "label": "Look up and to the right in front of golden Toad statue",
+          "to": "4th_floor_corrupted",
+          "art": "other"
         }
-      ]
+      ],
+      "color": "#DF2020",
+      "shape": "assets/rooms/4th_floor_final.png"
     },
     {
       "id": "uncanny_courtyard_windy",
@@ -2849,6 +2972,96 @@
       "name": "Desert Maze",
       "kind": "course",
       "exits": []
+    },
+    {
+      "id": "flooded_downtown",
+      "name": "Flooded Downtown",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "shifted_sand_land",
+      "name": "Shifted Sand Land",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "shifted_sand_land_1",
+          "type": "hole",
+          "label": "Hole at the top of the pyramid",
+          "to": "eyerock_s_tomb"
+        }
+      ]
+    },
+    {
+      "id": "eyerock_s_tomb",
+      "name": "Eyerok's Tomb",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "toad_catacombs",
+      "name": "Toad Catacombs",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "toad_catacombs_1",
+          "type": "other",
+          "label": "Back to Plexal Basement (Wet Floor Maze)",
+          "to": "plexal_basement_wet_floor_maze",
+          "pair": "plexal_basement_wet_floor_maze_9"
+        }
+      ]
+    },
+    {
+      "id": "tubular_lobby",
+      "name": "Tubular Lobby",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "orange_hall",
+      "name": "Orange Hall",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "orange_hall_1",
+          "type": "doubledoor",
+          "label": "Back to Plexal Basement (Wet Floor Maze)",
+          "to": "plexal_basement_wet_floor_maze",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "plexal_basement_wet_floor_maze_14"
+        }
+      ]
+    },
+    {
+      "id": "4th_floor_corrupted",
+      "name": "4th Floor (Corrupted)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "4th_floor_corrupted_1",
+          "type": "deadly",
+          "x": 0.654,
+          "y": 0.954,
+          "label": "Look up and to the right in front of golden Toad statue",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
+        },
+        {
+          "id": "4th_floor_corrupted_2",
+          "type": "deadly",
+          "x": 0.84,
+          "y": 0.458,
+          "label": "Pipe to AI Undergrounds. Reaching the Core freezes your game",
+          "to": "",
+          "art": "deadly"
+        }
+      ],
+      "shape": "assets/rooms/4th_floor_final.png",
+      "color": "#A12617"
     }
   ]
 }
