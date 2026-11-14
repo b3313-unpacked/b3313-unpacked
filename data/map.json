@@ -381,45 +381,135 @@
       "exits": [
         {
           "id": "crescent_castle_1",
-          "type": "lockeddoor",
-          "label": "Back to Plexal Lobby (4-way)",
+          "type": "doubledoor",
+          "label": "Double door to mirror room",
           "to": "plexal_lobby_4_way",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "plexal_lobby_4_way_7"
+          "x": 0.392,
+          "y": 0.061,
+          "pair": "plexal_lobby_4_way_7",
+          "art": "doubledoor"
         },
         {
           "id": "crescent_castle_2",
           "type": "doubledoor",
-          "label": "Back to Plexal Hallway",
+          "label": "Double door and down short purple hallway",
           "to": "plexal_hallway",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.56,
+          "y": 0.102,
           "pair": "plexal_hallway_4"
         },
         {
           "id": "crescent_castle_3",
-          "type": "doubledoor",
-          "label": "Back to Plexal Basement",
+          "type": "pipe",
+          "label": "Into the pipe and through 2 sets of double door",
           "to": "plexal_basement",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "plexal_basement_7"
+          "x": 0.803,
+          "y": 0.524,
+          "pair": "plexal_basement_7",
+          "art": "blockpipe"
         },
         {
           "id": "crescent_castle_4",
           "type": "doubledoor",
-          "label": "Back to Castle Grounds",
+          "label": "End of giant cyan room",
           "to": "castle_grounds",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.485,
+          "y": 0.993,
           "pair": "castle_grounds_8"
+        },
+        {
+          "id": "crescent_castle_5",
+          "type": "hole",
+          "x": 0.631,
+          "y": 0.587,
+          "label": "Alcove in wall and into the hole",
+          "to": "tick_tock_blocks",
+          "art": "painting"
+        },
+        {
+          "id": "crescent_castle_6",
+          "type": "other",
+          "x": 0.246,
+          "y": 0.504,
+          "label": "Giant painting next to Toad",
+          "to": "bountiful_beach",
+          "art": "painting"
+        },
+        {
+          "id": "crescent_castle_7",
+          "type": "door",
+          "x": 0.074,
+          "y": 0.217,
+          "label": "Down the pipe and through the door",
+          "to": "dark_lobby"
+        },
+        {
+          "id": "crescent_castle_8",
+          "type": "deadly",
+          "x": 0,
+          "y": 0.249,
+          "label": "Down the pipe and into Peach's Secret Slide hole",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
+        },
+        {
+          "id": "crescent_castle_9",
+          "type": "other",
+          "x": 0.184,
+          "y": 0.423,
+          "label": "Jump into painting of the sea with clouds",
+          "to": "vanilla_upstairs",
+          "art": "other",
+          "pair": "vanilla_upstairs_1"
+        },
+        {
+          "id": "crescent_castle_10",
+          "type": "other",
+          "x": 0.233,
+          "y": 0.278,
+          "label": "Jump into painting of single cloud with eyes",
+          "to": "bowser_s_floor",
+          "art": "other",
+          "pair": "bowser_s_floor_1"
+        },
+        {
+          "id": "crescent_castle_11",
+          "type": "hole",
+          "x": 0.746,
+          "y": 0.284,
+          "label": "Hole of sky in front of cloud painting",
+          "to": "castle_grounds",
+          "art": "hole",
+          "alts": [
+            {
+              "to": "twisted_castle_grounds",
+              "note": "Rarely"
+            }
+          ]
+        },
+        {
+          "id": "crescent_castle_12",
+          "type": "other",
+          "x": 0.852,
+          "y": 0.283,
+          "label": "Jump into painting of single cloud with eyes",
+          "to": "basement_annex",
+          "art": "other",
+          "pair": "basement_annex_1"
+        },
+        {
+          "id": "crescent_castle_13",
+          "type": "door",
+          "x": 0.485,
+          "y": 0.004,
+          "label": "Hidden door behind sky painting",
+          "to": "fake_lobby",
+          "pair": "fake_lobby_1"
         }
-      ]
+      ],
+      "shape": "assets/rooms/crescent_castle.png",
+      "color": "#20DFDF"
     },
     {
       "id": "toad_s_lobby",
@@ -3062,6 +3152,98 @@
       ],
       "shape": "assets/rooms/4th_floor_final.png",
       "color": "#A12617"
+    },
+    {
+      "id": "tick_tock_blocks",
+      "name": "Tick Tock Blocks",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "bountiful_beach",
+      "name": "Bountiful Beach",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "dark_lobby",
+      "name": "Dark Lobby",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "vanilla_upstairs",
+      "name": "Vanilla Upstairs",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "vanilla_upstairs_1",
+          "type": "other",
+          "label": "Back to Crescent Castle",
+          "to": "crescent_castle",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "crescent_castle_9"
+        }
+      ]
+    },
+    {
+      "id": "bowser_s_floor",
+      "name": "Bowser's Floor",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "bowser_s_floor_1",
+          "type": "other",
+          "label": "Back to Crescent Castle",
+          "to": "crescent_castle",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "crescent_castle_10"
+        }
+      ]
+    },
+    {
+      "id": "twisted_castle_grounds",
+      "name": "Twisted Castle Grounds",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "basement_annex",
+      "name": "Basement Annex",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "basement_annex_1",
+          "type": "other",
+          "label": "Back to Crescent Castle",
+          "to": "crescent_castle",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "crescent_castle_12"
+        }
+      ]
+    },
+    {
+      "id": "fake_lobby",
+      "name": "Fake Lobby",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "fake_lobby_1",
+          "type": "door",
+          "label": "Back to Crescent Castle",
+          "to": "crescent_castle",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "crescent_castle_13"
+        }
+      ]
     }
   ]
 }

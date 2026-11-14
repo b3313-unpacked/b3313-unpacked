@@ -10,7 +10,7 @@
    ===================================================================== */
 
 const LOG_MODE = new URLSearchParams(location.search).has("log");
-const KEYS = { progress:"b3313unpacked.progress", draft:"b3313unpacked.draft" };
+const KEYS = { progress:"b3313unpacked.progress", draft:"b3313unpacked.draft", prefs:"b3313unpacked.prefs" };
 const FS_OK = "showDirectoryPicker" in window;
 
 /* ============================== helpers ============================== */
@@ -242,6 +242,7 @@ function exportStars(){
 /* ============================== state ============================== */
 const state = {
   tab:"explore", here:"castle_grounds", cameVia:null, history:[], checked:new Set(), route:null,
+  pinSize:"l", fadePins:false,
   rsQ:"", rsMin:0, rsConn:[], rsConnQ:"", rsShow:48, starQ:"", starC:"all", starShow:"all", planFrom:null, planTo:"", showIO:false,
   edit:false, sel:null, placing:null, newKind:null, newFor:null, newName:"",
   dirty:false, choose:null, confirm:null, picking:false, pickQ:"", delConfirm:null,
@@ -273,6 +274,10 @@ const switchesIn = pid => DATA.switches.filter(w => w.places.includes(pid));
 function loadProgress(){
   try { const o = JSON.parse(localStorage.getItem(KEYS.progress) || "{}"); state.checked = new Set(o.checked || []); } catch {}
 }
+function loadPrefs(){
+  try { const o = JSON.parse(localStorage.getItem(KEYS.prefs) || "{}"); if (["l", "m", "s"].includes(o.pinSize)) state.pinSize = o.pinSize; state.fadePins = !!o.fadePins; } catch {}
+}
+function savePrefs(){ try { localStorage.setItem(KEYS.prefs, JSON.stringify({ pinSize:state.pinSize, fadePins:state.fadePins })); } catch {} }
 function saveProgress(){ try { localStorage.setItem(KEYS.progress, JSON.stringify({ checked:[...state.checked] })); } catch {} }
 
 /* ---------- unsaved-edit backup, saved in this browser ---------- */
@@ -508,7 +513,7 @@ function iconSVG(type){
     deadly:`<rect x="-11" y="-14" width="22" height="28" rx="3" fill="#7A0F18" stroke="#0E0A0C" stroke-width="2.5"/>`,
     doubledoor:`<rect x="-14" y="-14" width="13" height="28" rx="2" fill="#C8995A" stroke="#4A3520" stroke-width="2.5"/><rect x="1" y="-14" width="13" height="28" rx="2" fill="#C8995A" stroke="#4A3520" stroke-width="2.5"/>`,
     lockeddoor:`<rect x="-11" y="-14" width="22" height="28" rx="3" fill="#8A7A6A" stroke="#3A3028" stroke-width="2.5"/><rect x="-5" y="-1" width="10" height="8" rx="1" fill="#E3C160" stroke="#3A3028" stroke-width="1.5"/><path d="M-3 -1 V-4 A3 3 0 0 1 3 -4 V-1" fill="none" stroke="#3A3028" stroke-width="1.5"/>`,
-    hole:`<ellipse rx="14" ry="10" fill="#0D0B12" stroke="#000" stroke-width="2"/>`,
+    hole:`<circle r="10" fill="#0D0B12" stroke="#000" stroke-width="2"/>`,
     other:`<circle r="12" fill="#B9B3C9" stroke="#241F33" stroke-width="2"/><text y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#241F33">?</text>`
   }[type] || `<circle r="12" fill="#B9B3C9" stroke="#241F33" stroke-width="2"/>`;
   return `<svg viewBox="-16 -16 32 32" aria-hidden="true">${inner}</svg>`;
@@ -576,7 +581,7 @@ function mapHTML(p, opt = {}){
       title="${esc(e.label)}: ${esc(typeName(e.type))}, ${esc(dest)}" aria-label="${esc(e.label)}, ${esc(typeName(e.type))}, ${esc(dest)}">
       ${exitIcon(e)}<span class="badge">${idx + 1}</span>${P[e.to] && P[e.to].kind === "course" && e.type !== "deadly" ? `<span class="cap">${esc(P[e.to].name)}</span>` : ""}</button>`;
   }).join("");
-  return `<div class="map ${state.placing && opt.live ? "placing" : ""}" data-map="${p.id}" data-view="${v.x},${v.y},${v.w},${v.h}" style="--ar:${ar.toFixed(4)}">
+  return `<div class="map ${state.placing && opt.live ? "placing" : ""} ${opt.live ? `pins-${state.pinSize}${state.fadePins ? " fade" : ""}` : ""}" data-map="${p.id}" data-view="${v.x},${v.y},${v.w},${v.h}" style="--ar:${ar.toFixed(4)}">
     ${src ? `<div class="drawwrap"><img class="drawing" src="${esc(src)}" alt="" style="width:${(100 / v.w).toFixed(2)}%;height:${(100 / v.h).toFixed(2)}%;left:${(-v.x / v.w * 100).toFixed(2)}%;top:${(-v.y / v.h * 100).toFixed(2)}%"></div>`
           : `<div class="colorbox" style="background:${isHex(p.color) ? p.color : "#8A8D92"}">${opt.live ? `No drawing yet${state.edit ? ". Add one under This room." : ""}` : ""}</div>`}
     ${(p.labels || []).map(l => `<span class="maplabel" style="${at(l.x, l.y)}">${esc(l.text)}</span>`).join("")}
@@ -681,7 +686,12 @@ function renderExplore(){
       ${hint}
       ${mapHTML(p, { live:true, next:nextId, cameVia:state.cameVia, sel:state.edit ? state.sel : null })}
       ${p.view ? `<p class="view-note">${esc(p.view)}</p>` : ""}
-      ${p.kind === "room" ? `<div class="legend">
+      ${p.kind === "room" ? `<div class="row pinctl">
+        <span class="small muted">Icons</span>
+        ${[["l", "Large"], ["m", "Medium"], ["s", "Small"]].map(([k, t]) => `<button class="swatch ${state.pinSize === k ? "on" : ""}" data-action="pin-size" data-v="${k}">${t}</button>`).join("")}
+        <button class="swatch ${state.fadePins ? "on" : ""}" data-action="pin-fade" aria-pressed="${state.fadePins}">Fade icons</button>
+      </div>
+      <div class="legend">
         <span><i style="border:2px dashed var(--ok)"></i>Where you came in</span>
         ${nextId ? `<span><i style="border:3px solid var(--gold)"></i>Your next step</span>` : ""}
         <span>${state.edit ? "Click an exit to edit it" : "Click any exit to go through it"}</span>
@@ -1020,13 +1030,12 @@ function rsConnListHTML(){
   return list.map(p => `<button class="swatch" data-action="rs-add" data-place="${p.id}">${esc(p.name)}${p.kind === "course" ? " (course)" : ""}</button>`).join("") || `<span class="small muted">Nothing by that name.</span>`;
 }
 function renderFind(){
-  const minBtn = (v, t) => `<button class="swatch ${state.rsMin === v ? "on" : ""}" data-action="rs-min" data-v="${v}">${t}</button>`;
   return `<div class="explore find">
     <div class="card">
       <div class="field"><span class="lbl">Room name</span>
         <input data-filter="rsq" value="${esc(state.rsQ)}" placeholder="Search by name" aria-label="Search rooms by name"></div>
       <div class="field"><span class="lbl">I see at least this many ways out</span>
-        ${minBtn(0, "Any")}${[1, 2, 3, 4, 5, 6, 7, 8].map(n => minBtn(n, String(n))).join("")}</div>
+        <input type="number" min="0" step="1" inputmode="numeric" data-filter="rsmin" value="${state.rsMin || ""}" placeholder="Any" aria-label="Minimum number of ways out" style="max-width:120px"></div>
       <div class="field"><span class="lbl">It connects to</span>
         <p class="small muted" style="margin:0 0 6px">Add every room or course you know it leads to or comes from. Only rooms connected to all of them are shown.</p>
         <div class="picked">${state.rsConn.map(id => `<span class="cchip" style="padding-left:10px">${esc(placeName(id))}<button data-action="rs-remove" data-place="${id}" aria-label="Remove ${esc(placeName(id))}">✕</button></span>`).join("")}</div>
@@ -1317,7 +1326,8 @@ document.addEventListener("click", ev => {
     "toggle-switch-place": () => { const w = SWITCH[el.dataset.sw]; w.places = w.places.includes(p.id) ? w.places.filter(x => x !== p.id) : [...w.places, p.id]; markDirty(); },
     "toggle-switch": () => { const id = el.dataset.sw; state.checked.has(id) ? state.checked.delete(id) : state.checked.add(id); saveProgress(); },
     "route-switch": () => { if (startRoute(SWITCH[el.dataset.sw].places)){ state.tab = "explore"; state.edit = false; window.scrollTo(0, 0); } },
-    "rs-min": () => { state.rsMin = Number(el.dataset.v); state.rsShow = 48; },
+    "pin-size": () => { state.pinSize = el.dataset.v; savePrefs(); },
+    "pin-fade": () => { state.fadePins = !state.fadePins; savePrefs(); },
     "rs-add": () => { if (!state.rsConn.includes(el.dataset.place)) state.rsConn.push(el.dataset.place); state.rsConnQ = ""; state.rsShow = 48; },
     "rs-remove": () => { state.rsConn = state.rsConn.filter(x => x !== el.dataset.place); state.rsShow = 48; },
     "rs-reset": () => { Object.assign(state, { rsQ:"", rsMin:0, rsConn:[], rsConnQ:"", rsShow:48 }); },
@@ -1331,6 +1341,7 @@ document.addEventListener("input", ev => {
   const el = ev.target;
   if (el.dataset.filter === "starq"){ state.starQ = el.value; $("#starlist").innerHTML = starListHTML(); return; }
   if (el.dataset.filter === "rsq"){ state.rsQ = el.value; state.rsShow = 48; $("#rsresults").innerHTML = roomSelectResultsHTML(); return; }
+  if (el.dataset.filter === "rsmin"){ const n = parseInt(el.value, 10); state.rsMin = n > 0 ? n : 0; state.rsShow = 48; $("#rsresults").innerHTML = roomSelectResultsHTML(); return; }
   if (el.dataset.filter === "rsconnq"){ state.rsConnQ = el.value; $("#rsconnlist").innerHTML = rsConnListHTML(); return; }
   if (el.dataset.filter === "pickq"){ state.pickQ = el.value; $("#picklist").innerHTML = pickListHTML(); return; }
   if (el.dataset.edit && el.tagName === "INPUT" && el.type !== "checkbox") applyEdit(el);
@@ -1416,6 +1427,7 @@ function handleFile(el){
 async function fetchJSON(url){ const r = await fetch(url, { cache:"no-cache" }); if (!r.ok) throw new Error(url); return r.json(); }
 async function init(){
   loadProgress();
+  loadPrefs();
   try {
     const [map, stars] = await Promise.all([fetchJSON("data/map.json"), fetchJSON("data/stars.json")]);
     applyData(map, stars);
