@@ -361,7 +361,7 @@
           "y": 0.22,
           "label": "Jump in hole in front of double door below Bowser painting with no red stars",
           "to": "bowser_in_the_dark_world_shoshinkai",
-          "art": "hole"
+          "art": "painting"
         },
         {
           "id": "genesis_basement_7",
@@ -2491,6 +2491,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "parallel_lobby_2_4"
+        },
+        {
+          "id": "vanilla_lobby_2",
+          "type": "doubledoor",
+          "label": "Back to Polygonal Chaos",
+          "to": "polygonal_chaos",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "polygonal_chaos_6"
         }
       ]
     },
@@ -2648,14 +2658,33 @@
         {
           "id": "clock_hall_1",
           "type": "doubledoor",
-          "label": "Back to Plexal Lobby (Large Rooms)",
+          "label": "Double door at outdoor end",
           "to": "plexal_lobby_large_rooms",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.003,
+          "y": 0.494,
           "pair": "plexal_lobby_large_rooms_7"
+        },
+        {
+          "id": "clock_hall_2",
+          "type": "doubledoor",
+          "label": "Double door at indoor end",
+          "to": "outer_strip",
+          "x": 0.992,
+          "y": 0.494,
+          "pair": "outer_strip_4"
+        },
+        {
+          "id": "clock_hall_3",
+          "type": "pipe",
+          "x": 0.143,
+          "y": 0.264,
+          "label": "Jump into pipe behind Peach painting",
+          "to": "tubular_lobby",
+          "art": "blockpipe"
         }
-      ]
+      ],
+      "shape": "assets/rooms/clock_hall.png",
+      "color": "#20ACDF"
     },
     {
       "id": "goomba_hills",
@@ -2955,34 +2984,110 @@
         {
           "id": "floor_3b_1",
           "type": "pipe",
-          "label": "Back to Sunny Courtyard",
+          "label": "Pipe behind Peach painting",
           "to": "sunny_courtyard",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.114,
+          "y": 0.559,
           "pair": "sunny_courtyard_1"
         },
         {
           "id": "floor_3b_2",
-          "type": "door",
-          "label": "Back to Nebula Lobby",
+          "type": "pipe",
+          "label": "In ! room on top of the red ! block",
           "to": "nebula_lobby",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "nebula_lobby_9"
+          "x": 0.779,
+          "y": 0.91,
+          "pair": "nebula_lobby_9",
+          "art": "pipe"
         },
         {
           "id": "floor_3b_3",
           "type": "pipe",
-          "label": "Back to Parallel Lobby",
+          "label": "Jump in the pipe in front of pool, then walk behind the sign to warp up",
           "to": "parallel_lobby_2",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.465,
+          "y": 0.291,
           "pair": "parallel_lobby_2_5"
+        },
+        {
+          "id": "floor_3b_4",
+          "type": "door",
+          "x": 0.001,
+          "y": 0.824,
+          "label": "Double door on the same wall as Peach painting",
+          "to": "vanilla_basement",
+          "art": "doubledoor",
+          "pair": "vanilla_basement_1"
+        },
+        {
+          "id": "floor_3b_5",
+          "type": "door",
+          "x": 0.968,
+          "y": 0.827,
+          "label": "Door diagonal from Peach painting",
+          "to": "lethal_cavern",
+          "art": "painting"
+        },
+        {
+          "id": "floor_3b_6",
+          "type": "deadly",
+          "x": 0.131,
+          "y": 0.613,
+          "label": "Jump into the cake behind the Peach painting",
+          "to": "",
+          "respawn": "plexal_lobby"
+        },
+        {
+          "id": "floor_3b_7",
+          "type": "doubledoor",
+          "x": 0.968,
+          "y": 0.584,
+          "label": "Double door across from Peach painting",
+          "to": "breaking_the_barrier",
+          "art": "doubledoor",
+          "pair": "breaking_the_barrier_1"
+        },
+        {
+          "id": "floor_3b_8",
+          "type": "other",
+          "x": 0.465,
+          "y": 0.007,
+          "label": "Jump in the Pokey painting",
+          "to": "sandstone_palace",
+          "art": "painting"
+        },
+        {
+          "id": "floor_3b_9",
+          "type": "doubledoor",
+          "x": 0.212,
+          "y": 0.105,
+          "label": "Double door with green carpet and through dark hallway",
+          "to": "polygonal_chaos",
+          "art": "doubledoor",
+          "pair": "polygonal_chaos_3"
+        },
+        {
+          "id": "floor_3b_10",
+          "type": "doubledoor",
+          "x": 0.719,
+          "y": 0.104,
+          "label": "Double door withe the pink carpet",
+          "to": "sunny_balcony",
+          "art": "doubledoor",
+          "pair": "sunny_balcony_2"
+        },
+        {
+          "id": "floor_3b_11",
+          "type": "deadly",
+          "x": 0.509,
+          "y": 0.743,
+          "label": "Look up on one of the sun carpets, and find the pipe",
+          "to": "",
+          "art": "deadly"
         }
-      ]
+      ],
+      "shape": "assets/rooms/floor_3b.png",
+      "color": "#DEA368"
     },
     {
       "id": "grim_green_forest",
@@ -3094,6 +3199,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "plexal_upstairs_3"
+        },
+        {
+          "id": "royal_lobby_2",
+          "type": "door",
+          "label": "Back to Bowser's Castle",
+          "to": "bowser_s_castle",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "bowser_s_castle_4"
         }
       ]
     },
@@ -3253,7 +3368,18 @@
       "id": "forest_maze",
       "name": "Forest Maze",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "forest_maze_1",
+          "type": "door",
+          "label": "Back to Bowser's Castle",
+          "to": "bowser_s_castle",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "bowser_s_castle_3"
+        }
+      ]
     },
     {
       "id": "big_boo_s_fortress",
@@ -3581,7 +3707,18 @@
       "id": "dark_lobby",
       "name": "Dark Lobby",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "dark_lobby_1",
+          "type": "door",
+          "label": "Back to Floor 2B (2nd Floor)",
+          "to": "floor_2b_2nd_floor",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "floor_2b_2nd_floor_2"
+        }
+      ]
     },
     {
       "id": "vanilla_upstairs",
@@ -3710,6 +3847,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "crescent_castle_13"
+        },
+        {
+          "id": "fake_lobby_2",
+          "type": "doubledoor",
+          "label": "Back to Floor 2B (2nd Floor)",
+          "to": "floor_2b_2nd_floor",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "floor_2b_2nd_floor_8"
         }
       ]
     },
@@ -3806,20 +3953,66 @@
     },
     {
       "id": "floor_2b",
-      "name": "Floor 2B",
+      "name": "Floor 2B (1st Floor)",
       "kind": "room",
       "exits": [
         {
           "id": "floor_2b_1",
           "type": "door",
-          "label": "Back to Internal Sewer System",
+          "label": "Door next to hallway of paintings",
           "to": "internal_sewer_system",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.783,
+          "y": 0.949,
           "pair": "internal_sewer_system_7"
+        },
+        {
+          "id": "floor_2b_2",
+          "type": "door",
+          "label": "Door up on a ledge",
+          "to": "crumbling_castle",
+          "x": 0.233,
+          "y": 0.239,
+          "pair": "crumbling_castle_3"
+        },
+        {
+          "id": "floor_2b_3",
+          "type": "doubledoor",
+          "label": "Double door in a dip in wide room",
+          "to": "bowser_s_castle",
+          "x": 0.269,
+          "y": 0.654,
+          "pair": "bowser_s_castle_5"
+        },
+        {
+          "id": "floor_2b_4",
+          "type": "door",
+          "x": 0.528,
+          "y": 0.634,
+          "label": "Door upstairs next to wf.z64 painting",
+          "to": "floor_2b_2nd_floor",
+          "pair": "floor_2b_2nd_floor_1"
+        },
+        {
+          "id": "floor_2b_5",
+          "type": "other",
+          "x": 0.641,
+          "y": 0.636,
+          "label": "Jump into Whomp's Fortress painting",
+          "to": "wf_z64",
+          "art": "painting"
+        },
+        {
+          "id": "floor_2b_6",
+          "type": "deadly",
+          "x": 0.557,
+          "y": 0.359,
+          "label": "Break the cork boxes and find a pipe",
+          "to": "",
+          "art": "deadly"
         }
-      ]
+      ],
+      "color": "#20ACDF",
+      "shape": "assets/rooms/floor_2b_1.png"
     },
     {
       "id": "uncanny_moat",
@@ -3841,14 +4034,34 @@
         {
           "id": "sunny_balcony_1",
           "type": "door",
-          "label": "Back to Balcony",
+          "label": "Door off to the side",
           "to": "balcony",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.987,
+          "y": 0.628,
           "pair": "balcony_3"
+        },
+        {
+          "id": "sunny_balcony_2",
+          "type": "doubledoor",
+          "label": "Double door in front of sun statue",
+          "to": "floor_3b",
+          "x": 0.491,
+          "y": 0.011,
+          "pair": "floor_3b_10"
+        },
+        {
+          "id": "sunny_balcony_3",
+          "type": "doubledoor",
+          "x": 0.048,
+          "y": 0.35,
+          "label": "The other double door, through short hallway",
+          "to": "crumbling_castle",
+          "art": "doubledoor",
+          "pair": "crumbling_castle_1"
         }
-      ]
+      ],
+      "shape": "assets/rooms/sunny_balcony.png",
+      "color": "#DEC968"
     },
     {
       "id": "chroma_tundra",
@@ -4024,7 +4237,7 @@
           "type": "door",
           "x": 0.201,
           "y": 0.713,
-          "label": "",
+          "label": "Door across from Wing Cap box",
           "to": "peach_upstairs",
           "pair": "peach_upstairs_1"
         },
@@ -4352,7 +4565,7 @@
           "type": "doubledoor",
           "x": 0.001,
           "y": 0.329,
-          "label": "Double door under the red star",
+          "label": "Double door under the red star and through short hallway",
           "to": "bowser_s_castle",
           "pair": "bowser_s_castle_1"
         },
@@ -4478,7 +4691,7 @@
           "type": "doubledoor",
           "x": 0.918,
           "y": 0.671,
-          "label": "Double door near red Jolly Roger Bay painting",
+          "label": "Double door near red Jolly Roger Bay painting and down long, dark hallway",
           "to": "basement_maze",
           "art": "doubledoor",
           "pair": "basement_maze_1"
@@ -4513,24 +4726,80 @@
         {
           "id": "polygonal_chaos_1",
           "type": "door",
-          "label": "Back to 4th Floor",
+          "label": "Door in front of fountain",
           "to": "4th_floor",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.209,
+          "y": 0.204,
           "pair": "4th_floor_7"
         },
         {
           "id": "polygonal_chaos_2",
           "type": "doubledoor",
-          "label": "Back to Bowser's Domain",
+          "label": "Double door near faceless Toad",
           "to": "bowser_s_domain",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.47,
+          "y": 0.856,
           "pair": "bowser_s_domain_5"
+        },
+        {
+          "id": "polygonal_chaos_3",
+          "type": "doubledoor",
+          "label": "Door in isolated section with overlook",
+          "to": "floor_3b",
+          "x": 0.745,
+          "y": 0.997,
+          "pair": "floor_3b_9"
+        },
+        {
+          "id": "polygonal_chaos_4",
+          "type": "other",
+          "x": 0.824,
+          "y": 0.578,
+          "label": "Jump in shadowy painting near 3 tall, blocky stairs",
+          "to": "wonderland_woods",
+          "art": "painting"
+        },
+        {
+          "id": "polygonal_chaos_5",
+          "type": "other",
+          "x": 0.767,
+          "y": 0.042,
+          "label": "Jump into the machine atop the ramp",
+          "to": "sgi_indy",
+          "art": "painting"
+        },
+        {
+          "id": "polygonal_chaos_6",
+          "type": "doubledoor",
+          "x": 0.701,
+          "y": 0.632,
+          "label": "Double door across from SGI Indy, through a window",
+          "to": "vanilla_lobby",
+          "art": "doubledoor",
+          "pair": "vanilla_lobby_2"
+        },
+        {
+          "id": "polygonal_chaos_7",
+          "type": "pipe",
+          "x": 0.227,
+          "y": 0.89,
+          "label": "Jump up the pillars and into the pipe",
+          "to": "bowser_s_castle",
+          "art": "pipe",
+          "pair": "bowser_s_castle_2"
+        },
+        {
+          "id": "polygonal_chaos_8",
+          "type": "door",
+          "x": 0.04,
+          "y": 0.845,
+          "label": "Door in short hallway near Bowser's Castle pipe",
+          "to": "clockwork_internals",
+          "pair": "clockwork_internals_1"
         }
-      ]
+      ],
+      "color": "#141414",
+      "shape": "assets/rooms/polygonal_chaos.png"
     },
     {
       "id": "enhancer_creation",
@@ -4557,24 +4826,69 @@
         {
           "id": "peach_upstairs_1",
           "type": "door",
-          "label": "Back to Wall Castle",
+          "label": "Door in bricked mirror room",
           "to": "wall_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.505,
+          "y": 0.989,
           "pair": "wall_castle_3"
         },
         {
           "id": "peach_upstairs_2",
           "type": "doubledoor",
-          "label": "Back to Bowser's Domain",
+          "label": "Double door up the stairs from either corridor",
           "to": "bowser_s_domain",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.51,
+          "y": 0.011,
           "pair": "bowser_s_domain_7"
+        },
+        {
+          "id": "peach_upstairs_3",
+          "type": "door",
+          "x": 0.095,
+          "y": 0.647,
+          "label": "Door in the left corridor",
+          "to": "painting_museum",
+          "pair": "painting_museum_1"
+        },
+        {
+          "id": "peach_upstairs_4",
+          "type": "door",
+          "x": 0.906,
+          "y": 0.645,
+          "label": "Door in the right corridor",
+          "to": "crumbling_castle",
+          "pair": "crumbling_castle_2"
+        },
+        {
+          "id": "peach_upstairs_5",
+          "type": "other",
+          "x": 0.51,
+          "y": 0.455,
+          "label": "Jump in red sky painting",
+          "to": "mirrored_upstairs",
+          "art": "other",
+          "pair": "mirrored_upstairs_1"
+        },
+        {
+          "id": "peach_upstairs_6",
+          "type": "door",
+          "x": 0.609,
+          "y": 0.416,
+          "label": "Door under Peach painting, downstairs, and into double door",
+          "to": "vanilla_lobby"
+        },
+        {
+          "id": "peach_upstairs_7",
+          "type": "doubledoor",
+          "x": 0.51,
+          "y": 0.184,
+          "label": "Follow long hallway into double door",
+          "to": "polygonal_chaos",
+          "art": "doubledoor"
         }
-      ]
+      ],
+      "shape": "assets/rooms/peach_upstairs.png",
+      "color": "#C968DE"
     },
     {
       "id": "indigo_cave",
@@ -4619,24 +4933,73 @@
         {
           "id": "basement_maze_1",
           "type": "doubledoor",
-          "label": "Back to Bowser's Domain",
+          "label": "Star door and down long, dark hallway",
           "to": "bowser_s_domain",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.18,
+          "y": 0.924,
           "pair": "bowser_s_domain_11"
         },
         {
           "id": "basement_maze_2",
           "type": "door",
-          "label": "Back to Parallel Lobby",
+          "label": "Through the water tunnel into a room with item boxes, and down the pipe",
           "to": "parallel_lobby_2",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "parallel_lobby_2_13"
+          "x": 0.253,
+          "y": 0.38,
+          "pair": "parallel_lobby_2_13",
+          "art": "hole"
+        },
+        {
+          "id": "basement_maze_3",
+          "type": "lockeddoor",
+          "x": 0.228,
+          "y": 0.984,
+          "label": "Locked door under Mr. I painting",
+          "to": "clockwork_internals",
+          "art": "locked_door",
+          "pair": "clockwork_internals_2"
+        },
+        {
+          "id": "basement_maze_4",
+          "type": "lockeddoor",
+          "x": 0.353,
+          "y": 0.367,
+          "label": "Locked door near water tunnel",
+          "to": "outer_strip",
+          "art": "locked_door",
+          "pair": "outer_strip_2"
+        },
+        {
+          "id": "basement_maze_5",
+          "type": "lockeddoor",
+          "x": 0.574,
+          "y": 0.334,
+          "label": "Locked door at end of wide U-turn",
+          "to": "greenhouse_framework",
+          "art": "locked_door",
+          "pair": "greenhouse_framework_2"
+        },
+        {
+          "id": "basement_maze_6",
+          "type": "lockeddoor",
+          "x": 0.854,
+          "y": 0.52,
+          "label": "Locked door in basement lobby",
+          "to": "vanilla_basement",
+          "art": "locked_door"
+        },
+        {
+          "id": "basement_maze_7",
+          "type": "door",
+          "x": 0.989,
+          "y": 0.493,
+          "label": "Equivalent under the moat entrance",
+          "to": "mr_i_s_maze",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/basement_maze.png",
+      "color": "#0E6245"
     },
     {
       "id": "alternate_courtyard",
@@ -4680,24 +5043,43 @@
         {
           "id": "peaceful_grounds_1",
           "type": "door",
-          "label": "Back to Wall Castle",
+          "label": "Door across from castle",
           "to": "wall_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.81,
+          "y": 0.149,
           "pair": "wall_castle_12"
         },
         {
           "id": "peaceful_grounds_2",
           "type": "doubledoor",
-          "label": "Back to Parallel Lobby",
+          "label": "Double door attached to castle",
           "to": "parallel_lobby_2",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.809,
+          "y": 0.969,
           "pair": "parallel_lobby_2_16"
+        },
+        {
+          "id": "peaceful_grounds_3",
+          "type": "deadly",
+          "x": 0.33,
+          "y": 0.218,
+          "label": "Swim to the bottom of the well",
+          "to": "",
+          "respawn": "plexal_lobby"
+        },
+        {
+          "id": "peaceful_grounds_4",
+          "type": "hole",
+          "x": 0.013,
+          "y": 0.228,
+          "label": "Enter the giant hole in the cliff",
+          "to": "castle_bathroom",
+          "art": "hole",
+          "pair": "castle_bathroom_2"
         }
-      ]
+      ],
+      "shape": "assets/rooms/parallel_backyard.png",
+      "color": "#20DF20"
     },
     {
       "id": "bowser_s_castle",
@@ -4706,15 +5088,74 @@
       "exits": [
         {
           "id": "bowser_s_castle_1",
-          "type": "doubledoor",
-          "label": "Back to Nebula Lobby",
+          "type": "door",
+          "label": "Door in octagonal room and through double door under Bowser painting",
           "to": "nebula_lobby",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "nebula_lobby_19"
+          "x": 0.657,
+          "y": 0.866,
+          "pair": "nebula_lobby_19",
+          "art": "door"
+        },
+        {
+          "id": "bowser_s_castle_2",
+          "type": "pipe",
+          "label": "Pipe at end of skinny hallway",
+          "to": "polygonal_chaos",
+          "x": 0.731,
+          "y": 0.584,
+          "pair": "polygonal_chaos_7"
+        },
+        {
+          "id": "bowser_s_castle_3",
+          "type": "door",
+          "x": 0.261,
+          "y": 0.259,
+          "label": "Door in skinny hallway",
+          "to": "forest_maze",
+          "pair": "forest_maze_1"
+        },
+        {
+          "id": "bowser_s_castle_4",
+          "type": "door",
+          "x": 0.346,
+          "y": 0.098,
+          "label": "Left double door at the end of the castle",
+          "to": "royal_lobby",
+          "art": "doubledoor",
+          "pair": "royal_lobby_2"
+        },
+        {
+          "id": "bowser_s_castle_5",
+          "type": "doubledoor",
+          "x": 0.601,
+          "y": 0.099,
+          "label": "Right double door at the end of the castle",
+          "to": "floor_2b",
+          "art": "doubledoor",
+          "pair": "floor_2b_3"
+        },
+        {
+          "id": "bowser_s_castle_6",
+          "type": "lockeddoor",
+          "x": 0.471,
+          "y": 0.007,
+          "label": "Locked door at the back of the castle",
+          "to": "purple_upstairs",
+          "art": "locked_door",
+          "pair": "purple_upstairs_1"
+        },
+        {
+          "id": "bowser_s_castle_7",
+          "type": "other",
+          "x": 0.476,
+          "y": 0.739,
+          "label": "Look up at the ceiling",
+          "to": "personalization_chamber",
+          "art": "other"
         }
-      ]
+      ],
+      "shape": "assets/rooms/bowsers_castle.png",
+      "color": "#DF5320"
     },
     {
       "id": "chomp_s_cloudy_isles",
@@ -4930,6 +5371,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "bowser_s_domain_9"
+        },
+        {
+          "id": "challenge_lobby_2",
+          "type": "doubledoor",
+          "label": "Back to Crumbling Castle",
+          "to": "crumbling_castle",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "crumbling_castle_4"
         }
       ]
     },
@@ -4973,14 +5424,33 @@
         {
           "id": "castle_bathroom_1",
           "type": "door",
-          "label": "Back to Bowser's Domain",
+          "label": "Only door in the room",
           "to": "bowser_s_domain",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.233,
+          "y": 0.765,
           "pair": "bowser_s_domain_13"
+        },
+        {
+          "id": "castle_bathroom_2",
+          "type": "hole",
+          "label": "Giant hole in the wall",
+          "to": "peaceful_grounds",
+          "x": 0.401,
+          "y": 0.918,
+          "pair": "peaceful_grounds_4"
+        },
+        {
+          "id": "castle_bathroom_3",
+          "type": "other",
+          "x": 0.369,
+          "y": 0.825,
+          "label": "Only enterable painting in the room",
+          "to": "river_mountain_beta",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/castle_bathroom.png",
+      "color": "#F0F0F0"
     },
     {
       "id": "bowser_s_airship",
@@ -5133,7 +5603,7 @@
           "type": "door",
           "x": 0.733,
           "y": 0.041,
-          "label": "Door past the black pit, through the hedge maze, and into a pipe below the sun fountain",
+          "label": "Door past the black pit, through the hedge maze, into a pipe below the sun fountain, and through a water tunnel",
           "to": "basement_maze",
           "art": "door",
           "pair": "basement_maze_2"
@@ -5270,6 +5740,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "parallel_lobby_2_12"
+        },
+        {
+          "id": "greenhouse_framework_2",
+          "type": "lockeddoor",
+          "label": "Back to Basement Maze",
+          "to": "basement_maze",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "basement_maze_5"
         }
       ]
     },
@@ -5290,6 +5770,403 @@
       "name": "No Man's Land",
       "kind": "course",
       "exits": []
+    },
+    {
+      "id": "vanilla_basement",
+      "name": "Vanilla Basement",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "vanilla_basement_1",
+          "type": "door",
+          "label": "Back to Floor 3B",
+          "to": "floor_3b",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "floor_3b_4"
+        }
+      ]
+    },
+    {
+      "id": "breaking_the_barrier",
+      "name": "Breaking the Barrier",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "breaking_the_barrier_1",
+          "type": "doubledoor",
+          "label": "Back to Floor 3B",
+          "to": "floor_3b",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "floor_3b_7"
+        }
+      ]
+    },
+    {
+      "id": "sandstone_palace",
+      "name": "Sandstone Palace",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "wonderland_woods",
+      "name": "Wonderland Woods",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "sgi_indy",
+      "name": "SGI Indy",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "clockwork_internals",
+      "name": "Clockwork Internals",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "clockwork_internals_1",
+          "type": "door",
+          "label": "Back to Polygonal Chaos",
+          "to": "polygonal_chaos",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "polygonal_chaos_8"
+        },
+        {
+          "id": "clockwork_internals_2",
+          "type": "lockeddoor",
+          "label": "Back to Basement Maze",
+          "to": "basement_maze",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "basement_maze_3"
+        }
+      ]
+    },
+    {
+      "id": "crumbling_castle",
+      "name": "Crumbling Castle",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "crumbling_castle_1",
+          "type": "doubledoor",
+          "label": "Door leading to short hallway with double door",
+          "to": "sunny_balcony",
+          "x": 0.603,
+          "y": 0.897,
+          "pair": "sunny_balcony_3",
+          "art": "door"
+        },
+        {
+          "id": "crumbling_castle_2",
+          "type": "door",
+          "label": "Bricked door in largest room",
+          "to": "peach_upstairs",
+          "x": 0.745,
+          "y": 0.984,
+          "pair": "peach_upstairs_4"
+        },
+        {
+          "id": "crumbling_castle_3",
+          "type": "door",
+          "x": 0.014,
+          "y": 0.109,
+          "label": "Door on ledge to short hallway to another door",
+          "to": "floor_2b",
+          "pair": "floor_2b_2"
+        },
+        {
+          "id": "crumbling_castle_4",
+          "type": "doubledoor",
+          "x": 0.084,
+          "y": 0.316,
+          "label": "Double door at end of winding hallway",
+          "to": "challenge_lobby",
+          "art": "doubledoor",
+          "pair": "challenge_lobby_2"
+        },
+        {
+          "id": "crumbling_castle_5",
+          "type": "other",
+          "x": 0.278,
+          "y": 0.185,
+          "label": "Jump into giant crack in the wall",
+          "to": "tubular_lobby",
+          "art": "other"
+        }
+      ],
+      "shape": "assets/rooms/crumbling_castle.png",
+      "color": "#2080DF"
+    },
+    {
+      "id": "painting_museum",
+      "name": "Painting Museum",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "painting_museum_1",
+          "type": "door",
+          "label": "Back to Peach Upstairs",
+          "to": "peach_upstairs",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "peach_upstairs_3"
+        }
+      ]
+    },
+    {
+      "id": "mirrored_upstairs",
+      "name": "Mirrored Upstairs",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "mirrored_upstairs_1",
+          "type": "other",
+          "label": "Back to Peach Upstairs",
+          "to": "peach_upstairs",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "peach_upstairs_5"
+        }
+      ]
+    },
+    {
+      "id": "river_mountain_beta",
+      "name": "Bob-omb River (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "river_mountain_beta_1",
+          "type": "pipe",
+          "label": "Pipe at the top of the waterfall",
+          "to": "bob_omb_cavern",
+          "art": "pipe"
+        }
+      ]
+    },
+    {
+      "id": "bob_omb_cavern",
+      "name": "Bob-omb Cavern",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "purple_upstairs",
+      "name": "Purple Upstairs",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "purple_upstairs_1",
+          "type": "lockeddoor",
+          "label": "Back to Bowser's Castle",
+          "to": "bowser_s_castle",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "bowser_s_castle_6"
+        }
+      ]
+    },
+    {
+      "id": "floor_2b_2nd_floor",
+      "name": "Floor 2B (2nd Floor)",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "floor_2b_2nd_floor_1",
+          "type": "door",
+          "label": "Door in hallway next to piano",
+          "to": "floor_2b",
+          "x": 0.929,
+          "y": 0.769,
+          "pair": "floor_2b_4"
+        },
+        {
+          "id": "floor_2b_2nd_floor_2",
+          "type": "door",
+          "x": 0.403,
+          "y": 0.939,
+          "label": "Double door in divot, down a black hallway to another double door",
+          "to": "dark_lobby",
+          "art": "doubledoor",
+          "pair": "dark_lobby_1"
+        },
+        {
+          "id": "floor_2b_2nd_floor_3",
+          "type": "doubledoor",
+          "x": 0.217,
+          "y": 0.86,
+          "label": "Double door with pink carpet, through another set of double door under Bowser painting",
+          "to": "outer_strip",
+          "pair": "outer_strip_1"
+        },
+        {
+          "id": "floor_2b_2nd_floor_4",
+          "type": "other",
+          "x": 0.214,
+          "y": 0.764,
+          "label": "Jump in painting in front of water hole",
+          "to": "midnight_meadow",
+          "art": "painting"
+        },
+        {
+          "id": "floor_2b_2nd_floor_5",
+          "type": "door",
+          "x": 0.007,
+          "y": 0.187,
+          "label": "Door 1 to room with Wiggler painting",
+          "to": "wiggler_s_forest_fortress",
+          "art": "painting"
+        },
+        {
+          "id": "floor_2b_2nd_floor_6",
+          "type": "other",
+          "x": 0.237,
+          "y": 0.085,
+          "label": "Jump into island painting in rec room",
+          "to": "sunshine_isles",
+          "art": "painting"
+        },
+        {
+          "id": "floor_2b_2nd_floor_7",
+          "type": "door",
+          "x": 0.057,
+          "y": 0.035,
+          "label": "Door 1 to room with Goomboss course painting",
+          "to": "goomboss_battle",
+          "art": "painting"
+        },
+        {
+          "id": "floor_2b_2nd_floor_8",
+          "type": "doubledoor",
+          "x": 0.644,
+          "y": 0.184,
+          "label": "Double door at end of long hallway",
+          "to": "fake_lobby",
+          "art": "doubledoor",
+          "pair": "fake_lobby_2"
+        }
+      ],
+      "shape": "assets/rooms/floor_2b_2.png",
+      "color": "#0E622C"
+    },
+    {
+      "id": "outer_strip",
+      "name": "Outer Strip",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "outer_strip_1",
+          "type": "doubledoor",
+          "label": "Double door under clock symbol",
+          "to": "floor_2b_2nd_floor",
+          "x": 0.504,
+          "y": 0.439,
+          "pair": "floor_2b_2nd_floor_3"
+        },
+        {
+          "id": "outer_strip_2",
+          "type": "doubledoor",
+          "label": "Left of the clock symbol and down long hallway",
+          "to": "basement_maze",
+          "x": 0.081,
+          "y": 0.1,
+          "pair": "basement_maze_4",
+          "art": "doubledoor"
+        },
+        {
+          "id": "outer_strip_3",
+          "type": "door",
+          "x": 0.942,
+          "y": 0.078,
+          "label": "Through the tunnel right of the clock symbol",
+          "to": "elder_koopa_library",
+          "pair": "elder_koopa_library_1"
+        },
+        {
+          "id": "outer_strip_4",
+          "type": "doubledoor",
+          "x": 0.504,
+          "y": 0.989,
+          "label": "Double door across from the clock symbol",
+          "to": "clock_hall",
+          "art": "doubledoor",
+          "pair": "clock_hall_2"
+        }
+      ],
+      "shape": "assets/rooms/outer_strip.png",
+      "color": "#DADADA"
+    },
+    {
+      "id": "midnight_meadow",
+      "name": "Midnight Meadow",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "wiggler_s_forest_fortress",
+      "name": "Wiggler's Forest Fortress",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "sunshine_isles",
+      "name": "Sunshine Isles",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "goomboss_battle",
+      "name": "Goomboss Battle",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "goomboss_battle_1",
+          "type": "door",
+          "label": "Jump into the hole at the tallest oak tree",
+          "to": "goomboss_lair",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "goomboss_lair",
+      "name": "Goomboss' Lair",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "mr_i_s_maze",
+      "name": "Mr. I's Maze",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "elder_koopa_library",
+      "name": "Elder Koopa Library",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "elder_koopa_library_1",
+          "type": "door",
+          "label": "Back to Outer Strip",
+          "to": "outer_strip",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "outer_strip_3"
+        }
+      ]
     }
   ]
 }
