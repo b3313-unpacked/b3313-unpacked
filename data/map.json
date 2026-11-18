@@ -2501,6 +2501,26 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "polygonal_chaos_6"
+        },
+        {
+          "id": "vanilla_lobby_3",
+          "type": "door",
+          "label": "Back to Clockwork Internals",
+          "to": "clockwork_internals",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "clockwork_internals_6"
+        },
+        {
+          "id": "vanilla_lobby_4",
+          "type": "pipe",
+          "label": "Back to Uncanny Basement",
+          "to": "uncanny_basement",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "uncanny_basement_4"
         }
       ]
     },
@@ -3193,24 +3213,70 @@
         {
           "id": "royal_lobby_1",
           "type": "doubledoor",
-          "label": "Back to Plexal Upstairs",
+          "label": "Double door under Bowser painting",
           "to": "plexal_upstairs",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.44,
+          "y": 0.971,
           "pair": "plexal_upstairs_3"
         },
         {
           "id": "royal_lobby_2",
           "type": "door",
-          "label": "Back to Bowser's Castle",
+          "label": "Double door at the top of the lobby",
           "to": "bowser_s_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "bowser_s_castle_4"
+          "x": 0.437,
+          "y": 0.013,
+          "pair": "bowser_s_castle_4",
+          "art": "doubledoor"
+        },
+        {
+          "id": "royal_lobby_3",
+          "type": "other",
+          "x": 0.06,
+          "y": 0.631,
+          "label": "Jump into the castle diorama",
+          "to": "vanilla_castle_grounds",
+          "art": "other"
+        },
+        {
+          "id": "royal_lobby_4",
+          "type": "door",
+          "x": 0.305,
+          "y": 0.492,
+          "label": "Left door to room with painting",
+          "to": "salty_salty_shore",
+          "art": "painting"
+        },
+        {
+          "id": "royal_lobby_5",
+          "type": "door",
+          "x": 0.555,
+          "y": 0.492,
+          "label": "Right door to room with painting",
+          "to": "piranha_plant_garden",
+          "art": "painting"
+        },
+        {
+          "id": "royal_lobby_6",
+          "type": "other",
+          "x": 0.978,
+          "y": 0.626,
+          "label": "Jump into the giant Tall Tall Mountain painting",
+          "to": "tall_tall_mountain_beta",
+          "art": "painting"
+        },
+        {
+          "id": "royal_lobby_7",
+          "type": "other",
+          "x": 0.862,
+          "y": 0.843,
+          "label": "Jump into the painting of the city",
+          "to": "downtown_city",
+          "art": "painting"
         }
-      ]
+      ],
+      "color": "#1726A1",
+      "shape": "assets/rooms/royal_lobby.png"
     },
     {
       "id": "dry_town",
@@ -4809,14 +4875,26 @@
         {
           "id": "enhancer_creation_1",
           "type": "door",
-          "label": "Back to Silent Sewers",
+          "label": "Into the pipe",
           "to": "silent_sewers",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "silent_sewers_3"
+          "x": 0.911,
+          "y": 0.975,
+          "pair": "silent_sewers_3",
+          "art": "blockpipe"
+        },
+        {
+          "id": "enhancer_creation_2",
+          "type": "door",
+          "x": 0.007,
+          "y": 0.09,
+          "label": "Into the hole in the wall",
+          "to": "caged_garden",
+          "art": "hole",
+          "pair": "caged_garden_2"
         }
-      ]
+      ],
+      "shape": "assets/rooms/enhancer_creation.png",
+      "color": "#C4C4C4"
     },
     {
       "id": "peach_upstairs",
@@ -4904,14 +4982,44 @@
         {
           "id": "aquarium_lobby_1",
           "type": "door",
-          "label": "Back to Wall Castle",
+          "label": "Right hole in the wall",
           "to": "wall_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "wall_castle_6"
+          "x": 0.573,
+          "y": 0.535,
+          "pair": "wall_castle_6",
+          "art": "hole"
+        },
+        {
+          "id": "aquarium_lobby_2",
+          "type": "doubledoor",
+          "label": "Double door, and through a hallway",
+          "to": "painting_museum",
+          "x": 0.493,
+          "y": 0.798,
+          "pair": "painting_museum_6",
+          "art": "doubledoor"
+        },
+        {
+          "id": "aquarium_lobby_3",
+          "type": "door",
+          "label": "Bottom door and down a hallway",
+          "to": "garden",
+          "x": 0.492,
+          "y": 0.456,
+          "pair": "garden_2"
+        },
+        {
+          "id": "aquarium_lobby_4",
+          "type": "door",
+          "x": 0.491,
+          "y": 0.332,
+          "label": "Top door and in the hole",
+          "to": "dry_square",
+          "art": "painting"
         }
-      ]
+      ],
+      "color": "#68C9DE",
+      "shape": "assets/rooms/aquarium_lobby.png"
     },
     {
       "id": "oak_slide",
@@ -4985,7 +5093,7 @@
           "x": 0.854,
           "y": 0.52,
           "label": "Locked door in basement lobby",
-          "to": "vanilla_basement",
+          "to": "vanilla_lobby",
           "art": "locked_door"
         },
         {
@@ -5365,24 +5473,76 @@
         {
           "id": "challenge_lobby_1",
           "type": "door",
-          "label": "Back to Bowser's Domain",
+          "label": "Door 1",
           "to": "bowser_s_domain",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.141,
+          "y": 0.826,
           "pair": "bowser_s_domain_9"
         },
         {
           "id": "challenge_lobby_2",
           "type": "doubledoor",
-          "label": "Back to Crumbling Castle",
+          "label": "Double door under clock",
           "to": "crumbling_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.496,
+          "y": 0.977,
           "pair": "crumbling_castle_4"
+        },
+        {
+          "id": "challenge_lobby_3",
+          "type": "door",
+          "x": 0.153,
+          "y": 0.516,
+          "label": "Door 2 to room with painting",
+          "to": "motos_factory",
+          "art": "painting"
+        },
+        {
+          "id": "challenge_lobby_4",
+          "type": "door",
+          "x": 0.49,
+          "y": 0.01,
+          "label": "Metal door at the end of short hallway",
+          "to": ""
+        },
+        {
+          "id": "challenge_lobby_5",
+          "type": "door",
+          "x": 0.833,
+          "y": 0.51,
+          "label": "Door 3 to room with painting",
+          "to": "tall_tall_treetops",
+          "art": "painting"
+        },
+        {
+          "id": "challenge_lobby_6",
+          "type": "other",
+          "x": 0.49,
+          "y": 0.286,
+          "label": "Jump in faceless Peach painting in the hallway",
+          "to": "uncanny_library",
+          "art": "other"
+        },
+        {
+          "id": "challenge_lobby_7",
+          "type": "deadly",
+          "x": 0.841,
+          "y": 0.829,
+          "label": "Use the Vanish Cap to go through the brick wall",
+          "to": ""
+        },
+        {
+          "id": "challenge_lobby_8",
+          "type": "deadly",
+          "x": 0.502,
+          "y": 0.657,
+          "label": "Look up at the ceiling",
+          "to": "",
+          "art": "deadly"
         }
-      ]
+      ],
+      "color": "#68DEC9",
+      "shape": "assets/rooms/challenge_lobby.png"
     },
     {
       "id": "drip_drop_depths",
@@ -5407,14 +5567,53 @@
         {
           "id": "uncanny_basement_1",
           "type": "door",
-          "label": "Back to Bowser's Domain",
+          "label": "Elevated door with flame above it",
           "to": "bowser_s_domain",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.846,
+          "y": 0.781,
           "pair": "bowser_s_domain_12"
+        },
+        {
+          "id": "uncanny_basement_2",
+          "type": "door",
+          "label": "Door in wider hallway",
+          "to": "clockwork_internals",
+          "x": 0.657,
+          "y": 0.986,
+          "pair": "clockwork_internals_4"
+        },
+        {
+          "id": "uncanny_basement_3",
+          "type": "door",
+          "x": 0.017,
+          "y": 0.676,
+          "label": "Hole in the wall at the end of hallway",
+          "to": "caged_garden",
+          "art": "hole",
+          "pair": "caged_garden_1"
+        },
+        {
+          "id": "uncanny_basement_4",
+          "type": "pipe",
+          "x": 0.525,
+          "y": 0.349,
+          "label": "Into the pipe and stand in one of the corners",
+          "to": "vanilla_lobby",
+          "art": "pipe",
+          "pair": "vanilla_lobby_4"
+        },
+        {
+          "id": "uncanny_basement_5",
+          "type": "door",
+          "label": "Door with flame above it",
+          "to": "greenhouse_framework",
+          "x": 0.981,
+          "y": 0.028,
+          "pair": "greenhouse_framework_3"
         }
-      ]
+      ],
+      "shape": "assets/rooms/uncanny_basement.png",
+      "color": "#0E622C"
     },
     {
       "id": "castle_bathroom",
@@ -5426,8 +5625,8 @@
           "type": "door",
           "label": "Only door in the room",
           "to": "bowser_s_domain",
-          "x": 0.233,
-          "y": 0.765,
+          "x": 0.063,
+          "y": 0.703,
           "pair": "bowser_s_domain_13"
         },
         {
@@ -5435,15 +5634,15 @@
           "type": "hole",
           "label": "Giant hole in the wall",
           "to": "peaceful_grounds",
-          "x": 0.401,
-          "y": 0.918,
+          "x": 0.409,
+          "y": 0.977,
           "pair": "peaceful_grounds_4"
         },
         {
           "id": "castle_bathroom_3",
           "type": "other",
-          "x": 0.369,
-          "y": 0.825,
+          "x": 0.335,
+          "y": 0.811,
           "label": "Only enterable painting in the room",
           "to": "river_mountain_beta",
           "art": "painting"
@@ -5734,24 +5933,44 @@
         {
           "id": "greenhouse_framework_1",
           "type": "door",
-          "label": "Back to Parallel Lobby",
+          "label": "Door between arches",
           "to": "parallel_lobby_2",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.439,
+          "y": 0.99,
           "pair": "parallel_lobby_2_12"
         },
         {
           "id": "greenhouse_framework_2",
           "type": "lockeddoor",
-          "label": "Back to Basement Maze",
+          "label": "Locked door across from fountain",
           "to": "basement_maze",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "basement_maze_5"
+          "x": 0.688,
+          "y": 0.011,
+          "pair": "basement_maze_5",
+          "art": "locked_door"
+        },
+        {
+          "id": "greenhouse_framework_3",
+          "type": "door",
+          "x": 0.004,
+          "y": 0.565,
+          "label": "Door behind Toad statue",
+          "to": "uncanny_basement",
+          "pair": "uncanny_basement_5"
+        },
+        {
+          "id": "greenhouse_framework_4",
+          "type": "lockeddoor",
+          "x": 0.995,
+          "y": 0.45,
+          "label": "Locked door in bent hallway with flower beds",
+          "to": "internal_garden",
+          "art": "locked_door",
+          "pair": "internal_garden_1"
         }
-      ]
+      ],
+      "shape": "assets/rooms/greenhouse_framework.png",
+      "color": "#20DF20"
     },
     {
       "id": "frosty_battlefield",
@@ -5831,24 +6050,61 @@
         {
           "id": "clockwork_internals_1",
           "type": "door",
-          "label": "Back to Polygonal Chaos",
+          "label": "Door at end of long hallway",
           "to": "polygonal_chaos",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.496,
+          "y": 0.994,
           "pair": "polygonal_chaos_8"
         },
         {
           "id": "clockwork_internals_2",
-          "type": "lockeddoor",
-          "label": "Back to Basement Maze",
+          "type": "doubledoor",
+          "label": "Double door in junction room",
           "to": "basement_maze",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "basement_maze_3"
+          "x": 0.496,
+          "y": 0.005,
+          "pair": "basement_maze_3",
+          "art": "doubledoor"
+        },
+        {
+          "id": "clockwork_internals_3",
+          "type": "door",
+          "x": 0.191,
+          "y": 0.296,
+          "label": "Door at the end of the left corridor from middle room",
+          "to": "painting_museum",
+          "pair": "painting_museum_2"
+        },
+        {
+          "id": "clockwork_internals_4",
+          "type": "door",
+          "x": 0.791,
+          "y": 0.298,
+          "label": "Door at the end of the right corridor from middle room",
+          "to": "uncanny_basement",
+          "pair": "uncanny_basement_2"
+        },
+        {
+          "id": "clockwork_internals_5",
+          "type": "door",
+          "x": 0.201,
+          "y": 0.054,
+          "label": "Left door in junction room",
+          "to": "uncanny_library",
+          "pair": "uncanny_library_1"
+        },
+        {
+          "id": "clockwork_internals_6",
+          "type": "door",
+          "x": 0.772,
+          "y": 0.055,
+          "label": "Right door in junction room",
+          "to": "vanilla_lobby",
+          "pair": "vanilla_lobby_3"
         }
-      ]
+      ],
+      "color": "#DEA368",
+      "shape": "assets/rooms/clockwork_internals.png"
     },
     {
       "id": "crumbling_castle",
@@ -5914,14 +6170,70 @@
         {
           "id": "painting_museum_1",
           "type": "door",
-          "label": "Back to Peach Upstairs",
+          "label": "Back right door, and down the ramp",
           "to": "peach_upstairs",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.848,
+          "y": 0.055,
           "pair": "peach_upstairs_3"
+        },
+        {
+          "id": "painting_museum_2",
+          "type": "door",
+          "label": "Door left of Wet-Dry World skybox painting, and down a hallway",
+          "to": "clockwork_internals",
+          "x": 0.096,
+          "y": 0.655,
+          "pair": "clockwork_internals_3"
+        },
+        {
+          "id": "painting_museum_3",
+          "type": "doubledoor",
+          "x": 0.496,
+          "y": 0.983,
+          "label": "Double door across from Wet-Dry World skybox painting",
+          "to": "vanilla_castle_grounds",
+          "art": "doubledoor",
+          "pair": "vanilla_castle_grounds_1"
+        },
+        {
+          "id": "painting_museum_4",
+          "type": "doubledoor",
+          "x": 0.504,
+          "y": 0.374,
+          "label": "Double door under Wet-Dry World skybox painting, and down the stairs",
+          "to": "vanilla_lobby",
+          "art": "doubledoor"
+        },
+        {
+          "id": "painting_museum_5",
+          "type": "door",
+          "x": 0.907,
+          "y": 0.656,
+          "label": "Door right of Wet-Dry World skybox painting",
+          "to": "garden",
+          "pair": "garden_1"
+        },
+        {
+          "id": "painting_museum_6",
+          "type": "door",
+          "x": 0.131,
+          "y": 0.059,
+          "label": "Back left door, and down the hall",
+          "to": "aquarium_lobby",
+          "pair": "aquarium_lobby_2"
+        },
+        {
+          "id": "painting_museum_7",
+          "type": "other",
+          "x": 0.349,
+          "y": 0.659,
+          "label": "Upstairs and into the Tall Tall Mountain painting",
+          "to": "hazardous_highway",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/painting_museum.png",
+      "color": "#DF2020"
     },
     {
       "id": "mirrored_upstairs",
@@ -6167,6 +6479,207 @@
           "pair": "outer_strip_3"
         }
       ]
+    },
+    {
+      "id": "uncanny_library",
+      "name": "Uncanny Library",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "uncanny_library_1",
+          "type": "door",
+          "label": "Back to Clockwork Internals",
+          "to": "clockwork_internals",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "clockwork_internals_5"
+        }
+      ]
+    },
+    {
+      "id": "motos_factory",
+      "name": "Motos Factory",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "tall_tall_treetops",
+      "name": "Tall, Tall Treetops",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "internal_garden",
+      "name": "Internal Garden",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "internal_garden_1",
+          "type": "lockeddoor",
+          "label": "Back to Greenhouse Framework",
+          "to": "greenhouse_framework",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "greenhouse_framework_4"
+        }
+      ]
+    },
+    {
+      "id": "vanilla_castle_grounds",
+      "name": "Vanilla Castle Grounds",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "vanilla_castle_grounds_1",
+          "type": "doubledoor",
+          "label": "Back to Painting Museum",
+          "to": "painting_museum",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "painting_museum_3"
+        }
+      ]
+    },
+    {
+      "id": "garden",
+      "name": "Garden",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "garden_1",
+          "type": "door",
+          "label": "Door across from Peach window",
+          "to": "painting_museum",
+          "x": 0.267,
+          "y": 0.579,
+          "pair": "painting_museum_5"
+        },
+        {
+          "id": "garden_2",
+          "type": "door",
+          "x": 0.61,
+          "y": 0.579,
+          "label": "Door under Peach window and down a hallway",
+          "to": "aquarium_lobby",
+          "pair": "aquarium_lobby_3"
+        }
+      ],
+      "shape": "assets/rooms/garden.png",
+      "color": "#A14317"
+    },
+    {
+      "id": "hazardous_highway",
+      "name": "Hazardous Highway",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "dry_square",
+      "name": "Dry Downtown",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "caged_garden",
+      "name": "Caged Garden",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "caged_garden_1",
+          "type": "hole",
+          "label": "Through the open hole",
+          "to": "uncanny_basement",
+          "x": 0.497,
+          "y": 0.017,
+          "pair": "uncanny_basement_3"
+        },
+        {
+          "id": "caged_garden_2",
+          "type": "hole",
+          "label": "Through the grate",
+          "to": "enhancer_creation",
+          "x": 0.489,
+          "y": 0.986,
+          "pair": "enhancer_creation_2",
+          "art": "hole"
+        }
+      ],
+      "shape": "assets/rooms/caged_garden.png",
+      "color": "#17A126"
+    },
+    {
+      "id": "salty_salty_shore",
+      "name": "Salty, Salty Shore",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "piranha_plant_garden",
+      "name": "Piranha Plant Garden",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "piranha_plant_garden_1",
+          "type": "pipe",
+          "label": "Pipe at the highest statue",
+          "to": "piranha_s_igloo",
+          "art": "blockpipe",
+          "pair": "piranha_s_igloo_1"
+        }
+      ]
+    },
+    {
+      "id": "piranha_s_igloo",
+      "name": "Piranha's Igloo",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "piranha_s_igloo_1",
+          "type": "pipe",
+          "label": "Back to Piranha Plant Garden",
+          "to": "piranha_plant_garden",
+          "pair": "piranha_plant_garden_1"
+        }
+      ]
+    },
+    {
+      "id": "tall_tall_mountain_beta",
+      "name": "Tall, Tall Mountain (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "tall_tall_mountain_beta_1",
+          "type": "hole",
+          "label": "Jump into the hole at the top of the mountain",
+          "to": "magic_mushroom_cave",
+          "art": "hole",
+          "pair": "magic_mushroom_cave_1"
+        }
+      ]
+    },
+    {
+      "id": "magic_mushroom_cave",
+      "name": "Magic Mushroom Cave",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "magic_mushroom_cave_1",
+          "type": "hole",
+          "label": "Enter the hut ",
+          "to": "tall_tall_mountain_beta",
+          "pair": "tall_tall_mountain_beta_1",
+          "art": "door"
+        }
+      ]
+    },
+    {
+      "id": "downtown_city",
+      "name": "Downtown City",
+      "kind": "course",
+      "exits": []
     }
   ]
 }
