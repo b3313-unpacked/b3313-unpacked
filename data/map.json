@@ -1216,7 +1216,52 @@
       "id": "personalization_chamber",
       "name": "Personalization Chamber",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "personalization_chamber_1",
+          "type": "other",
+          "x": 0.491,
+          "y": 0.113,
+          "label": "Top of the ? painting",
+          "to": "mr_i_s_maze",
+          "art": "painting"
+        },
+        {
+          "id": "personalization_chamber_2",
+          "type": "other",
+          "x": 0.731,
+          "y": 0.795,
+          "label": "Bottom right of the ? painting",
+          "to": "toad_s_hedge_maze",
+          "art": "painting"
+        },
+        {
+          "id": "personalization_chamber_3",
+          "type": "deadly",
+          "x": 0.244,
+          "y": 0.797,
+          "label": "Bottom left of the ? painting",
+          "to": "",
+          "art": "deadly"
+        },
+        {
+          "id": "personalization_chamber_4",
+          "type": "deadly",
+          "x": 0.242,
+          "y": 0.419,
+          "label": "Middle left of the ? painting",
+          "to": ""
+        },
+        {
+          "id": "personalization_chamber_5",
+          "type": "deadly",
+          "x": 0.733,
+          "y": 0.417,
+          "label": "Middle right of the ? painting",
+          "to": ""
+        }
+      ],
+      "shape": "assets/rooms/personalization_chamber.png"
     },
     {
       "id": "surface_test",
@@ -1927,14 +1972,60 @@
         {
           "id": "crimson_hallway_1",
           "type": "door",
-          "label": "Back to Beta Lobby C",
+          "label": "Single door closest to locked door",
           "to": "beta_lobby_c",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.409,
+          "y": 0.629,
           "pair": "beta_lobby_c_8"
+        },
+        {
+          "id": "crimson_hallway_2",
+          "type": "deadly",
+          "x": 0.133,
+          "y": 0.743,
+          "label": "Beat Big Boo and jump in his cage",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
+        },
+        {
+          "id": "crimson_hallway_3",
+          "type": "hole",
+          "x": 0.026,
+          "y": 0.389,
+          "label": "Jump in the hole at the end of the locked door hallway",
+          "to": "bowser_s_checkered_madness",
+          "art": "painting"
+        },
+        {
+          "id": "crimson_hallway_4",
+          "type": "door",
+          "x": 0.621,
+          "y": 0.129,
+          "label": "Door to the right of locked door",
+          "to": "uncanny_courtyard"
+        },
+        {
+          "id": "crimson_hallway_5",
+          "type": "hole",
+          "x": 0.993,
+          "y": 0.382,
+          "label": "Jump in the hole at the end of MIPS hallway",
+          "to": "aquarium_limbo",
+          "art": "painting"
+        },
+        {
+          "id": "crimson_hallway_6",
+          "type": "other",
+          "x": 0.523,
+          "y": 0.373,
+          "label": "Come here from the Plexal Lobby, and then die",
+          "to": "monochrome_castle_grounds",
+          "art": "other"
         }
-      ]
+      ],
+      "shape": "assets/rooms/crimson_hallway.png",
+      "color": "#A11726"
     },
     {
       "id": "river_mountain",
@@ -2090,7 +2181,7 @@
           "type": "door",
           "x": 0.769,
           "y": 0.015,
-          "label": "",
+          "label": "Double door at the end of the larger hallway",
           "to": "castle_garden",
           "art": "doubledoor",
           "pair": "castle_garden_1"
@@ -2256,7 +2347,8 @@
           "y": 0.206,
           "label": "Stand on blue pillar near blue flames",
           "to": "tubular_lobby",
-          "art": "other"
+          "art": "other",
+          "arrive": "Basement room"
         },
         {
           "id": "plexal_basement_wet_floor_maze_13",
@@ -2544,6 +2636,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "uncanny_courtyard_5"
+        },
+        {
+          "id": "funhouse_2",
+          "type": "lockeddoor",
+          "label": "Back to Cryptic Hideout",
+          "to": "cryptic_hideout",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "cryptic_hideout_2"
         }
       ]
     },
@@ -2660,15 +2762,34 @@
       "exits": [
         {
           "id": "castle_garden_1",
-          "type": "door",
-          "label": "Back to Plexal Lobby (Large Rooms)",
+          "type": "doubledoor",
+          "label": "Double door below Peach painting",
           "to": "plexal_lobby_large_rooms",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.499,
+          "y": 0.98,
           "pair": "plexal_lobby_large_rooms_6"
+        },
+        {
+          "id": "castle_garden_2",
+          "type": "pipe",
+          "x": 0.138,
+          "y": 0.907,
+          "label": "Pipe in the corner of the garden",
+          "to": "toad_s_hedge_maze",
+          "art": "painting"
+        },
+        {
+          "id": "castle_garden_3",
+          "type": "deadly",
+          "x": 0.505,
+          "y": 0.02,
+          "label": "Double door at the other end of the garden",
+          "to": "",
+          "art": "deadly"
         }
-      ]
+      ],
+      "shape": "assets/rooms/castle_garden.png",
+      "color": "#20DF20"
     },
     {
       "id": "clock_hall",
@@ -2700,7 +2821,8 @@
           "y": 0.264,
           "label": "Jump into pipe behind Peach painting",
           "to": "tubular_lobby",
-          "art": "blockpipe"
+          "art": "blockpipe",
+          "arrive": "Negative room"
         }
       ],
       "shape": "assets/rooms/clock_hall.png",
@@ -3416,7 +3538,7 @@
           "type": "doubledoor",
           "x": 0.269,
           "y": 0.161,
-          "label": "Double door up the crescent moon",
+          "label": "Double door up the crescent moon, and up the ramp past the clock symbol",
           "to": "cryptic_hideout",
           "pair": "cryptic_hideout_1"
         }
@@ -3496,15 +3618,46 @@
       "exits": [
         {
           "id": "cryptic_hideout_1",
-          "type": "doubledoor",
-          "label": "Back to Plexal Upstairs (Upper)",
+          "type": "lockeddoor",
+          "label": "Locked door across from clock and down the ramp",
           "to": "plexal_upstairs_upper",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "plexal_upstairs_upper_6"
+          "x": 0.507,
+          "y": 0.982,
+          "pair": "plexal_upstairs_upper_6",
+          "art": "locked_door"
+        },
+        {
+          "id": "cryptic_hideout_2",
+          "type": "lockeddoor",
+          "x": 0.028,
+          "y": 0.478,
+          "label": "Locked door on the side, and down the hallway",
+          "to": "funhouse",
+          "art": "locked_door",
+          "pair": "funhouse_2"
+        },
+        {
+          "id": "cryptic_hideout_3",
+          "type": "other",
+          "x": 0.494,
+          "y": 0.021,
+          "label": "Jump in the handless clock face",
+          "to": "click_clock_climb",
+          "art": "painting"
+        },
+        {
+          "id": "cryptic_hideout_4",
+          "type": "deadly",
+          "x": 0.973,
+          "y": 0.147,
+          "label": "In the door to the right and down the hallway",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
         }
-      ]
+      ],
+      "shape": "assets/rooms/cryptic_hideout.png",
+      "color": "#1726A1"
     },
     {
       "id": "sandy_skyloft",
@@ -3672,7 +3825,56 @@
       "id": "tubular_lobby",
       "name": "Tubular Lobby",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "tubular_lobby_1",
+          "type": "door",
+          "x": 0.496,
+          "y": 0.65,
+          "label": "Door in beta room",
+          "to": "hybrid_lobby"
+        },
+        {
+          "id": "tubular_lobby_2",
+          "type": "door",
+          "x": 0.987,
+          "y": 0.335,
+          "label": "Door in nighttime room",
+          "to": "solar_tower",
+          "alts": [
+            {
+              "to": "lunar_tower",
+              "note": "At night"
+            }
+          ]
+        },
+        {
+          "id": "tubular_lobby_3",
+          "type": "door",
+          "x": 0.004,
+          "y": 0.332,
+          "label": "Door in vanilla room",
+          "to": "alternate_courtyard"
+        },
+        {
+          "id": "tubular_lobby_4",
+          "type": "door",
+          "x": 0.502,
+          "y": 0.013,
+          "label": "Door in negative room and into the pipe",
+          "to": "solar_tower"
+        },
+        {
+          "id": "tubular_lobby_5",
+          "type": "door",
+          "x": 0.492,
+          "y": 0.332,
+          "label": "Look up at the ceiling in any of the 4 rooms",
+          "to": "personalization_chamber",
+          "art": "other"
+        }
+      ],
+      "shape": "assets/rooms/tubular_lobby.png"
     },
     {
       "id": "orange_hall",
@@ -3845,6 +4047,15 @@
           "label": "Into the hole, and stand in the beam of light on top of the machine",
           "to": "scary_sewer_maze",
           "art": "hole"
+        },
+        {
+          "id": "bowser_s_floor_5",
+          "type": "door",
+          "x": 0.99,
+          "y": 0.416,
+          "label": "Jump into the Bob-omb painting",
+          "to": "bob_omb_village",
+          "art": "painting"
         }
       ],
       "shape": "assets/rooms/bowsers_floor.png",
@@ -4041,7 +4252,8 @@
           "x": 0.742,
           "y": 0.386,
           "label": "Jump at the brick wall",
-          "to": "tubular_lobby"
+          "to": "tubular_lobby",
+          "arrive": "Beta room"
         }
       ],
       "shape": "assets/rooms/hybrid_lobby.png",
@@ -4425,7 +4637,8 @@
           "x": 0.451,
           "y": 0.332,
           "label": "Above door leading to 4-way in an alcove",
-          "to": "tubular_lobby"
+          "to": "tubular_lobby",
+          "arrive": "Vanilla room"
         }
       ],
       "shape": "assets/rooms/wall_castle.png",
@@ -5147,14 +5360,25 @@
         {
           "id": "alternate_courtyard_1",
           "type": "door",
-          "label": "Back to Wall Castle",
+          "label": "Door behind the fountain",
           "to": "wall_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.498,
+          "y": 0.968,
           "pair": "wall_castle_10"
+        },
+        {
+          "id": "alternate_courtyard_2",
+          "type": "door",
+          "x": 0.502,
+          "y": 0.476,
+          "label": "Hole in the fountain",
+          "to": "uncanny_courtyard_windy",
+          "art": "hole",
+          "arrive": "In the Crimson form. Step on the fountain pedestal to warp to Windy form"
         }
-      ]
+      ],
+      "shape": "assets/rooms/alternate_courtyard.png",
+      "color": "#DADADA"
     },
     {
       "id": "courtyard_fabricated",
@@ -5554,7 +5778,8 @@
           "x": 0.49,
           "y": 0.01,
           "label": "Metal door at the end of short hallway",
-          "to": ""
+          "to": "vanilla_castle_grounds",
+          "pair": "vanilla_castle_grounds_2"
         },
         {
           "id": "challenge_lobby_5",
@@ -6256,7 +6481,8 @@
           "y": 0.185,
           "label": "Jump into giant crack in the wall",
           "to": "tubular_lobby",
-          "art": "other"
+          "art": "other",
+          "arrive": "Nighttime room"
         }
       ],
       "shape": "assets/rooms/crumbling_castle.png",
@@ -6735,6 +6961,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "painting_museum_3"
+        },
+        {
+          "id": "vanilla_castle_grounds_2",
+          "type": "door",
+          "label": "Back to Challenge Lobby",
+          "to": "challenge_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "challenge_lobby_4"
         }
       ]
     },
@@ -6958,6 +7194,50 @@
       "id": "peach_s_floor",
       "name": "Peach's Floor",
       "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "bob_omb_village",
+      "name": "Bob-omb Village",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "toad_s_hedge_maze",
+      "name": "Toad's Hedge Maze",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "bowser_s_checkered_madness",
+      "name": "Bowser's Checkered Madness",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "bowser_s_checkered_madness_1",
+          "type": "other",
+          "label": "Collect a star, and follow Peach into her stained glass window",
+          "to": "vanilla_castle_grounds",
+          "art": "other"
+        }
+      ]
+    },
+    {
+      "id": "aquarium_limbo",
+      "name": "Aquatic Tunnel",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "monochrome_castle_grounds",
+      "name": "Monochrome Castle Grounds",
+      "kind": "room",
+      "exits": []
+    },
+    {
+      "id": "click_clock_climb",
+      "name": "Click Clock Climb",
+      "kind": "course",
       "exits": []
     }
   ]
