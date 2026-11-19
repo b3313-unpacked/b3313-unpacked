@@ -3811,14 +3811,44 @@
         {
           "id": "bowser_s_floor_1",
           "type": "other",
-          "label": "Back to Crescent Castle",
+          "label": "Jump in the sky painting in the side room",
           "to": "crescent_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.902,
+          "y": 0.144,
           "pair": "crescent_castle_10"
+        },
+        {
+          "id": "bowser_s_floor_2",
+          "type": "doubledoor",
+          "x": 0.817,
+          "y": 0.714,
+          "label": "Double door in its own alcove",
+          "to": "bowser_s_prison",
+          "art": "doubledoor",
+          "pair": "bowser_s_prison_1"
+        },
+        {
+          "id": "bowser_s_floor_3",
+          "type": "door",
+          "x": 0.597,
+          "y": 0.089,
+          "label": "Through the door and down a long hallway into a big Bowser painting",
+          "to": "bowser_s_hallway",
+          "art": "door",
+          "pair": "bowser_s_hallway_1"
+        },
+        {
+          "id": "bowser_s_floor_4",
+          "type": "hole",
+          "x": 0.087,
+          "y": 0.639,
+          "label": "Into the hole, and stand in the beam of light on top of the machine",
+          "to": "scary_sewer_maze",
+          "art": "hole"
         }
-      ]
+      ],
+      "shape": "assets/rooms/bowsers_floor.png",
+      "color": "#AEAEAE"
     },
     {
       "id": "twisted_castle_grounds",
@@ -5457,7 +5487,28 @@
       "id": "unsettling_maze",
       "name": "Unsettling Maze",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "unsettling_maze_1",
+          "type": "door",
+          "label": "The door not below a eyeless Peach painting",
+          "to": "warped_internal_garden",
+          "x": 0.989,
+          "y": 0.059,
+          "pair": "warped_internal_garden_3"
+        },
+        {
+          "id": "unsettling_maze_2",
+          "type": "deadly",
+          "x": 0.004,
+          "y": 0.63,
+          "label": "Go in the hole in the wall past the dark beta lobby",
+          "to": "",
+          "art": "deadly"
+        }
+      ],
+      "shape": "assets/rooms/unsettling_maze.png",
+      "color": "#404040"
     },
     {
       "id": "lobby_z64",
@@ -5916,14 +5967,43 @@
         {
           "id": "warped_internal_garden_1",
           "type": "door",
-          "label": "Back to Parallel Lobby",
+          "label": "Door in the tunnel",
           "to": "parallel_lobby_2",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.484,
+          "y": 0.988,
           "pair": "parallel_lobby_2_11"
+        },
+        {
+          "id": "warped_internal_garden_2",
+          "type": "door",
+          "x": 0.484,
+          "y": 0.014,
+          "label": "Either door on the wall",
+          "to": "elder_koopa_library",
+          "pair": "elder_koopa_library_3"
+        },
+        {
+          "id": "warped_internal_garden_3",
+          "type": "door",
+          "x": 0.487,
+          "y": 0.737,
+          "label": "Door in alcove above",
+          "to": "unsettling_maze",
+          "pair": "unsettling_maze_1"
+        },
+        {
+          "id": "warped_internal_garden_4",
+          "type": "deadly",
+          "x": 0.016,
+          "y": 0.582,
+          "label": "Climb in the window, or jump down the pit in the tunnel",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
         }
-      ]
+      ],
+      "shape": "assets/rooms/warped_internal_garden.png",
+      "color": "#C9DE68"
     },
     {
       "id": "greenhouse_framework",
@@ -6015,14 +6095,34 @@
         {
           "id": "breaking_the_barrier_1",
           "type": "doubledoor",
-          "label": "Back to Floor 3B",
+          "label": "Double door in main room",
           "to": "floor_3b",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.49,
+          "y": 0.986,
           "pair": "floor_3b_7"
+        },
+        {
+          "id": "breaking_the_barrier_2",
+          "type": "doubledoor",
+          "label": "Double door up the ramp and through the courtyard",
+          "to": "internal_garden",
+          "x": 0.496,
+          "y": 0.015,
+          "pair": "internal_garden_3"
+        },
+        {
+          "id": "breaking_the_barrier_3",
+          "type": "deadly",
+          "x": 0.483,
+          "y": 0.651,
+          "label": "Go in one of the single doors and immediately re-enter it",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
         }
-      ]
+      ],
+      "shape": "assets/rooms/breaking_barrier.png",
+      "color": "#AAC7E4"
     },
     {
       "id": "sandstone_palace",
@@ -6286,6 +6386,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "bowser_s_castle_6"
+        },
+        {
+          "id": "purple_upstairs_2",
+          "type": "doubledoor",
+          "label": "Back to Bowser's Hallway",
+          "to": "bowser_s_hallway",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "bowser_s_hallway_2"
         }
       ]
     },
@@ -6471,14 +6581,60 @@
         {
           "id": "elder_koopa_library_1",
           "type": "door",
-          "label": "Back to Outer Strip",
+          "label": "Door in front of the sign",
           "to": "outer_strip",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.329,
+          "y": 0.982,
           "pair": "outer_strip_3"
+        },
+        {
+          "id": "elder_koopa_library_2",
+          "type": "doubledoor",
+          "label": "Double door across from Lethal Lava Land painting",
+          "to": "internal_garden",
+          "x": 0.893,
+          "y": 0.889,
+          "pair": "internal_garden_2"
+        },
+        {
+          "id": "elder_koopa_library_3",
+          "type": "door",
+          "label": "Into the elevated door, and into either door in the next room",
+          "to": "warped_internal_garden",
+          "x": 0.331,
+          "y": 0.011,
+          "pair": "warped_internal_garden_2"
+        },
+        {
+          "id": "elder_koopa_library_4",
+          "type": "hole",
+          "x": 0.016,
+          "y": 0.564,
+          "label": "Push the thin bookshelf and go in the hole",
+          "to": "unsettling_maze",
+          "art": "hole"
+        },
+        {
+          "id": "elder_koopa_library_5",
+          "type": "hole",
+          "x": 0.895,
+          "y": 0.45,
+          "label": "Hole in front of the Lethal Lava Land painting",
+          "to": "bedrock_magmas",
+          "art": "painting"
+        },
+        {
+          "id": "elder_koopa_library_6",
+          "type": "hole",
+          "x": 0.718,
+          "y": 0.248,
+          "label": "Jump in the hole in the small room",
+          "to": "spiky_sand_land",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/elder_koopa_library.png",
+      "color": "#2080DF"
     },
     {
       "id": "uncanny_library",
@@ -6516,15 +6672,54 @@
       "exits": [
         {
           "id": "internal_garden_1",
-          "type": "lockeddoor",
-          "label": "Back to Greenhouse Framework",
+          "type": "doubledoor",
+          "label": "Double door under painting next to Vanish Cap box",
           "to": "greenhouse_framework",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.808,
+          "y": 0.549,
           "pair": "greenhouse_framework_4"
+        },
+        {
+          "id": "internal_garden_2",
+          "type": "doubledoor",
+          "x": 0.714,
+          "y": 0.246,
+          "label": "Double door in the back corner away from mirror",
+          "to": "elder_koopa_library",
+          "art": "doubledoor",
+          "pair": "elder_koopa_library_2"
+        },
+        {
+          "id": "internal_garden_3",
+          "type": "doubledoor",
+          "x": 0.515,
+          "y": 0.341,
+          "label": "Out the bricked double door and across the courtyard",
+          "to": "breaking_the_barrier",
+          "art": "doubledoor",
+          "pair": "breaking_the_barrier_2"
+        },
+        {
+          "id": "internal_garden_4",
+          "type": "doubledoor",
+          "x": 0.219,
+          "y": 0.551,
+          "label": "Double door across from Greenhouse Framework double door, and into the Goomba painting",
+          "to": "twilight_forest",
+          "art": "painting"
+        },
+        {
+          "id": "internal_garden_5",
+          "type": "doubledoor",
+          "x": 0.515,
+          "y": 0.964,
+          "label": "Double door on the other side of the mirror and in the Luigi painting",
+          "to": "breaking_the_barrier",
+          "art": "doubledoor"
         }
-      ]
+      ],
+      "shape": "assets/rooms/internal_garden.png",
+      "color": "#20DF20"
     },
     {
       "id": "vanilla_castle_grounds",
@@ -6679,6 +6874,90 @@
       "id": "downtown_city",
       "name": "Downtown City",
       "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "twilight_forest",
+      "name": "Twilight Forest",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "spiky_sand_land",
+      "name": "Spiky Sand Land",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "bowser_s_prison",
+      "name": "Bowser's Prison",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "bowser_s_prison_1",
+          "type": "doubledoor",
+          "label": "Double door across from throne room",
+          "to": "bowser_s_floor",
+          "x": 0.483,
+          "y": 0.988,
+          "pair": "bowser_s_floor_2"
+        },
+        {
+          "id": "bowser_s_prison_2",
+          "type": "deadly",
+          "x": 0.145,
+          "y": 0.449,
+          "label": "Jump in the pipe",
+          "to": "",
+          "art": "deadly",
+          "respawn": "plexal_lobby"
+        },
+        {
+          "id": "bowser_s_prison_3",
+          "type": "other",
+          "x": 0.476,
+          "y": 0.128,
+          "label": "Stand on the throne",
+          "to": "peach_s_floor",
+          "art": "other"
+        }
+      ],
+      "shape": "assets/rooms/bowsers_prison.png",
+      "color": "#38620E"
+    },
+    {
+      "id": "bowser_s_hallway",
+      "name": "Bowser's Hallway",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "bowser_s_hallway_1",
+          "type": "other",
+          "label": "Into the Bowser painting, up the ramp, and down the hallway",
+          "to": "bowser_s_floor",
+          "x": 0.006,
+          "y": 0.509,
+          "pair": "bowser_s_floor_3",
+          "art": "other"
+        },
+        {
+          "id": "bowser_s_hallway_2",
+          "type": "doubledoor",
+          "x": 0.993,
+          "y": 0.498,
+          "label": "Double door at the end of the hallway",
+          "to": "purple_upstairs",
+          "art": "doubledoor",
+          "pair": "purple_upstairs_2"
+        }
+      ],
+      "color": "#6C6C6C",
+      "shape": "assets/rooms/bowsers_hallway.png"
+    },
+    {
+      "id": "peach_s_floor",
+      "name": "Peach's Floor",
+      "kind": "room",
       "exits": []
     }
   ]
