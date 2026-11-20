@@ -2577,44 +2577,162 @@
         {
           "id": "vanilla_lobby_1",
           "type": "door",
-          "label": "Back to Parallel Lobby",
+          "label": "Go through the middle Peach window and through the door",
           "to": "parallel_lobby_2",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.948,
+          "y": 0.281,
           "pair": "parallel_lobby_2_4"
         },
         {
           "id": "vanilla_lobby_2",
           "type": "doubledoor",
-          "label": "Back to Polygonal Chaos",
+          "label": "Through the Peach window and down the passageway",
           "to": "polygonal_chaos",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "polygonal_chaos_6"
+          "x": 0.491,
+          "y": 1,
+          "pair": "polygonal_chaos_6",
+          "art": "other"
         },
         {
           "id": "vanilla_lobby_3",
           "type": "door",
-          "label": "Back to Clockwork Internals",
+          "label": "Ground-pound the sun floor and go through the door",
           "to": "clockwork_internals",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.493,
+          "y": 0.849,
           "pair": "clockwork_internals_6"
         },
         {
           "id": "vanilla_lobby_4",
           "type": "pipe",
-          "label": "Back to Uncanny Basement",
+          "label": "Jump into the right hole in the Jolly Roger Bay room, and find the pipe",
           "to": "uncanny_basement",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.986,
+          "y": 0.541,
           "pair": "uncanny_basement_4"
+        },
+        {
+          "id": "vanilla_lobby_5",
+          "type": "doubledoor",
+          "x": 0.493,
+          "y": 0.954,
+          "label": "Double door normally leading to castle grounds, and down Boo hallway",
+          "to": "dark_lobby",
+          "art": "doubledoor",
+          "pair": "dark_lobby_2"
+        },
+        {
+          "id": "vanilla_lobby_6",
+          "type": "other",
+          "x": 0.493,
+          "y": 0.745,
+          "label": "Look up at the ceiling",
+          "to": "solar_tower",
+          "art": "other"
+        },
+        {
+          "id": "vanilla_lobby_7",
+          "type": "door",
+          "x": 0.01,
+          "y": 0.449,
+          "label": "Door 1 to room with painting",
+          "to": "bob_omb_battlefield_beta",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_lobby_8",
+          "type": "door",
+          "x": 0.19,
+          "y": 0.43,
+          "label": "Door 3 into room with painting",
+          "to": "cool_cool_mountain_beta",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_lobby_9",
+          "type": "door",
+          "x": 0.808,
+          "y": 0.418,
+          "label": "Door 2 to room with painting",
+          "to": "flying_fortress",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_lobby_10",
+          "type": "door",
+          "x": 0.988,
+          "y": 0.388,
+          "label": "Jump into the left hole in the Jolly Roger Bay room",
+          "to": "fish_tank",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_lobby_11",
+          "type": "door",
+          "x": 0.988,
+          "y": 0.461,
+          "label": "Door 3 to room with painting",
+          "to": "jolly_roger_bay_beta",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_lobby_12",
+          "type": "lockeddoor",
+          "x": 0.491,
+          "y": 0.562,
+          "label": "Expected locked door downstairs",
+          "to": "vanilla_basement",
+          "art": "locked_door",
+          "pair": "vanilla_basement_2"
+        },
+        {
+          "id": "vanilla_lobby_13",
+          "type": "door",
+          "x": 0.493,
+          "y": 0.014,
+          "label": "Go into the courtyard, beat Big Boo, and jump in the cage",
+          "to": "big_boo_s_haunt_beta",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_lobby_14",
+          "type": "hole",
+          "x": 0.069,
+          "y": 0.339,
+          "label": "Jump into the first trapdoor past the star door",
+          "to": "bowser_in_the_dark_world_beta",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_lobby_15",
+          "type": "hole",
+          "x": 0.033,
+          "y": 0.299,
+          "label": "Jump into the second trapdoor past the star door",
+          "to": "breaking_the_barrier",
+          "art": "hole"
+        },
+        {
+          "id": "vanilla_lobby_16",
+          "type": "lockeddoor",
+          "x": 0.493,
+          "y": 0.38,
+          "label": "Key door normally to upsatirs",
+          "to": "purple_upstairs",
+          "art": "locked_door"
+        },
+        {
+          "id": "vanilla_lobby_17",
+          "type": "hole",
+          "x": 0.933,
+          "y": 0.324,
+          "label": "Go through Peach's Secret Slide hole",
+          "to": "big_boo_s_haunted_forest",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/vanilla_lobby.png",
+      "color": "#20ACDF"
     },
     {
       "id": "grassy_highlands",
@@ -2630,24 +2748,34 @@
         {
           "id": "funhouse_1",
           "type": "door",
-          "label": "Back to Uncanny Courtyard",
+          "label": "Door hidden in the walls with plains and red mountains",
           "to": "uncanny_courtyard",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.917,
+          "y": 0.813,
           "pair": "uncanny_courtyard_5"
         },
         {
           "id": "funhouse_2",
           "type": "lockeddoor",
-          "label": "Back to Cryptic Hideout",
+          "label": "Door hidden in the walls with the night sky, and down the hall",
           "to": "cryptic_hideout",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "cryptic_hideout_2"
+          "x": 0.447,
+          "y": 0.653,
+          "pair": "cryptic_hideout_2",
+          "art": "door"
+        },
+        {
+          "id": "funhouse_3",
+          "type": "door",
+          "x": 0.328,
+          "y": 0.011,
+          "label": "Door hidden in the walls with green hills",
+          "to": "forest_maze",
+          "pair": "forest_maze_2"
         }
-      ]
+      ],
+      "shape": "assets/rooms/funhouse.png",
+      "color": "#DFAC20"
     },
     {
       "id": "zany_castle",
@@ -3560,14 +3688,25 @@
         {
           "id": "forest_maze_1",
           "type": "door",
-          "label": "Back to Bowser's Castle",
+          "label": "Door at the end of the left hallway",
           "to": "bowser_s_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.384,
+          "y": 0.062,
           "pair": "bowser_s_castle_3"
+        },
+        {
+          "id": "forest_maze_2",
+          "type": "doubledoor",
+          "label": "Double door in the main room",
+          "to": "funhouse",
+          "x": 0.547,
+          "y": 0.98,
+          "pair": "funhouse_3",
+          "art": "doubledoor"
         }
-      ]
+      ],
+      "shape": "assets/rooms/forest_maze.png",
+      "color": "#20DF80"
     },
     {
       "id": "big_boo_s_fortress",
@@ -3985,6 +4124,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "floor_2b_2nd_floor_2"
+        },
+        {
+          "id": "dark_lobby_2",
+          "type": "doubledoor",
+          "label": "Back to Vanilla Lobby",
+          "to": "vanilla_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "vanilla_lobby_5"
         }
       ]
     },
@@ -4453,14 +4602,43 @@
         {
           "id": "stellar_tower_1",
           "type": "pipe",
-          "label": "Back to Toad's Lobby",
+          "label": "Pipe outside the tower",
           "to": "toad_s_lobby",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "toad_s_lobby_5"
+          "x": 0.941,
+          "y": 0.844,
+          "pair": "toad_s_lobby_5",
+          "art": "blockpipe"
+        },
+        {
+          "id": "stellar_tower_2",
+          "type": "pipe",
+          "x": 0.587,
+          "y": 0.754,
+          "label": "Pipe on the first floor",
+          "to": "zany_forest",
+          "art": "painting"
+        },
+        {
+          "id": "stellar_tower_3",
+          "type": "pipe",
+          "x": 0.215,
+          "y": 0.753,
+          "label": "Pipe on the second floor",
+          "to": "mountainside_village",
+          "art": "painting"
+        },
+        {
+          "id": "stellar_tower_4",
+          "type": "pipe",
+          "x": 0.631,
+          "y": 0.228,
+          "label": "Pipe on the top floor",
+          "to": "wallman_citadel",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/stellar_tower.png",
+      "color": "#F3EBE2"
     },
     {
       "id": "silent_sewers",
@@ -4927,9 +5105,9 @@
           "type": "hole",
           "x": 0.096,
           "y": 0.268,
-          "label": "Break open the cork box in one of the prison cells and jump down",
+          "label": "Break open the cork box in one of the prison cells and jump down. Go through the hole and platform through the Escape Route and through double doors at the end",
           "to": "escape_route",
-          "art": "hole"
+          "art": "painting"
         },
         {
           "id": "bowser_s_domain_4",
@@ -5703,9 +5881,23 @@
     },
     {
       "id": "escape_route",
-      "name": "Escape Route",
-      "kind": "room",
-      "exits": []
+      "name": "Imperfect Sanctuary Lobby",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "escape_route_1",
+          "type": "other",
+          "label": "Jump in the Peach painting or collect the star",
+          "to": "vanilla_lobby",
+          "art": "other"
+        },
+        {
+          "id": "escape_route_2",
+          "type": "door",
+          "label": "Go in the door on the right side and up the steep ramp",
+          "to": "alternate_courtyard"
+        }
+      ]
     },
     {
       "id": "unsettling_maze",
@@ -5738,7 +5930,28 @@
       "id": "lobby_z64",
       "name": "lobby.z64",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "lobby_z64_1",
+          "type": "other",
+          "x": 0.506,
+          "y": 0.686,
+          "label": "Look up at the ceiling",
+          "to": "vanilla_lobby",
+          "art": "other"
+        },
+        {
+          "id": "lobby_z64_2",
+          "type": "other",
+          "x": 0.497,
+          "y": 0.016,
+          "label": "Jump into the painting",
+          "to": "bob_omb_battlefield_beta",
+          "art": "painting"
+        }
+      ],
+      "shape": "assets/rooms/lobbyz64.png",
+      "color": "#20DF80"
     },
     {
       "id": "challenge_lobby",
@@ -6309,6 +6522,16 @@
           "y": 0.5,
           "needsPos": true,
           "pair": "floor_3b_4"
+        },
+        {
+          "id": "vanilla_basement_2",
+          "type": "lockeddoor",
+          "label": "Back to Vanilla Lobby",
+          "to": "vanilla_lobby",
+          "x": 0.5,
+          "y": 0.5,
+          "needsPos": true,
+          "pair": "vanilla_lobby_12"
         }
       ]
     },
@@ -6414,7 +6637,7 @@
           "type": "door",
           "x": 0.201,
           "y": 0.054,
-          "label": "Left door in junction room",
+          "label": "Left door in junction room, and through dark hallway",
           "to": "uncanny_library",
           "pair": "uncanny_library_1"
         },
@@ -6870,14 +7093,33 @@
         {
           "id": "uncanny_library_1",
           "type": "door",
-          "label": "Back to Clockwork Internals",
+          "label": "Door in the dark room",
           "to": "clockwork_internals",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.41,
+          "y": 0.007,
           "pair": "clockwork_internals_5"
+        },
+        {
+          "id": "uncanny_library_2",
+          "type": "hole",
+          "x": 0.867,
+          "y": 0.802,
+          "label": "Enter the hole through the grate",
+          "to": "castle_bathroom",
+          "art": "hole"
+        },
+        {
+          "id": "uncanny_library_3",
+          "type": "deadly",
+          "x": 0.391,
+          "y": 0.983,
+          "label": "Jump into the faceless Peach painting",
+          "to": "",
+          "respawn": "plexal_lobby"
         }
-      ]
+      ],
+      "shape": "assets/rooms/uncanny_library.png",
+      "color": "#2A2A2A"
     },
     {
       "id": "motos_factory",
@@ -7237,6 +7479,91 @@
     {
       "id": "click_clock_climb",
       "name": "Click Clock Climb",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "zany_forest",
+      "name": "Zany Forest",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "mountainside_village",
+      "name": "Goomba Town",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "wallman_citadel",
+      "name": "Wallman Citadel",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "cool_cool_mountain_beta",
+      "name": "Cool, Cool Mountain (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "cool_cool_mountain_beta_1",
+          "type": "hole",
+          "label": "Jump in the hole in the beginning",
+          "to": "cabin_s_snow_slide",
+          "art": "hole",
+          "pair": "cabin_s_snow_slide_1"
+        }
+      ]
+    },
+    {
+      "id": "cabin_s_snow_slide",
+      "name": "Cabin's Snow Slide",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "cabin_s_snow_slide_1",
+          "type": "hole",
+          "label": "Hole at the end of the slide",
+          "to": "cool_cool_mountain_beta",
+          "pair": "cool_cool_mountain_beta_1"
+        }
+      ]
+    },
+    {
+      "id": "flying_fortress",
+      "name": "Flying Fortress",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "fish_tank",
+      "name": "Aquarium Limbo",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "big_boo_s_haunt_beta",
+      "name": "Big Boo's Haunt (beta)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "bowser_in_the_dark_world_beta",
+      "name": "Bowser in the Dark World (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "bowser_in_the_dark_world_beta_1",
+          "type": "pipe",
+          "label": "Pipe at the end of the course",
+          "to": "bowser_in_the_dark_world_december_95",
+          "art": "pipe"
+        }
+      ]
+    },
+    {
+      "id": "bowser_in_the_dark_world_december_95",
+      "name": "Bowser in the Dark World (December '95)",
       "kind": "course",
       "exits": []
     }
