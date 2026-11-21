@@ -2717,7 +2717,7 @@
           "type": "lockeddoor",
           "x": 0.493,
           "y": 0.38,
-          "label": "Key door normally to upsatirs",
+          "label": "Locked door normally to upstairs",
           "to": "purple_upstairs",
           "art": "locked_door"
         },
@@ -4117,25 +4117,35 @@
       "exits": [
         {
           "id": "dark_lobby_1",
-          "type": "door",
-          "label": "Back to Floor 2B (2nd Floor)",
+          "type": "doubledoor",
+          "label": "Double door normally to castle grounds and through the dark hallway",
           "to": "floor_2b_2nd_floor",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "floor_2b_2nd_floor_2"
+          "x": 0.499,
+          "y": 0.988,
+          "pair": "floor_2b_2nd_floor_2",
+          "art": "doubledoor"
         },
         {
           "id": "dark_lobby_2",
           "type": "doubledoor",
-          "label": "Back to Vanilla Lobby",
+          "label": "Go through the Boo hallway and into the double door",
           "to": "vanilla_lobby",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.495,
+          "y": 0.013,
           "pair": "vanilla_lobby_5"
+        },
+        {
+          "id": "dark_lobby_3",
+          "type": "hole",
+          "x": 0.501,
+          "y": 0.772,
+          "label": "Ground pound the sun and enter the hole in the wall all the way down",
+          "to": "mario_s_maze",
+          "art": "painting"
         }
-      ]
+      ],
+      "color": "#621D0E",
+      "shape": "assets/rooms/vanilla_lobby.png"
     },
     {
       "id": "vanilla_upstairs",
@@ -4296,25 +4306,27 @@
       "exits": [
         {
           "id": "fake_lobby_1",
-          "type": "door",
-          "label": "Back to Crescent Castle",
+          "type": "doubledoor",
+          "label": "Double door to normally castle grounds",
           "to": "crescent_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "crescent_castle_13"
+          "x": 0.497,
+          "y": 0.984,
+          "pair": "crescent_castle_13",
+          "art": "doubledoor"
         },
         {
           "id": "fake_lobby_2",
-          "type": "doubledoor",
-          "label": "Back to Floor 2B (2nd Floor)",
+          "type": "lockeddoor",
+          "label": "Locked door normally to upstairs",
           "to": "floor_2b_2nd_floor",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "floor_2b_2nd_floor_8"
+          "x": 0.495,
+          "y": 0.378,
+          "pair": "floor_2b_2nd_floor_8",
+          "art": "locked_door"
         }
-      ]
+      ],
+      "shape": "assets/rooms/vanilla_lobby.png",
+      "color": "#AAE4E4"
     },
     {
       "id": "hybrid_lobby",
@@ -6516,24 +6528,71 @@
         {
           "id": "vanilla_basement_1",
           "type": "door",
-          "label": "Back to Floor 3B",
+          "label": "Double door in a hallway after the star door",
           "to": "floor_3b",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "floor_3b_4"
+          "x": 0.854,
+          "y": 0.919,
+          "pair": "floor_3b_4",
+          "art": "doubledoor"
         },
         {
           "id": "vanilla_basement_2",
           "type": "lockeddoor",
-          "label": "Back to Vanilla Lobby",
+          "label": "Locked door normally leading to lobby",
           "to": "vanilla_lobby",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "vanilla_lobby_12"
+          "x": 0.488,
+          "y": 0.521,
+          "pair": "vanilla_lobby_12",
+          "art": "locked_door"
+        },
+        {
+          "id": "vanilla_basement_3",
+          "type": "door",
+          "x": 0.99,
+          "y": 0.443,
+          "label": "Door normally leading to under the moat",
+          "to": "vanilla_castle_grounds"
+        },
+        {
+          "id": "vanilla_basement_4",
+          "type": "other",
+          "x": 0.054,
+          "y": 0.409,
+          "label": "Try to collect the star",
+          "to": "basement_maze",
+          "art": "other"
+        },
+        {
+          "id": "vanilla_basement_5",
+          "type": "deadly",
+          "x": 0.489,
+          "y": 0.092,
+          "label": "Jump in the pipe where Hazy Maze Cave would normally be",
+          "to": "",
+          "art": "deadly",
+          "respawn": "vanilla_basement"
+        },
+        {
+          "id": "vanilla_basement_6",
+          "type": "other",
+          "x": 0.359,
+          "y": 0.033,
+          "label": "Jump in the Lethal Lava Land painting",
+          "to": "fire_bubble_shoshinkai_2",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_basement_7",
+          "type": "other",
+          "x": 0.133,
+          "y": 0.263,
+          "label": "Jump into the Shifting Sand Land wall",
+          "to": "chroma_tundra_beta",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/vanilla_basement.png",
+      "color": "#0E622C"
     },
     {
       "id": "breaking_the_barrier",
@@ -7197,24 +7256,96 @@
         {
           "id": "vanilla_castle_grounds_1",
           "type": "doubledoor",
-          "label": "Back to Painting Museum",
+          "label": "Double door on the roof",
           "to": "painting_museum",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.515,
+          "y": 0.507,
           "pair": "painting_museum_3"
         },
         {
           "id": "vanilla_castle_grounds_2",
           "type": "door",
-          "label": "Back to Challenge Lobby",
+          "label": "Iron door in the drained moat",
           "to": "challenge_lobby",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.659,
+          "y": 0.638,
           "pair": "challenge_lobby_4"
+        },
+        {
+          "id": "vanilla_castle_grounds_3",
+          "type": "doubledoor",
+          "x": 0.513,
+          "y": 0.638,
+          "label": "Front double doors",
+          "to": "vanilla_lobby",
+          "art": "doubledoor"
+        },
+        {
+          "id": "vanilla_castle_grounds_4",
+          "type": "hole",
+          "x": 0.512,
+          "y": 0.719,
+          "label": "Hole inside wall under bridge",
+          "to": "scary_sewer_maze",
+          "art": "hole",
+          "arrive": "Beginning of Underwater Section"
+        },
+        {
+          "id": "vanilla_castle_grounds_5",
+          "type": "hole",
+          "x": 0.512,
+          "y": 0.796,
+          "label": "Hole in the ground under bridge, through long hallway into double door",
+          "to": "genesis_basement",
+          "art": "hole"
+        },
+        {
+          "id": "vanilla_castle_grounds_6",
+          "type": "other",
+          "x": 0.512,
+          "y": 0.581,
+          "label": "Fly through Peach's head on her window",
+          "to": "castle_grounds",
+          "art": "other"
+        },
+        {
+          "id": "vanilla_castle_grounds_7",
+          "type": "door",
+          "x": 0.299,
+          "y": 0.437,
+          "label": "Door on ledge left side when facing front door",
+          "to": "silent_hall"
+        },
+        {
+          "id": "vanilla_castle_grounds_8",
+          "type": "hole",
+          "x": 0.231,
+          "y": 0.426,
+          "label": "Hole in ground near waterfall",
+          "to": "sunken_castle",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_castle_grounds_9",
+          "type": "doubledoor",
+          "x": 0.518,
+          "y": 0.382,
+          "label": "Double door back of the castle",
+          "to": "crescent_castle",
+          "art": "doubledoor"
+        },
+        {
+          "id": "vanilla_castle_grounds_10",
+          "type": "deadly",
+          "x": 0.637,
+          "y": 0.252,
+          "label": "Cave in wall behind castle",
+          "to": "",
+          "respawn": "castle_grounds"
         }
-      ]
+      ],
+      "color": "#68DE7E",
+      "shape": "assets/rooms/castle_grounds.png"
     },
     {
       "id": "garden",
@@ -7564,6 +7695,78 @@
     {
       "id": "bowser_in_the_dark_world_december_95",
       "name": "Bowser in the Dark World (December '95)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "mario_s_maze",
+      "name": "Mario's Maze",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "chroma_tundra_beta",
+      "name": "Chroma Tundra (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "chroma_tundra_beta_1",
+          "type": "other",
+          "label": "Jump onto the platform at the beginning",
+          "to": "shifting_sand_land_beta",
+          "art": "painting",
+          "pair": "shifting_sand_land_beta_1"
+        },
+        {
+          "id": "chroma_tundra_beta_2",
+          "type": "door",
+          "label": "Jump in the pipe hidden in the crates behind the tower",
+          "to": "bowser_s_outpost",
+          "art": "pipe",
+          "pair": "bowser_s_outpost_1"
+        }
+      ]
+    },
+    {
+      "id": "shifting_sand_land_beta",
+      "name": "Shifting Sand Land (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "shifting_sand_land_beta_1",
+          "type": "other",
+          "label": "Approach a quicksand pit",
+          "to": "chroma_tundra_beta",
+          "pair": "chroma_tundra_beta_1",
+          "art": "painting"
+        },
+        {
+          "id": "shifting_sand_land_beta_2",
+          "type": "hole",
+          "label": "Enter the pyramid",
+          "to": "pyramid_of_old",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "bowser_s_outpost",
+      "name": "Bowser's Outpost",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "bowser_s_outpost_1",
+          "type": "pipe",
+          "label": "Jump in the pipe at the top",
+          "to": "chroma_tundra_beta",
+          "pair": "chroma_tundra_beta_2",
+          "art": "pipe"
+        }
+      ]
+    },
+    {
+      "id": "pyramid_of_old",
+      "name": "Pyramid of Old",
       "kind": "course",
       "exits": []
     }
