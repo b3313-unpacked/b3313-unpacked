@@ -127,8 +127,7 @@
           "y": 0.504,
           "label": "Hidden hallway door behind clock above front door",
           "to": "twisted_red_hallway",
-          "art": "doubledoor",
-          "pair": "twisted_red_hallway_1"
+          "art": "doubledoor"
         },
         {
           "id": "castle_grounds_6",
@@ -417,14 +416,24 @@
         {
           "id": "twisted_red_hallway_1",
           "type": "door",
-          "label": "Back to Castle Grounds",
-          "to": "castle_grounds",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
-          "pair": "castle_grounds_5"
+          "label": "Door",
+          "to": "twisted_lobby",
+          "x": 0.483,
+          "y": 0.017,
+          "pair": "twisted_lobby_1"
+        },
+        {
+          "id": "twisted_red_hallway_2",
+          "type": "doubledoor",
+          "x": 0.498,
+          "y": 0.973,
+          "label": "Double door",
+          "to": "twisted_castle_grounds",
+          "art": "doubledoor"
         }
-      ]
+      ],
+      "shape": "assets/rooms/silent_hall.png",
+      "color": "#DF2020"
     },
     {
       "id": "silent_hall",
@@ -1261,7 +1270,8 @@
           "to": ""
         }
       ],
-      "shape": "assets/rooms/personalization_chamber.png"
+      "shape": "assets/rooms/personalization_chamber.png",
+      "color": "#FFFFFF"
     },
     {
       "id": "surface_test",
@@ -4013,7 +4023,8 @@
           "art": "other"
         }
       ],
-      "shape": "assets/rooms/tubular_lobby.png"
+      "shape": "assets/rooms/tubular_lobby.png",
+      "color": "#FFFFFF"
     },
     {
       "id": "orange_hall",
@@ -4155,14 +4166,116 @@
         {
           "id": "vanilla_upstairs_1",
           "type": "other",
-          "label": "Back to Crescent Castle",
+          "label": "Jump in the small sky painting left of the Wet-Dry World painting",
           "to": "crescent_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.779,
+          "y": 0.963,
           "pair": "crescent_castle_9"
+        },
+        {
+          "id": "vanilla_upstairs_2",
+          "type": "door",
+          "x": 0.674,
+          "y": 0.821,
+          "label": "Through the door and down the stairs normally leading to the lobby",
+          "to": "plexal_lobby_large_rooms"
+        },
+        {
+          "id": "vanilla_upstairs_3",
+          "type": "other",
+          "x": 0.557,
+          "y": 0.746,
+          "label": "Jump into the night sky painting next to the stairs",
+          "to": "purple_upstairs",
+          "art": "other",
+          "pair": "purple_upstairs_3"
+        },
+        {
+          "id": "vanilla_upstairs_4",
+          "type": "door",
+          "x": 0.624,
+          "y": 0.987,
+          "label": "Jump into the Wet-Dry World painting",
+          "to": "wet_dry_world_beta",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_upstairs_5",
+          "type": "other",
+          "x": 0.147,
+          "y": 0.955,
+          "label": "Jump into the wall leading to Snowman's Land",
+          "to": "snowman_s_darkness",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_upstairs_6",
+          "type": "other",
+          "x": 0.016,
+          "y": 0.708,
+          "label": "Go through the mirror",
+          "to": "mirrored_upstairs",
+          "art": "other",
+          "pair": "mirrored_upstairs_2"
+        },
+        {
+          "id": "vanilla_upstairs_7",
+          "type": "other",
+          "x": 0.64,
+          "y": 0.444,
+          "label": "Jump in the Tall, Tall Mountain painting",
+          "to": "grassy_snowy_summit",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_upstairs_8",
+          "type": "door",
+          "x": 0.987,
+          "y": 0.711,
+          "label": "Enter either of the Tiny-Huge Island paintings",
+          "to": "tiny_huge_island_beta",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_upstairs_9",
+          "type": "other",
+          "x": 0.094,
+          "y": 0.156,
+          "label": "Jump into the Lethal Lava Land painting",
+          "to": "fire_bubble_2",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_upstairs_10",
+          "type": "other",
+          "x": 0.524,
+          "y": 0.106,
+          "label": "Break the glass and jump into the pendulum",
+          "to": "clockwork_innards",
+          "art": "painting"
+        },
+        {
+          "id": "vanilla_upstairs_11",
+          "type": "deadly",
+          "x": 0.521,
+          "y": 0.01,
+          "label": "Enter the clock face",
+          "to": "",
+          "respawn": "vanilla_upstairs"
+        },
+        {
+          "id": "vanilla_upstairs_12",
+          "type": "hole",
+          "x": 0.951,
+          "y": 0.151,
+          "label": "Jump in the Rainbow Ride hole in the alcove ",
+          "to": "tubular_lobby",
+          "art": "hole",
+          "arrive": "Nighttime room"
         }
-      ]
+      ],
+      "shape": "assets/rooms/vanilla_upstairs.png",
+      "color": "#1743A1"
     },
     {
       "id": "bowser_s_floor",
@@ -4224,7 +4337,19 @@
       "id": "twisted_castle_grounds",
       "name": "Twisted Castle Grounds",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "twisted_castle_grounds_1",
+          "type": "pipe",
+          "x": 0.481,
+          "y": 0.259,
+          "label": "Pipe behind the castle",
+          "to": "uncanny_basement",
+          "art": "pipe"
+        }
+      ],
+      "shape": "assets/rooms/twisted_castle_grounds.png",
+      "color": "#7E68DE"
     },
     {
       "id": "basement_annex",
@@ -5578,14 +5703,51 @@
         {
           "id": "courtyard_fabricated_1",
           "type": "door",
-          "label": "Back to Wall Castle",
+          "label": "Door in alcove",
           "to": "wall_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.499,
+          "y": 0.974,
           "pair": "wall_castle_11"
+        },
+        {
+          "id": "courtyard_fabricated_2",
+          "type": "door",
+          "x": 0.496,
+          "y": 0.744,
+          "label": "Lower door",
+          "to": "fabricated_lobby",
+          "pair": "fabricated_lobby_1"
+        },
+        {
+          "id": "courtyard_fabricated_3",
+          "type": "deadly",
+          "x": 0.501,
+          "y": 0.33,
+          "label": "Jump in the well",
+          "to": "",
+          "respawn": "parallel_lobby_2"
+        },
+        {
+          "id": "courtyard_fabricated_4",
+          "type": "hole",
+          "x": 0.943,
+          "y": 0.179,
+          "label": "Hole in the corner",
+          "to": "checkerboard_fabricated",
+          "art": "painting"
+        },
+        {
+          "id": "courtyard_fabricated_5",
+          "type": "other",
+          "x": 0.121,
+          "y": 0.277,
+          "label": "Jump in Big Boo's cage",
+          "to": "big_boo_s_haunt_fabricated",
+          "art": "painting"
         }
-      ]
+      ],
+      "color": "#A12617",
+      "shape": "assets/rooms/alternate_courtyard.png"
     },
     {
       "id": "peaceful_grounds",
@@ -5691,7 +5853,7 @@
           "type": "lockeddoor",
           "x": 0.471,
           "y": 0.007,
-          "label": "Locked door at the back of the castle",
+          "label": "Locked door at the back of the castle, through the purple lobby, and up the spiral staricase",
           "to": "purple_upstairs",
           "art": "locked_door",
           "pair": "purple_upstairs_1"
@@ -6851,14 +7013,120 @@
         {
           "id": "mirrored_upstairs_1",
           "type": "other",
-          "label": "Back to Peach Upstairs",
+          "label": "Jump into the red night sky painting next to the stairs",
           "to": "peach_upstairs",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.43,
+          "y": 0.754,
           "pair": "peach_upstairs_5"
+        },
+        {
+          "id": "mirrored_upstairs_2",
+          "type": "other",
+          "label": "Go through the mirror",
+          "to": "vanilla_upstairs",
+          "x": 0.973,
+          "y": 0.709,
+          "pair": "vanilla_upstairs_6"
+        },
+        {
+          "id": "mirrored_upstairs_3",
+          "type": "door",
+          "x": 0.316,
+          "y": 0.816,
+          "label": "Through the door and down the stairs normally leading to the lobby",
+          "to": "vanilla_upstairs"
+        },
+        {
+          "id": "mirrored_upstairs_4",
+          "type": "door",
+          "x": 0.366,
+          "y": 0.982,
+          "label": "Jump into the Wet-Dry World painting",
+          "to": "wet_dry_paradise",
+          "art": "painting"
+        },
+        {
+          "id": "mirrored_upstairs_5",
+          "type": "deadly",
+          "x": 0.651,
+          "y": 0.563,
+          "label": "Jump into the Bob-omb Battlefield painting",
+          "to": ""
+        },
+        {
+          "id": "mirrored_upstairs_6",
+          "type": "other",
+          "x": 0.527,
+          "y": 0.48,
+          "label": "Jump into the Cool, Cool Mountain painting",
+          "to": "snow_tunnels",
+          "art": "painting"
+        },
+        {
+          "id": "mirrored_upstairs_7",
+          "type": "other",
+          "x": 0.177,
+          "y": 0.488,
+          "label": "Jump into the grassy plains painting",
+          "to": "flying_fortress",
+          "art": "painting"
+        },
+        {
+          "id": "mirrored_upstairs_8",
+          "type": "deadly",
+          "x": 0.058,
+          "y": 0.564,
+          "label": "Jump into the Jolly Roger Bay painting",
+          "to": ""
+        },
+        {
+          "id": "mirrored_upstairs_9",
+          "type": "door",
+          "x": 0,
+          "y": 0.713,
+          "label": "Enter the middle Tiny-Huge Island painting",
+          "to": "tiny_huge_island_beta",
+          "art": "painting"
+        },
+        {
+          "id": "mirrored_upstairs_10",
+          "type": "hole",
+          "x": 0.907,
+          "y": 0.151,
+          "label": "Jump into the hole in the alcove",
+          "to": "castle_grounds",
+          "art": "hole"
+        },
+        {
+          "id": "mirrored_upstairs_11",
+          "type": "hole",
+          "x": 0.036,
+          "y": 0.155,
+          "label": "Jump into the hole in the alcove",
+          "to": "castle_grounds",
+          "art": "hole"
+        },
+        {
+          "id": "mirrored_upstairs_12",
+          "type": "other",
+          "x": 0.471,
+          "y": 0.013,
+          "label": "Enter the clock face",
+          "to": "click_clock_climb",
+          "art": "painting"
+        },
+        {
+          "id": "mirrored_upstairs_13",
+          "type": "other",
+          "x": 0.474,
+          "y": 0.317,
+          "label": "Enter the Bowser painting at the top of the endless staricase",
+          "to": "bowser_s_floor",
+          "art": "other"
         }
-      ]
+      ],
+      "shape": "assets/rooms/mirrored_upstairs.png",
+      "color": "#A11726"
     },
     {
       "id": "river_mountain_beta",
@@ -6887,25 +7155,53 @@
       "exits": [
         {
           "id": "purple_upstairs_1",
-          "type": "lockeddoor",
-          "label": "Back to Bowser's Castle",
+          "type": "door",
+          "label": "Down the spiral staircase and through locked door",
           "to": "bowser_s_castle",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.671,
+          "y": 0.815,
           "pair": "bowser_s_castle_6"
         },
         {
           "id": "purple_upstairs_2",
           "type": "doubledoor",
-          "label": "Back to Bowser's Hallway",
+          "label": "Double door at the top of the endless staricase",
           "to": "bowser_s_hallway",
-          "x": 0.5,
-          "y": 0.5,
-          "needsPos": true,
+          "x": 0.518,
+          "y": 0.338,
           "pair": "bowser_s_hallway_2"
+        },
+        {
+          "id": "purple_upstairs_3",
+          "type": "other",
+          "label": "Jump into the night sky painting next to the stairs",
+          "to": "vanilla_upstairs",
+          "x": 0.557,
+          "y": 0.75,
+          "pair": "vanilla_upstairs_3"
+        },
+        {
+          "id": "purple_upstairs_4",
+          "type": "other",
+          "x": 0.668,
+          "y": 0.75,
+          "label": "Stand in front of the white dots in the lobby area",
+          "to": "tubular_lobby",
+          "art": "other",
+          "arrive": "Negative room"
+        },
+        {
+          "id": "purple_upstairs_5",
+          "type": "hole",
+          "x": 0.516,
+          "y": 0.266,
+          "label": "Jump in the hole at the top of the endless staircase",
+          "to": "bowser_in_the_dark_world_shoshinkai",
+          "art": "painting"
         }
-      ]
+      ],
+      "shape": "assets/rooms/vanilla_upstairs.png",
+      "color": "#8020DF"
     },
     {
       "id": "floor_2b_2nd_floor",
@@ -7083,7 +7379,7 @@
     },
     {
       "id": "elder_koopa_library",
-      "name": "Elder Koopa Library",
+      "name": "Elder Koopa's Library",
       "kind": "room",
       "exits": [
         {
@@ -7567,7 +7863,34 @@
       "id": "peach_s_floor",
       "name": "Peach's Floor",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "peach_s_floor_1",
+          "type": "doubledoor",
+          "x": 0.489,
+          "y": 0.008,
+          "label": "Go through the double door and keep going until you reach a pipe",
+          "to": "peach_s_cell",
+          "art": "painting"
+        },
+        {
+          "id": "peach_s_floor_2",
+          "type": "door",
+          "x": 0.489,
+          "y": 0.983,
+          "label": "Through the door and in the hole at the end of the Boo hallway",
+          "to": "peach_s_cell",
+          "art": "painting",
+          "alts": [
+            {
+              "to": "eternal_fort",
+              "note": "Rarely"
+            }
+          ]
+        }
+      ],
+      "color": "#AEAEAE",
+      "shape": "assets/rooms/peachs_floor.png"
     },
     {
       "id": "bob_omb_village",
@@ -7605,7 +7928,20 @@
       "id": "monochrome_castle_grounds",
       "name": "Monochrome Castle Grounds",
       "kind": "room",
-      "exits": []
+      "exits": [
+        {
+          "id": "monochrome_castle_grounds_1",
+          "type": "doubledoor",
+          "x": 0.51,
+          "y": 0.635,
+          "label": "Front double doors",
+          "to": "monochrome_lobby",
+          "art": "doubledoor",
+          "pair": "monochrome_lobby_1"
+        }
+      ],
+      "shape": "assets/rooms/castle_grounds.png",
+      "color": "#FFFFFF"
     },
     {
       "id": "click_clock_climb",
@@ -7769,6 +8105,489 @@
       "name": "Pyramid of Old",
       "kind": "course",
       "exits": []
+    },
+    {
+      "id": "wet_dry_world_beta",
+      "name": "Wet-Dry World (beta)",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "wet_dry_world_beta_1",
+          "type": "hole",
+          "label": "Hole in the grate in the corner",
+          "to": "dry_town",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "snowman_s_darkness",
+      "name": "Snowman's Darkness",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "snowman_s_darkness_1",
+          "type": "door",
+          "label": "Enter the igloo",
+          "to": "chief_chilly_s_ring",
+          "art": "hole"
+        }
+      ]
+    },
+    {
+      "id": "chief_chilly_s_ring",
+      "name": "Chief Chilly",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "grassy_snowy_summit",
+      "name": "Grassy Snowy Summit",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "fire_bubble_2",
+      "name": "Fire Bubble 2",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "clockwork_innards",
+      "name": "Clockwork Innards",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "wet_dry_paradise",
+      "name": "Wet-Dry Paradise",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "twisted_lobby",
+      "name": "Twisted Lobby",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "twisted_lobby_1",
+          "type": "door",
+          "label": "Door normally leading to courtyard",
+          "to": "twisted_red_hallway",
+          "x": 0.491,
+          "y": 0.015,
+          "pair": "twisted_red_hallway_1",
+          "art": "door"
+        },
+        {
+          "id": "twisted_lobby_2",
+          "type": "doubledoor",
+          "x": 0.491,
+          "y": 0.421,
+          "label": "Double door where stairs to basement would be",
+          "to": "twisted_purple_hallway",
+          "art": "doubledoor",
+          "pair": "twisted_purple_hallway_1"
+        }
+      ],
+      "shape": "assets/rooms/vanilla_lobby.png",
+      "color": "#622C0E"
+    },
+    {
+      "id": "twisted_purple_hallway",
+      "name": "Twisted Purple Hallway",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "twisted_purple_hallway_1",
+          "type": "doubledoor",
+          "label": "Back to Twisted Lobby",
+          "to": "twisted_lobby",
+          "x": 0.475,
+          "y": 0.015,
+          "pair": "twisted_lobby_2"
+        },
+        {
+          "id": "twisted_purple_hallway_2",
+          "type": "doubledoor",
+          "x": 0.475,
+          "y": 0.978,
+          "label": "The other double door",
+          "to": "twisted_castle_grounds",
+          "art": "doubledoor"
+        }
+      ],
+      "shape": "assets/rooms/silent_hall.png",
+      "color": "#380E62"
+    },
+    {
+      "id": "fabricated_lobby",
+      "name": "Fabricated Lobby",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "fabricated_lobby_1",
+          "type": "door",
+          "label": "Back to the courtyard",
+          "to": "courtyard_fabricated",
+          "x": 0.491,
+          "y": 0.013,
+          "pair": "courtyard_fabricated_2"
+        },
+        {
+          "id": "fabricated_lobby_2",
+          "type": "door",
+          "x": 0.491,
+          "y": 0.985,
+          "label": "Double door to castle grounds",
+          "to": "fabricated_castle_grounds",
+          "art": "doubledoor",
+          "pair": "fabricated_castle_grounds_1"
+        },
+        {
+          "id": "fabricated_lobby_3",
+          "type": "door",
+          "x": 0.008,
+          "y": 0.466,
+          "label": "Left door 1 to room with painting",
+          "to": "snow_slide_fabricated",
+          "art": "painting"
+        },
+        {
+          "id": "fabricated_lobby_4",
+          "type": "door",
+          "x": 0.206,
+          "y": 0.426,
+          "label": "Left door 3 to room with painting",
+          "to": "mountain_fabricated",
+          "art": "painting"
+        },
+        {
+          "id": "fabricated_lobby_5",
+          "type": "door",
+          "x": 0.794,
+          "y": 0.423,
+          "label": "Right door 1 to room with painting",
+          "to": "fire_bubble_fabricated",
+          "art": "painting"
+        },
+        {
+          "id": "fabricated_lobby_6",
+          "type": "door",
+          "x": 0.986,
+          "y": 0.472,
+          "label": "Right door 3 to room with painting",
+          "to": "water_land_fabricated",
+          "art": "painting"
+        },
+        {
+          "id": "fabricated_lobby_7",
+          "type": "door",
+          "x": 0.489,
+          "y": 0.748,
+          "label": "Look up at the ceiling",
+          "to": "fabricated_lobby_corrupted",
+          "art": "painting"
+        }
+      ],
+      "shape": "assets/rooms/vanilla_lobby.png",
+      "color": "#A11726"
+    },
+    {
+      "id": "checkerboard_fabricated",
+      "name": "Checkerboard (fabricated)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "big_boo_s_haunt_fabricated",
+      "name": "Big Boo's Haunt (fabricated)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "fabricated_castle_grounds",
+      "name": "Fabricated Castle Grounds",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "fabricated_castle_grounds_1",
+          "type": "doubledoor",
+          "label": "Front double doors",
+          "to": "fabricated_lobby",
+          "x": 0.513,
+          "y": 0.638,
+          "pair": "fabricated_lobby_2"
+        },
+        {
+          "id": "fabricated_castle_grounds_2",
+          "type": "hole",
+          "x": 0.51,
+          "y": 0.714,
+          "label": "Hole inside wall under bridge",
+          "to": "wet_dry_moat",
+          "art": "painting"
+        }
+      ],
+      "shape": "assets/rooms/castle_grounds.png",
+      "color": "#17A143"
+    },
+    {
+      "id": "snow_slide_fabricated",
+      "name": "Snow Slide (fabricated)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "mountain_fabricated",
+      "name": "Mountain (fabricated)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "fire_bubble_fabricated",
+      "name": "Fire Bubble (fabricated)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "water_land_fabricated",
+      "name": "Water Land (fabricated)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "fabricated_lobby_corrupted",
+      "name": "Corrupted Beta Lobby",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "wet_dry_moat",
+      "name": "Wet-Dry Moat",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "peach_s_cell",
+      "name": "Peach's Cell",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "peach_s_cell_1",
+          "type": "other",
+          "label": "Collect the star, and jump into the pipe across the blood lake",
+          "to": "haunted_castle_grounds",
+          "art": "other"
+        }
+      ]
+    },
+    {
+      "id": "eternal_fort",
+      "name": "Eternal Fort",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "eternal_fort_1",
+          "type": "door",
+          "label": "Beat Bowser, collect the Grand Star, and go through the double doors",
+          "to": "monochrome_castle_grounds",
+          "art": "other"
+        }
+      ]
+    },
+    {
+      "id": "haunted_castle_grounds",
+      "name": "Haunted Castle Grounds",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "haunted_castle_grounds_1",
+          "type": "pipe",
+          "x": 0.513,
+          "y": 0.507,
+          "label": "Go through the 13 Red Star door and into the pipe",
+          "to": "randomized_realm",
+          "art": "painting"
+        },
+        {
+          "id": "haunted_castle_grounds_2",
+          "type": "doubledoor",
+          "x": 0.513,
+          "y": 0.637,
+          "label": "Front double doors",
+          "to": "beta_lobby_a",
+          "art": "doubledoor"
+        },
+        {
+          "id": "haunted_castle_grounds_3",
+          "type": "hole",
+          "x": 0.513,
+          "y": 0.719,
+          "label": "Jump in either hole under the bridge",
+          "to": "genesis_basement",
+          "art": "hole"
+        },
+        {
+          "id": "haunted_castle_grounds_4",
+          "type": "doubledoor",
+          "x": 0.515,
+          "y": 0.387,
+          "label": "Double door back of the castle",
+          "to": "crescent_castle",
+          "art": "doubledoor"
+        }
+      ],
+      "shape": "assets/rooms/castle_grounds.png",
+      "color": "#DF2020"
+    },
+    {
+      "id": "randomized_realm",
+      "name": "Randomized Realm",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "randomized_realm_1",
+          "type": "pipe",
+          "label": "Pipe at the end of the course",
+          "to": "eternal_fort",
+          "art": "painting"
+        }
+      ]
+    },
+    {
+      "id": "monochrome_lobby",
+      "name": "Monochrome Lobby",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "monochrome_lobby_1",
+          "type": "doubledoor",
+          "label": "Double door to outside",
+          "to": "monochrome_castle_grounds",
+          "x": 0.489,
+          "y": 0.969,
+          "pair": "monochrome_castle_grounds_1"
+        },
+        {
+          "id": "monochrome_lobby_2",
+          "type": "doubledoor",
+          "x": 0.491,
+          "y": 0.478,
+          "label": "Navigate until you reach a pipe",
+          "to": "world_of_dreams",
+          "art": "painting"
+        }
+      ],
+      "shape": "assets/rooms/beta_lobby.png",
+      "color": "#FFFFFF"
+    },
+    {
+      "id": "world_of_dreams",
+      "name": "World of Dreams",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "world_of_dreams_1",
+          "type": "pipe",
+          "label": "Pipe at the end of the course or die",
+          "to": "star_road",
+          "art": "pipe"
+        }
+      ]
+    },
+    {
+      "id": "star_road",
+      "name": "Star Road",
+      "kind": "room",
+      "exits": [
+        {
+          "id": "star_road_1",
+          "type": "hole",
+          "x": 0.341,
+          "y": 0.391,
+          "label": "Past sign 1",
+          "to": "dream_tower",
+          "art": "painting"
+        },
+        {
+          "id": "star_road_2",
+          "type": "hole",
+          "x": 0.372,
+          "y": 0.573,
+          "label": "Past sign 2",
+          "to": "peach_s_secret_slide_beta",
+          "art": "painting"
+        },
+        {
+          "id": "star_road_3",
+          "type": "hole",
+          "x": 0.536,
+          "y": 0.571,
+          "label": "Past sign 3",
+          "to": "cave_dungeon",
+          "art": "painting"
+        },
+        {
+          "id": "star_road_4",
+          "type": "pipe",
+          "x": 0.577,
+          "y": 0.389,
+          "label": "Past sign 4",
+          "to": "corrupted_challenge",
+          "art": "painting"
+        }
+      ],
+      "shape": "assets/rooms/star_road.png",
+      "color": "#20DFDF"
+    },
+    {
+      "id": "dream_tower",
+      "name": "Dream Tower",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "dream_tower_1",
+          "type": "pipe",
+          "label": "Pipe at the top of the tower",
+          "to": "nightmare_tower",
+          "art": "painting",
+          "pair": "nightmare_tower_1"
+        }
+      ]
+    },
+    {
+      "id": "peach_s_secret_slide_beta",
+      "name": "Peach's Secret Slide (beta)",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "cave_dungeon",
+      "name": "Cave Dungeon",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "corrupted_challenge",
+      "name": "Corrupted Challenge",
+      "kind": "course",
+      "exits": []
+    },
+    {
+      "id": "nightmare_tower",
+      "name": "Nightmare Tower",
+      "kind": "course",
+      "exits": [
+        {
+          "id": "nightmare_tower_1",
+          "type": "pipe",
+          "label": "Pipe at the top of the tower",
+          "to": "dream_tower",
+          "pair": "dream_tower_1",
+          "art": "painting"
+        }
+      ]
     }
   ]
 }
