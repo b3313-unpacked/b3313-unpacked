@@ -127,7 +127,7 @@
     {"id":"s_27_6","course":"Curly's Fire Bubble","color":"yellow","name":"Island at the edge of the map","save":{"offset":27,"bit":6},"place":"curly_s_fire_bubble"},
     {"id":"s_48_1","course":"Dark Downtown","color":"yellow","name":"8 Red Coins","save":{"offset":48,"bit":1},"place":"dark_downtown"},
     {"id":"s_48_2","course":"Dark Downtown","color":"yellow","name":"Break item box at the top","save":{"offset":48,"bit":2},"place":"dark_downtown"},
-    {"id":"s_28_4","course":"Desert Maze","color":"yellow","name":"8 Red Coins (DM) / Swim through castle (SC)","save":{"offset":28,"bit":4},"alsoIn":["Sunken Castle"],"notes":"One of the stars in Desert Maze and Sunken Castle share a star ID. Checking one will check both.","alsoPlace":{"Sunken Castle":"sunken_castle"},"place":"desert_maze"},
+    {"id":"s_28_4","course":"Desert Maze","color":"yellow","name":"8 Red Coins (DM) / Swim through castle (SC)","save":{"offset":28,"bit":4},"alsoIn":["Sunken Castle"],"notes":"One of the stars in Desert Maze and Sunken Castle share a star ID. Checking one will check both. Parallel Launcher considers it as 2 stars","alsoPlace":{"Sunken Castle":"sunken_castle"},"place":"desert_maze"},
     {"id":"s_28_5","course":"Desert Maze","color":"yellow","name":"Top of the flagpole on small hill","save":{"offset":28,"bit":5},"place":"desert_maze"},
     {"id":"s_53_2","course":"Dire Bubble","color":"yellow","name":"5 Silver Stars","save":{"offset":53,"bit":2},"place":"dire_bubble"},
     {"id":"s_53_3","course":"Dire Bubble","color":"yellow","name":"Beat 3 Chuckyas","save":{"offset":53,"bit":3},"place":"dire_bubble"},
@@ -479,6 +479,6 @@
     {"id":"s_49_2","course":"Nightmare Tower","color":"green","name":"In the grate partway up the tower","save":{"offset":49,"bit":2},"place":"nightmare_tower"},
     {"id":"s_50_0","course":"Peach's Secret Slide (beta)","color":"green","name":"End of the slide","save":{"offset":50,"bit":0},"place":"peach_s_secret_slide_beta"},
     {"id":"s_50_1","course":"World of Dreams","color":"green","name":"8 Red Coins","save":{"offset":50,"bit":1},"place":"world_of_dreams"},
-    {"id":"s_8_7","course":"Holy Yellow Switch Palace","color":"yellow","name":"Chance to get upon pressing switch","save":{"offset":8,"bit":7},"place":"holy_yellow_switch_palace"}
+    {"id":"s_8_7","course":"Holy Yellow Switch Palace","color":"yellow","name":"Chance to get upon pressing switch","save":{"offset":8,"bit":7},"place":"holy_yellow_switch_palace","bonus":true}
   ]
 }
