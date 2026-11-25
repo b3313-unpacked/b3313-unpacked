@@ -795,7 +795,10 @@ function exitForm(e){
     ${deadly ? `<label class="f">Where you end up after dying (optional)${destSelect("respawn", null, e.respawn, "Not logged", true, null)}</label>
     ${newPlaceRow("respawn", null)}` : `
     <label class="inline"><input type="checkbox" data-edit="ex-twoway" ${e.pair ? "checked" : ""} ${d && state.newFor !== "to" ? "" : "disabled"}> Two-way: going back through it brings you right here</label>
-    ${partner ? `<p class="small muted" style="margin:-4px 0 10px">You come out at <b>${esc(partner.label)}</b> in ${esc(d.name)}${partner.needsPos ? ". It hasn't been placed on that drawing yet." : "."}</p>`
+    ${partner ? `<label class="f" style="margin-top:-4px">You come out at, in ${esc(d.name)}<select data-edit="ex-partner">
+        ${d.exits.filter(x => x.type !== "deadly").map(x => `<option value="${x.id}" ${x.id === partner.id ? "selected" : ""}>${exitNum(x.id)}. ${esc(x.label || typeName(x.type))}${x.needsPos ? " (not placed yet)" : ""}</option>`).join("")}
+        <option value="__new">A new exit</option></select></label>
+      <p class="small muted" style="margin:-6px 0 10px">If two rooms lead back to the same door, pick that door here in both.</p>`
               : `<label class="f">Where you end up (optional)<input data-edit="ex-arrive" value="${esc(e.arrive || "")}" placeholder="e.g. You land on the 2nd floor balcony"></label>`}
     <div class="small" style="font-weight:600;margin-bottom:6px">Sometimes leads somewhere else</div>
     ${(e.alts || []).map((a, i) => `<div class="alt-row">
@@ -941,6 +944,36 @@ function linkTwoWay(e){
   // 3. otherwise find or make the way back
   const q = returnExit(e, d);
   q.pair = e.id; e.pair = q.id;
+}
+// Makes the exit e come out at exit x in its destination (or at a brand-new exit).
+// If x already leads somewhere else, the way back becomes one of x's "sometimes" destinations.
+function relinkPartner(e, xid){
+  const here = P[FROM[e.id]], d = P[e.to]; if (!d) return;
+  const old = e.pair ? EX[e.pair] : null;
+  unlinkPair(e);
+  // tidy up an automatic "Back to..." exit that nothing uses anymore
+  if (old && old.needsPos && old.to === here.id && !old.pair && !(old.alts || []).length && old.label === `Back to ${here.name}`){
+    d.exits = d.exits.filter(x => x.id !== old.id); reindex();
+  }
+  let x;
+  if (xid === "__new"){
+    x = { id:uniqueId(`${d.id}_${d.exits.length + 1}`, id => !!EX[id]), type:e.type, label:`Back to ${here.name}`, to:here.id };
+    if (d.kind === "room"){ x.x = 0.5; x.y = 0.5; x.needsPos = true; }
+    d.exits.push(x); reindex();
+    x.pair = e.id;
+  } else {
+    x = EX[xid]; if (!x) return;
+    const alt = (x.alts || []).find(a => a.to === here.id && !a.pair);
+    if (!x.to){ x.to = here.id; x.pair = e.id; }
+    else if (x.to === here.id && !x.pair) x.pair = e.id;
+    else if (alt) alt.pair = e.id;
+    else if (x.to === here.id){ unlinkPair(x); x.pair = e.id; }
+    else {
+      (x.alts = x.alts || []).push({ to:here.id, note:"", pair:e.id });
+      toast(`"${x.label || typeName(x.type)}" in ${d.name} now also sometimes leads to ${here.name}. Add a note on when, if you know.`);
+    }
+  }
+  e.pair = x.id;
 }
 function deletePlace(p){
   if (p.id === DATA.start) return;
@@ -1420,6 +1453,7 @@ function applyEdit(el){
       setDest(e, key, v); break;
     }
     case "ex-twoway": el.checked ? linkTwoWay(e) : unlinkPair(e); break;
+    case "ex-partner": relinkPartner(e, v); break;
     case "alt-twoway": el.checked ? linkAlt(e, +el.dataset.i) : unlinkAlt(e, +el.dataset.i); break;
     case "alt-note": e.alts[+el.dataset.i].note = v; break;
     case "newname": state.newName = v; return;

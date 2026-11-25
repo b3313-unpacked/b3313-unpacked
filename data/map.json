@@ -2914,7 +2914,8 @@
           "y": 0.907,
           "label": "Pipe in the corner of the garden",
           "to": "toad_s_hedge_maze",
-          "art": "painting"
+          "art": "painting",
+          "pair": "toad_s_hedge_maze_1"
         },
         {
           "id": "castle_garden_3",
@@ -6061,7 +6062,7 @@
         {
           "id": "escape_route_1",
           "type": "other",
-          "label": "Jump in the Peach painting or collect the star",
+          "label": "Jump in the Peach painting",
           "to": "vanilla_lobby",
           "art": "other"
         },
@@ -7902,7 +7903,15 @@
       "id": "toad_s_hedge_maze",
       "name": "Toad's Hedge Maze",
       "kind": "course",
-      "exits": []
+      "exits": [
+        {
+          "id": "toad_s_hedge_maze_1",
+          "type": "pipe",
+          "label": "Back to Castle Garden",
+          "to": "castle_garden",
+          "pair": "castle_garden_2"
+        }
+      ]
     },
     {
       "id": "bowser_s_checkered_madness",
