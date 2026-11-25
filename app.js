@@ -264,7 +264,10 @@ const starPlaces = s => groupsOf(s).map(g => placeFor(s, g)).filter(x => P[x]);
 const openSlots = () => DATA.stars.flatMap(s => groupsOf(s).filter(g => !P[placeFor(s, g)]).map(group => ({ s, group })));
 const starsIn = pid => DATA.stars.filter(s => starPlaces(s).includes(pid));
 const groupHere = (s, pid) => groupsOf(s).find(g => placeFor(s, g) === pid) || s.course;
-const gotIn = pid => starsIn(pid).filter(s => state.checked.has(s.id)).length;
+// A bonus star stays in the list and can be checked off, but isn't counted in any total.
+const counts = s => !s.bonus;
+const countedIn = pid => starsIn(pid).filter(counts);
+const gotIn = pid => countedIn(pid).filter(s => state.checked.has(s.id)).length;
 const exitNum = id => P[FROM[id]].exits.findIndex(x => x.id === id) + 1;
 const placeName = id => P[id] ? P[id].name : (id ? `${id} (not logged)` : "nowhere yet");
 const unplacedStars = () => DATA.stars.filter(s => !starPlaces(s).length);
@@ -621,9 +624,9 @@ function banners(){
 function routeBanner(){
   const rt = state.route, label = P[rt.target].name;
   if (rt.done){
-    const left = starsIn(rt.target).length - gotIn(rt.target);
+    const left = countedIn(rt.target).length - gotIn(rt.target);
     return `<div class="banner done"><div class="grow"><b>You've arrived at ${esc(label)}.</b>
-      ${starsIn(rt.target).length ? `<span class="muted"> ${left ? `${left} star${left > 1 ? "s" : ""} left to collect here.` : "You've collected every star here."}</span>` : ""}
+      ${countedIn(rt.target).length ? `<span class="muted"> ${left ? `${left} star${left > 1 ? "s" : ""} left to collect here.` : "You've collected every star here."}</span>` : ""}
       </div><button class="btn" data-action="clear-route">Clear route</button></div>`;
   }
   if (rt.lost){
@@ -644,7 +647,7 @@ function exitRow(e, idx, nextId){
   let dest;
   if (e.type === "deadly") dest = `Deadly dead end. You'll be killed.${P[e.respawn] ? ` You end up in ${P[e.respawn].name}.` : ""}`;
   else dest = `${typeName(e.type)}${e.floor ? `, ${e.floor}` : ""} to ${placeName(e.to)}`;
-  const stars = d && e.type !== "deadly" && starsIn(d.id).length ? ` <span class="tag">${gotIn(d.id)}/${starsIn(d.id).length}★</span>` : "";
+  const stars = d && e.type !== "deadly" && countedIn(d.id).length ? ` <span class="tag">${gotIn(d.id)}/${countedIn(d.id).length}★</span>` : "";
   const alts = (e.alts || []).filter(a => P[a.to]);
   const tags = (!e.pair && e.type !== "deadly" ? `<span class="tag one">one-way</span>` : "")
     + (alts.length ? `<span class="tag warn">varies</span>` : "")
@@ -700,7 +703,7 @@ function renderExplore(){
     </section>
     <section class="side">${state.edit ? editorPanel(p) : `
       <div class="card"><h3>Ways out (${p.exits.length})</h3>${p.exits.map((e, i) => exitRow(e, i, nextId)).join("") || `<p class="muted" style="margin:0">None logged yet.</p>`}</div>
-      ${here.length ? `<div class="card"><h3>Stars here (${gotIn(p.id)}/${here.length})</h3>${here.map(s => starRow(s, false)).join("")}</div>` : ""}
+      ${here.length ? `<div class="card"><h3>Stars here${countedIn(p.id).length ? ` (${gotIn(p.id)}/${countedIn(p.id).length})` : ""}</h3>${here.map(s => starRow(s, false)).join("")}</div>` : ""}
       ${switchesIn(p.id).length ? `<div class="card"><h3>Switches here</h3>${switchesIn(p.id).map(w => switchRow(w, false)).join("")}</div>` : ""}
       ${LOG_MODE ? `<details class="card"><summary>See this ${p.kind}'s data</summary><pre>${esc(JSON.stringify(p, null, 2))}</pre></details>` : ""}`}
     </section>
@@ -877,6 +880,7 @@ function starEditor(p){
       <input data-edit="star-name" data-star="${s.id}" value="${esc(s.name)}" placeholder="Star name, add (ACT1) if needed">
       <button class="btn sm" data-action="unplace-star" data-star="${s.id}" title="Take it off this room">Remove</button></div>
       <input data-edit="star-notes" data-star="${s.id}" value="${esc(s.notes || "")}" placeholder="Notes (optional)" style="margin-top:6px">
+      <label class="inline small" style="margin:6px 0 0"><input type="checkbox" data-edit="star-bonus" data-star="${s.id}" ${s.bonus ? "checked" : ""}> Bonus star: list it, but leave it out of every total</label>
     </div>`).join("") || (state.picking ? "" : `<p class="small muted" style="margin:0">No stars placed here.</p>`)}
   </div>`;
 }
@@ -1004,7 +1008,7 @@ function checkBtn(s){
 function starRow(s, goButton, group){
   const pl = group ? placeFor(s, group) : (P[s.place] ? s.place : starPlaces(s)[0]);
   return `<div class="star-row">${checkBtn(s)}
-    <div class="grow">${esc(s.name)}${s.notes ? `<div class="small muted">${esc(s.notes)}</div>` : ""}
+    <div class="grow">${esc(s.name)}${s.bonus ? ` <span class="tag">bonus, not counted</span>` : ""}${s.notes ? `<div class="small muted">${esc(s.notes)}</div>` : ""}
       ${!P[pl] ? `<div class="small muted">Location not logged yet</div>` : ""}</div>
     ${goButton && P[pl] ? `<button class="btn sm" data-action="route-place" data-place="${pl}">Go to ${esc(P[pl].name)}</button>` : ""}
   </div>`;
@@ -1033,21 +1037,21 @@ function starListHTML(){
   list.forEach(s => { add(s.course, s); (s.alsoIn || []).forEach(c => add(c, s)); });
   return `<div class="grid2">${groups.map(g => {
     const all = DATA.stars.filter(s => s.course === g.course || (s.alsoIn || []).includes(g.course));
-    const got = all.filter(s => state.checked.has(s.id)).length;
+    const got = all.filter(s => counts(s) && state.checked.has(s.id)).length, total = all.filter(counts).length;
     const places = [...new Set(all.map(s => placeFor(s, g.course)))];
     const one = places.length === 1 && P[places[0]] ? places[0] : null;
     return `<div class="card">
       <div class="row" style="justify-content:space-between;margin-bottom:6px">
-        <h3 style="margin:0">${esc(g.course)} <span class="muted small">${got}/${all.length}</span></h3>
+        <h3 style="margin:0">${esc(g.course)} <span class="muted small">${total ? `${got}/${total}` : "bonus"}</span></h3>
         ${one ? `<button class="btn sm" data-action="route-place" data-place="${one}">Take me here</button>` : ""}</div>
       ${g.stars.map(s => starRow(s, !one, g.course)).join("")}</div>`;
   }).join("")}</div>`;
 }
 function renderStars(){
-  const tot = c => DATA.stars.filter(s => s.color === c).length;
-  const got = c => DATA.stars.filter(s => s.color === c && state.checked.has(s.id)).length;
+  const tot = c => DATA.stars.filter(s => counts(s) && s.color === c).length;
+  const got = c => DATA.stars.filter(s => counts(s) && s.color === c && state.checked.has(s.id)).length;
   return `<div class="card" style="margin-bottom:16px">
-    <div class="row" style="justify-content:space-between"><h3 style="margin:0">${DATA.stars.filter(s => state.checked.has(s.id)).length} of ${DATA.stars.length} stars collected</h3>
+    <div class="row" style="justify-content:space-between"><h3 style="margin:0">${DATA.stars.filter(s => counts(s) && state.checked.has(s.id)).length} of ${DATA.stars.filter(counts).length} stars collected</h3>
     <button class="btn sm" data-action="io">${state.showIO ? "Hide backup" : "Back up or restore progress"}</button></div>
     ${state.showIO ? `<p class="small muted">Your checkmarks are saved in this browser. Copy this text somewhere safe to move them to another browser, or paste a backup and press Restore.</p>
       <textarea id="io">${esc(JSON.stringify({ checked:[...state.checked] }))}</textarea>
@@ -1253,8 +1257,8 @@ function renderCheck(){
 /* ============================== render ============================== */
 function renderChips(){
   if (!DATA) return;
-  const tot = c => DATA.stars.filter(s => s.color === c).length;
-  const got = c => DATA.stars.filter(s => s.color === c && state.checked.has(s.id)).length;
+  const tot = c => DATA.stars.filter(s => counts(s) && s.color === c).length;
+  const got = c => DATA.stars.filter(s => counts(s) && s.color === c && state.checked.has(s.id)).length;
   let folder = "";
   if (LOG_MODE){
     if (FOLDER) folder = `<span class="chip ok">Saving to <b>${esc(state.folderName)}</b>${state.saveStatus ? `: ${esc(state.saveStatus)}` : ""}</span>`;
@@ -1465,6 +1469,7 @@ function applyEdit(el){
     }
     case "star-name": s.name = v; break;
     case "star-notes": if (v.trim()) s.notes = v; else delete s.notes; break;
+    case "star-bonus": if (el.checked) s.bonus = true; else delete s.bonus; break;
   }
   markDirty();
 }
